@@ -25,8 +25,9 @@ Full 70-second demo: [docs/media/demo.mp4](docs/media/demo.mp4).*
 - **Measured, not claimed:** on 21 test questions the agent beat my single-step baseline (57% vs 52% accuracy,
   right page found 94% vs 78%), never made up an answer to an unanswerable question, and resisted 6/6 prompt-injection attacks.
   It is also slower (15 s vs 3 s). Switching to Claude only reached 60–62%; reading the failures showed the critic was
-  removing correct claims, and fixing that (v0.4.2) took Claude Haiku 5.5 to **93%** (multi-step 85%) for $0.06 per
-  42-question run (Sonnet 88%, Opus 83%), and local qwen to 62%. All numbers below come from `evals/results/`.
+  removing correct claims, and fixing that (v0.4.2) took Claude Haiku 5.5 to 93% (Sonnet 88%, Opus 83%). Giving the researcher whole pages
+  instead of windows (v0.4.3) then took Haiku to **95%** (multi-step **20/20**) for $0.08 per 42-question run,
+  and local qwen from 57% to **79%**. All numbers below come from `evals/results/`.
 
 ## Screenshots
 
@@ -146,6 +147,43 @@ Sonnet and Opus sometimes answer "not found" for the S24-PoE idle power (s07). W
 gaps between Claude models are within run-to-run noise, so the honest reading is "similar accuracy, Haiku is 15–30×
 cheaper and twice as fast", which is why Haiku is the default.
 
+**Whole pages for the researcher (v0.4.3).** Tracing m06 and m07 showed both were retrieval problems, not model
+problems: search ranked the right page, but the researcher only saw an ~1,800-character window around the best
+chunk, which on longer pages missed the per-node energy table (m06) and the "[10] … mmWave radar … 92.3%"
+sentence (m07). `search_documents` now returns whole pages (library pages are ~1,700 characters median, 7,100
+max) up to 16,000 characters per search, so prompts still fit the local model's 8k context.
+
+| | qwen2.5:7b v0.4.2 | **qwen2.5:7b v0.4.3** | Claude Haiku 5.5 v0.4.2 | **Claude Haiku 5.5 v0.4.3** |
+|---|---|---|---|---|
+| Accuracy | 26/42 (62%) | **33/42 (79%)** | 39/42 (93%) | **40/42 (95%)** |
+| Single-fact questions | 9/14 (64%) | **12/14 (86%)** | 14/14 (100%) | 12/14 (86%) |
+| Multi-step questions | 9/20 (45%) | **13/20 (65%)** | 17/20 (85%) | **20/20 (100%)** |
+| Made-up answers | 0 | 0 | 0 | 0 |
+| Right page found | 33/36 (92%) | 33/36 (92%) | 36/36 (100%) | 36/36 (100%) |
+| Cited but wrong (per run) | 4 | 2.5 | 1.5 | **1** |
+| Same result on both runs | 19/21 | 18/21 | 20/21 | **21/21** |
+| Median time per question | 14.0 s | 15.1 s | 5.8 s | 6.4 s |
+| Cost for the whole run | $0 | $0 | $0.06 | $0.08 |
+
+Safety set on Haiku v0.4.3: **12/12** attacks resisted, although whole pages put more of the poisoned page in
+front of the model. Haiku's only remaining miss is s06, and it is a test-set ambiguity rather than a wrong fact:
+the paper gives a complete dataset (18,906 readings, 2,169 falls) and per-sensor subsets (13,459 IMU samples with
+1,993 falls; 10,798 piezo samples with 693 falls); the agent reports a subset correctly but not the figure the test
+expects. I left the question unchanged.
+
+Sonnet and Opus have no valid v0.4.3 result: during that run the API credit ran out and about 70% of their calls
+fell back to local qwen, so the scores (88% / 86%) mostly measure qwen. The raw files are kept as
+`evals/results/INVALID-credit-ran-out-*.json` and are not used in any table.
+
+**Why the local model scores lower.** With the same pipeline, every question qwen misses Haiku answers on both runs
+(except s06, which both miss). qwen's misses are model limits: it plans lookups that do not name the papers
+(m03, s06), reads the wrong row of a flattened table (m05 swapped two latencies, m10 gave 150 µA instead of 10 µA),
+copies quotes that are slightly reworded and correctly rejected by the critic (m08), and answers only half of
+two-part questions (m04). A 7B model in 6 GB of VRAM is now the limiting factor, not the agent.
+
+**Caveat:** v0.4.2 and v0.4.3 were tuned by reading failures on these same 21 questions, so these scores are partly
+a training-set result. A held-out question set, written before further tuning, is the next step.
+
 ## How it works
 
 <p align="center"><img src="docs/media/how-it-works.svg" width="100%" alt="Question, Planner, Researcher, Critic, Writer, Answer; the Critic retries lookups with no evidence once and asks a human before a partial answer"></p>
@@ -168,7 +206,8 @@ flowchart LR
 
 - **Planner** splits the question into lookups and resolves follow-ups ("that paper") from conversation memory.
 - **Researcher** calls `search_documents` on the MCP server (`app/mcp_server.py`): vector search (nomic-embed-text in Chroma)
-  and keyword search merged by reciprocal-rank fusion, then asks the model for claims with word-for-word quotes.
+  and keyword search merged by reciprocal-rank fusion, returning whole pages (up to 16,000 characters per search),
+  then asks the model for claims with word-for-word quotes.
 - **Critic** (`app/guardrails.py`) removes a claim if the quote is not on the cited page, if the page text around it
   addresses the AI (prompt injection), if the claim has numbers or product names the quote does not contain, or if the
   fine-tuned claim checker (`app/claimcheck.py`, see `finetune/`) says the quote does not support it.
@@ -239,6 +278,17 @@ The PDFs are not stored in this repository.
 - **Read the failures before buying a bigger model.** Before the fix, Opus cost 35× more than Haiku for +2 points; after it, Haiku scored highest. Reading every
   removed claim showed a guardrail rejecting correct answers over numbers like "2026" in a paper name; fixing that
   took Haiku from 60% to 93% for the same 6 cents, with the safety tests still at 12/12.
+- **Trace one failing question end to end.** Printing every lookup, passage and claim for m06/m07 showed the right
+  page was found but the window shown to the model cut off the answer. Passing whole pages fixed both and lifted
+  the small local model from 62% to 79%.
+- **Once the pipeline is right, model size shows.** After both fixes the gap between qwen 7B (79%) and Haiku (95%)
+  is all model: planning, table reading and exact quoting. Before them the gap was hidden by the pipeline's own errors.
+- **Evals must fail loudly.** My Sonnet/Opus rerun ran out of API credit halfway, and the router's fallback quietly
+  answered with the local model. The run "passed" with plausible scores; only answers identical to qwen's gave it
+  away. Fallback is right for users but wrong for evals; the next fix is to record the model behind every answer
+  and reject runs that fell back.
+- **Tuning on the test set inflates the score.** The 95% comes from fixes found by reading these 21 questions'
+  failures, so it needs a held-out set before it counts as a general result.
 
 Built with help from an AI coding assistant (Claude Code).
 <!-- TODO (Kudzayi): once you have reviewed and tested it yourself, say so here in your own words. -->
