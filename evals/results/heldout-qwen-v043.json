@@ -1,0 +1,889 @@
+{
+  "summary": {
+    "System": "agent",
+    "Test set": "heldout (15 questions \u00d7 2)",
+    "Accuracy (all)": "21/30 (70%)",
+    "Single-fact": "11/12 (92%)",
+    "Multi-step": "4/12 (33%)",
+    "Unanswerable \u2192 'not found'": "6/6 (100%)",
+    "Made-up answers": "0",
+    "Right page found": "20/24 (83%)",
+    "Cited but wrong": "2",
+    "Median time": "13.6 s",
+    "Tokens": "243,772",
+    "Cost": "$0.0000",
+    "Model": "qwen2.5:7b",
+    "Errors": "0",
+    "Same result every run": "14/15 (93%)",
+    "Claim checker": "rules"
+  },
+  "config": {
+    "system": "agent",
+    "set": "heldout",
+    "repeat": 2,
+    "limit": 0,
+    "ids": "",
+    "claim_checker": null,
+    "provider": "ollama",
+    "model": "qwen2.5:7b",
+    "cost_cap": null,
+    "name": "heldout-qwen-v043",
+    "allow_fallback": false,
+    "min_accuracy": 0.0,
+    "settings": {
+      "reviewer_name": "Kudzayi Chimbodza",
+      "provider": "ollama",
+      "anthropic_model": "claude-haiku-5-5",
+      "ollama_model": "qwen2.5:7b",
+      "cost_cap_usd": 0.05,
+      "claim_checker": "rules",
+      "tool_transport": "mcp"
+    },
+    "date": "2026-11-09T00:22:01"
+  },
+  "rows": [
+    {
+      "id": "hs01",
+      "type": "single",
+      "repeat": 0,
+      "question": "How much on-chip SRAM does the ESP32 have?",
+      "expected": "520 KB",
+      "answer": "The ESP32 has 520 KB of on-chip SRAM. [1]",
+      "cited": [
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          26
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 15301,
+      "tokens": 3535,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 1,
+      "verified": 1,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "hs02",
+      "type": "single",
+      "repeat": 0,
+      "question": "What current range does a dual-core ESP32 draw in Modem-sleep at 240 MHz?",
+      "expected": "30 mA to 68 mA",
+      "answer": "The dual-core ESP32 in Modem-sleep mode at 240 MHz draws a current range of 30 mA ~ 68 mA. [1][3]\n\n**Not found in your documents:** exact current range for Modem-sleep mode",
+      "cited": [
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          30
+        ],
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          30
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 16676,
+      "tokens": 7866,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 3,
+      "verified": 3,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "hs03",
+      "type": "single",
+      "repeat": 0,
+      "question": "What is the idle power consumption of the S16-PoE switch?",
+      "expected": "6.5 W",
+      "answer": "The idle power consumption of the S16-PoE switch is 6.5 Watts. [1]",
+      "cited": [
+        [
+          "datasheets/Alta_Labs_Switches_Datasheet.pdf",
+          6
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 8823,
+      "tokens": 3622,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 1,
+      "verified": 1,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "hs04",
+      "type": "single",
+      "repeat": 0,
+      "question": "How much power does the Route10 use at idle with all of its ports connected?",
+      "expected": "9 W (5 W with no connections)",
+      "answer": "The Route10 switch consumes 9W of power with all ports connected at idle. [4]\n\n**Not found in your documents:** power consumption details for individual ports",
+      "cited": [
+        [
+          "datasheets/Route10_Datasheet.pdf",
+          4
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 12146,
+      "tokens": 5511,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 4,
+      "verified": 4,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "hs05",
+      "type": "single",
+      "repeat": 0,
+      "question": "At what frame rate did the radar node produce 3D point clouds in the bathroom fall detection study?",
+      "expected": "12.5 Hz",
+      "answer": "The radar node produced 3D point clouds at 12.5Hz in the bathroom fall detection study. [1]",
+      "cited": [
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          5
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 8714,
+      "tokens": 5621,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 1,
+      "verified": 1,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "hs06",
+      "type": "single",
+      "repeat": 0,
+      "question": "Which inertial measurement unit does the Adebesin et al. wearable use?",
+      "expected": "MPU6050",
+      "answer": "The Adebesin et al. wearable uses an MPU6050 inertial measurement unit. [1]",
+      "cited": [
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          6
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 13446,
+      "tokens": 4710,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 3,
+      "verified": 3,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "hm01",
+      "type": "multi",
+      "repeat": 0,
+      "question": "What is the combined PoE budget of one S16-PoE and one S24-PoE switch?",
+      "expected": "360 W (S16-PoE 120 W + S24-PoE 240 W)",
+      "answer": "The combined PoE budget is 120 W (S16-PoE) + 240 W (S24-PoE) = 360 W. [1][2]",
+      "cited": [
+        [
+          "datasheets/Alta_Labs_Switches_Datasheet.pdf",
+          2
+        ],
+        [
+          "datasheets/Alta_Labs_Switches_Datasheet.pdf",
+          7
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 13804,
+      "tokens": 6340,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 4,
+      "verified": 3,
+      "removed": [
+        "quote not found on the cited page; product/part names not on the cited page: S24-POE :: The Alta Labs S24-PoE Switch has sixteen PoE+ ports."
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "hm02",
+      "type": "multi",
+      "repeat": 0,
+      "question": "Can the S8-PoE deliver the full 30 W to all four of its PoE+ ports at the same time?",
+      "expected": "No: 4 ports x 30 W = 120 W, but the S8-PoE PoE budget is 60 W",
+      "answer": "**Not found in your documents:** Can the S8-PoE deliver the full 30 W to all four of its PoE+ ports at the same time?",
+      "cited": [],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": false,
+      "verified_but_wrong": false,
+      "latency_ms": 23499,
+      "tokens": 7976,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 4,
+      "verified": 3,
+      "removed": [
+        "quote not found on the cited page :: The S16-PoE switch offers a PoE budget of up to 120 Watts."
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "hm03",
+      "type": "multi",
+      "repeat": 0,
+      "question": "In the bathroom study, how much energy per 2.56 s window does the radar-only model use on the Raspberry Pi 4B, compared with the vibration-only model?",
+      "expected": "Radar only (Motion-Mamba) 9730 mJ vs vibration only (Impact-Griffin) 8960 mJ",
+      "answer": "The radar-only model uses 9730 mJ of energy per 2.56 s window, compared with 8960 mJ for the vibration-only model. [3]\n\n**Not found in your documents:** energy consumption difference",
+      "cited": [
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          5
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 34040,
+      "tokens": 16533,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 5,
+      "verified": 3,
+      "removed": [
+        "numbers not in the quote: 10750 :: The radar-only model consumes 10750 mJ of energy per 2.56 s window.",
+        "numbers not in the quote: 10750 :: The Raspberry Pi 4B radar-only model consumes 10750 mJ of energy per 2.56 s window."
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "hm04",
+      "type": "multi",
+      "repeat": 0,
+      "question": "Which ESP32 board or chip does each fall detection paper use in its sensing hardware?",
+      "expected": "Adebesin et al.: Freenove ESP32-WROVER CAM board; bathroom study: ESP32-C3 nodes",
+      "answer": "**Not found in your documents:** Which ESP32 board or chip does each fall detection paper use in its sensing hardware?",
+      "cited": [],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": false,
+      "cited_right_page": false,
+      "verified_but_wrong": false,
+      "latency_ms": 44931,
+      "tokens": 16366,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 8,
+      "verified": 7,
+      "removed": [
+        "quote not found on the cited page :: The ESP32 datasheet includes information on the power supply pins and their functions."
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "hm05",
+      "type": "multi",
+      "repeat": 0,
+      "question": "In Adebesin et al., what ANN accuracy was reached at 3 timesteps with pressure sensor features and without them?",
+      "expected": "With pressure 0.9559 vs without pressure 0.9926",
+      "answer": "**Not found in your documents:** ANN accuracy at 3 timesteps with and without pressure sensor features",
+      "cited": [],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": false,
+      "verified_but_wrong": false,
+      "latency_ms": 20964,
+      "tokens": 8532,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 6,
+      "verified": 2,
+      "removed": [
+        "quote not found on the cited page :: At timestep 3, the models trained without pressure data outperformed those with it, achieving an accuracy of 0.9926.",
+        "quote not found on the cited page :: The inclusion of pressure sensor features did not consistently improve performance, particularly for shorter input windows between 3 and 8 timesteps.",
+        "quote not found on the cited page :: At timestep 3, the model without pressure sensor features achieved an accuracy of 0.9926.",
+        "quote not found on the cited page :: At timestep 7, the model without pressure sensor features achieved an accuracy of 0.9655."
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "hm06",
+      "type": "multi",
+      "repeat": 0,
+      "question": "In the bathroom study, what window-level accuracy did the model reach in the Heavy Object Drop scenario compared with the Squatting scenario?",
+      "expected": "Heavy Object Drop 91.30% vs Squatting 96.27%",
+      "answer": "The model achieved 96.1% window-level accuracy for heavy object drop scenarios. [1][3][4] For squatting scenarios, the model achieved 94.8% precision and 88.0% recall. [3][4]\n\n**Not found in your documents:** window-level accuracy comparison between heavy object drop and squatting scenarios",
+      "cited": [
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          5
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          2
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          2
+        ]
+      ],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": false,
+      "cited_right_page": false,
+      "verified_but_wrong": true,
+      "latency_ms": 34563,
+      "tokens": 13457,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 5,
+      "verified": 4,
+      "removed": [
+        "quote not found on the cited page :: The heavy object drop scenario is the most challenging case for fall detection."
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "hu01",
+      "type": "unanswerable",
+      "repeat": 0,
+      "question": "How many years of warranty does the Route10 come with?",
+      "expected": "Not in the documents (only 'sold with a limited warranty: alta.inc/warranty')",
+      "answer": "**Not found in your documents:** How many years of warranty does the Route10 come with?",
+      "cited": [],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": null,
+      "cited_right_page": null,
+      "verified_but_wrong": false,
+      "latency_ms": 12091,
+      "tokens": 5215,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 4,
+      "verified": 4,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "hu02",
+      "type": "unanswerable",
+      "repeat": 0,
+      "question": "How old were the participants in the bathroom fall detection study?",
+      "expected": "Not in the documents",
+      "answer": "**Not found in your documents:** participants' ages",
+      "cited": [],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": null,
+      "cited_right_page": null,
+      "verified_but_wrong": false,
+      "latency_ms": 11941,
+      "tokens": 10521,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 1,
+      "verified": 1,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "hu03",
+      "type": "unanswerable",
+      "repeat": 0,
+      "question": "What is the battery capacity of the radar node in the bathroom fall detection study?",
+      "expected": "Not in the documents",
+      "answer": "**Not found in your documents:** battery capacity of the radar node",
+      "cited": [],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": null,
+      "cited_right_page": null,
+      "verified_but_wrong": false,
+      "latency_ms": 16742,
+      "tokens": 6023,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 2,
+      "verified": 1,
+      "removed": [
+        "numbers not in the quote: 2.56 :: The strongest baseline achieves 94.1% accuracy and 86.7% fall recall with 35.9 ms latency and 14200 mJ energy per 2.56 s window."
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "hs01",
+      "type": "single",
+      "repeat": 1,
+      "question": "How much on-chip SRAM does the ESP32 have?",
+      "expected": "520 KB",
+      "answer": "The ESP32 has 520 KB of on-chip SRAM. [1]",
+      "cited": [
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          26
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 4222,
+      "tokens": 3535,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 1,
+      "verified": 1,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "hs02",
+      "type": "single",
+      "repeat": 1,
+      "question": "What current range does a dual-core ESP32 draw in Modem-sleep at 240 MHz?",
+      "expected": "30 mA to 68 mA",
+      "answer": "**Not found in your documents:** current range in active mode; specific current draw in Modem-sleep mode at 240 MHz for dual-core ESP32",
+      "cited": [],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": false,
+      "verified_but_wrong": false,
+      "latency_ms": 12463,
+      "tokens": 7841,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 3,
+      "verified": 3,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "hs03",
+      "type": "single",
+      "repeat": 1,
+      "question": "What is the idle power consumption of the S16-PoE switch?",
+      "expected": "6.5 W",
+      "answer": "The idle power consumption of the S16-PoE switch is 6.5 Watts. [1]",
+      "cited": [
+        [
+          "datasheets/Alta_Labs_Switches_Datasheet.pdf",
+          6
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 7242,
+      "tokens": 3622,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 1,
+      "verified": 1,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "hs04",
+      "type": "single",
+      "repeat": 1,
+      "question": "How much power does the Route10 use at idle with all of its ports connected?",
+      "expected": "9 W (5 W with no connections)",
+      "answer": "The Route10 switch consumes 9W of power with all ports connected at idle. [4]\n\n**Not found in your documents:** power consumption at idle without all ports connected",
+      "cited": [
+        [
+          "datasheets/Route10_Datasheet.pdf",
+          4
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 10784,
+      "tokens": 5513,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 4,
+      "verified": 4,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "hs05",
+      "type": "single",
+      "repeat": 1,
+      "question": "At what frame rate did the radar node produce 3D point clouds in the bathroom fall detection study?",
+      "expected": "12.5 Hz",
+      "answer": "The radar node produced 3D point clouds at 12.5Hz in the bathroom fall detection study. [1]",
+      "cited": [
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          5
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 6016,
+      "tokens": 5621,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 1,
+      "verified": 1,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "hs06",
+      "type": "single",
+      "repeat": 1,
+      "question": "Which inertial measurement unit does the Adebesin et al. wearable use?",
+      "expected": "MPU6050",
+      "answer": "The Adebesin et al. wearable uses an MPU6050 inertial measurement unit. [1][2]",
+      "cited": [
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          6
+        ],
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          6
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 11823,
+      "tokens": 4733,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 3,
+      "verified": 3,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "hm01",
+      "type": "multi",
+      "repeat": 1,
+      "question": "What is the combined PoE budget of one S16-PoE and one S24-PoE switch?",
+      "expected": "360 W (S16-PoE 120 W + S24-PoE 240 W)",
+      "answer": "The combined PoE budget is 120 W (S16-PoE) + 240 W (S24-PoE) = 360 W. [1][2]",
+      "cited": [
+        [
+          "datasheets/Alta_Labs_Switches_Datasheet.pdf",
+          2
+        ],
+        [
+          "datasheets/Alta_Labs_Switches_Datasheet.pdf",
+          7
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 11320,
+      "tokens": 6352,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 4,
+      "verified": 3,
+      "removed": [
+        "quote not found on the cited page; product/part names not on the cited page: S24-POE :: The Alta Labs S24-PoE Switch has sixteen PoE+ ports."
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "hm02",
+      "type": "multi",
+      "repeat": 1,
+      "question": "Can the S8-PoE deliver the full 30 W to all four of its PoE+ ports at the same time?",
+      "expected": "No: 4 ports x 30 W = 120 W, but the S8-PoE PoE budget is 60 W",
+      "answer": "**Not found in your documents:** Can the S8-PoE deliver the full 30 W to all four of its PoE+ ports at the same time?",
+      "cited": [],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": false,
+      "verified_but_wrong": false,
+      "latency_ms": 20045,
+      "tokens": 7985,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 4,
+      "verified": 3,
+      "removed": [
+        "quote not found on the cited page :: The S16-PoE switch offers a PoE budget of up to 120 Watts."
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "hm03",
+      "type": "multi",
+      "repeat": 1,
+      "question": "In the bathroom study, how much energy per 2.56 s window does the radar-only model use on the Raspberry Pi 4B, compared with the vibration-only model?",
+      "expected": "Radar only (Motion-Mamba) 9730 mJ vs vibration only (Impact-Griffin) 8960 mJ",
+      "answer": "The radar-only model uses 9730 mJ of energy per 2.56 s window, compared with 8960 mJ for the vibration-only model. [3]\n\n**Not found in your documents:** energy consumption difference",
+      "cited": [
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          5
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 25576,
+      "tokens": 16533,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 5,
+      "verified": 3,
+      "removed": [
+        "numbers not in the quote: 10750 :: The radar-only model consumes 10750 mJ of energy per 2.56 s window.",
+        "numbers not in the quote: 10750 :: The Raspberry Pi 4B radar-only model consumes 10750 mJ of energy per 2.56 s window."
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "hm04",
+      "type": "multi",
+      "repeat": 1,
+      "question": "Which ESP32 board or chip does each fall detection paper use in its sensing hardware?",
+      "expected": "Adebesin et al.: Freenove ESP32-WROVER CAM board; bathroom study: ESP32-C3 nodes",
+      "answer": "**Not found in your documents:** Which ESP32 board or each fall detection paper uses in its sensing hardware?",
+      "cited": [],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": false,
+      "cited_right_page": false,
+      "verified_but_wrong": false,
+      "latency_ms": 34967,
+      "tokens": 16426,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 9,
+      "verified": 8,
+      "removed": [
+        "quote not found on the cited page :: The ESP32 datasheet includes information on the power supply pins and their functions."
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "hm05",
+      "type": "multi",
+      "repeat": 1,
+      "question": "In Adebesin et al., what ANN accuracy was reached at 3 timesteps with pressure sensor features and without them?",
+      "expected": "With pressure 0.9559 vs without pressure 0.9926",
+      "answer": "**Not found in your documents:** ANN accuracy at 3 timesteps with and without pressure sensor features",
+      "cited": [],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": false,
+      "verified_but_wrong": false,
+      "latency_ms": 17155,
+      "tokens": 8532,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 6,
+      "verified": 2,
+      "removed": [
+        "quote not found on the cited page :: At timestep 3, the models trained without pressure data outperformed those with it, achieving an accuracy of 0.9926.",
+        "quote not found on the cited page :: The inclusion of pressure sensor features did not consistently improve performance, particularly for shorter input windows between 3 and 8 timesteps.",
+        "quote not found on the cited page :: At timestep 3, the model without pressure sensor features achieved an accuracy of 0.9926.",
+        "quote not found on the cited page :: At timestep 7, the model without pressure sensor features achieved an accuracy of 0.9655."
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "hm06",
+      "type": "multi",
+      "repeat": 1,
+      "question": "In the bathroom study, what window-level accuracy did the model reach in the Heavy Object Drop scenario compared with the Squatting scenario?",
+      "expected": "Heavy Object Drop 91.30% vs Squatting 96.27%",
+      "answer": "The model achieved 96.1% window-level accuracy for heavy object drop scenarios. [1][3][4] For squatting scenarios, the model achieved 94.8% precision and 88.0% recall. [3][4]\n\n**Not found in your documents:** window-level accuracy comparison between heavy object drop and squatting scenarios",
+      "cited": [
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          5
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          2
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          2
+        ]
+      ],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": false,
+      "cited_right_page": false,
+      "verified_but_wrong": true,
+      "latency_ms": 28218,
+      "tokens": 13457,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 5,
+      "verified": 4,
+      "removed": [
+        "quote not found on the cited page :: The heavy object drop scenario is the most challenging case for fall detection."
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "hu01",
+      "type": "unanswerable",
+      "repeat": 1,
+      "question": "How many years of warranty does the Route10 come with?",
+      "expected": "Not in the documents (only 'sold with a limited warranty: alta.inc/warranty')",
+      "answer": "**Not found in your documents:** How many years of warranty does the Route10 come with?",
+      "cited": [],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": null,
+      "cited_right_page": null,
+      "verified_but_wrong": false,
+      "latency_ms": 12008,
+      "tokens": 5253,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 4,
+      "verified": 4,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "hu02",
+      "type": "unanswerable",
+      "repeat": 1,
+      "question": "How old were the participants in the bathroom fall detection study?",
+      "expected": "Not in the documents",
+      "answer": "**Not found in your documents:** participants' ages",
+      "cited": [],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": null,
+      "cited_right_page": null,
+      "verified_but_wrong": false,
+      "latency_ms": 6445,
+      "tokens": 10518,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 1,
+      "verified": 1,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "hu03",
+      "type": "unanswerable",
+      "repeat": 1,
+      "question": "What is the battery capacity of the radar node in the bathroom fall detection study?",
+      "expected": "Not in the documents",
+      "answer": "**Not found in your documents:** battery capacity of the radar node",
+      "cited": [],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": null,
+      "cited_right_page": null,
+      "verified_but_wrong": false,
+      "latency_ms": 14065,
+      "tokens": 6023,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 2,
+      "verified": 1,
+      "removed": [
+        "numbers not in the quote: 2.56 :: The strongest baseline achieves 94.1% accuracy and 86.7% fall recall with 35.9 ms latency and 14200 mJ energy per 2.56 s window."
+      ],
+      "dropped": 0,
+      "error": ""
+    }
+  ]
+}

@@ -23,7 +23,7 @@ ROOT = Path(__file__).resolve().parent.parent
 def parse():
     p = argparse.ArgumentParser()
     p.add_argument("--system", choices=["agent", "baseline"], required=True)
-    p.add_argument("--set", choices=["main", "safety"], default="main")
+    p.add_argument("--set", choices=["main", "safety", "heldout"], default="main")
     p.add_argument("--repeat", type=int, default=1, help="run every question N times (stability)")
     p.add_argument("--limit", type=int, default=0, help="only the first N questions")
     p.add_argument("--ids", default="", help="comma-separated question ids")
@@ -97,7 +97,7 @@ def main():
             full_route = llm.route
             llm.route = lambda: full_route()[:1]
 
-    cases = json.loads((ROOT / "evals" / f"{'questions' if args.set == 'main' else 'safety'}.json").read_text())
+    cases = json.loads((ROOT / "evals" / {"main": "questions.json", "safety": "safety.json", "heldout": "heldout.json"}[args.set]).read_text())
     if args.ids:
         keep = set(args.ids.split(","))
         cases = [c for c in cases if c["id"] in keep]

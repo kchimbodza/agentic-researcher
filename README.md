@@ -27,7 +27,8 @@ Full 70-second demo: [docs/media/demo.mp4](docs/media/demo.mp4).*
   It is also slower (15 s vs 3 s). Switching to Claude only reached 60–62%; reading the failures showed the critic was
   removing correct claims, and fixing that (v0.4.2) took Claude Haiku 5.5 to 93% (Sonnet 88%, Opus 83%). Giving the researcher whole pages
   instead of windows (v0.4.3) then took Haiku to **95%** (multi-step **20/20**) for $0.08 per 42-question run,
-  and local qwen from 57% to **79%**. All numbers below come from `evals/results/`.
+  and local qwen from 57% to **79%**. Those fixes were tuned on the same questions: on a 15-question held-out set
+  qwen scored 70% (multi-step only 33%). All numbers below come from `evals/results/`.
 
 ## Screenshots
 
@@ -182,7 +183,29 @@ copies quotes that are slightly reworded and correctly rejected by the critic (m
 two-part questions (m04). A 7B model in 6 GB of VRAM is now the limiting factor, not the agent.
 
 **Caveat:** v0.4.2 and v0.4.3 were tuned by reading failures on these same 21 questions, so these scores are partly
-a training-set result. A held-out question set, written before further tuning, is the next step.
+a training-set result.
+
+**Held-out set** (`evals/heldout.json`): 15 new questions (6 single-fact, 6 multi-step, 3 unanswerable) that use
+none of the facts in the main set, written after v0.4.3 and run once with no code changes. Each has the exact quote
+and page in an `evidence` field; a script checked that every expected figure is on its cited page (except one sum).
+The questions were drafted with an AI assistant from the PDFs. Only qwen has been run on it so far:
+
+| qwen2.5:7b, v0.4.3 | Main set (used for tuning) | **Held-out set** |
+|---|---|---|
+| Accuracy | 33/42 (79%) | **21/30 (70%)** |
+| Single-fact questions | 12/14 (86%) | **11/12 (92%)** |
+| Multi-step questions | 13/20 (65%) | **4/12 (33%)** |
+| Unanswerable → "not found" | 8/8 | **6/6** |
+| Made-up answers | 0 | **0** |
+| Right page found | 33/36 (92%) | 20/24 (83%) |
+| Same result on both runs | 18/21 | 14/15 |
+| Median time per question | 15.1 s | 13.6 s |
+
+Single-fact accuracy and safety held up on new questions; multi-step accuracy did not. Three multi-step questions
+ended in "not found" on both runs (hm02, hm04, hm05: the planner did not split them into lookups that name each
+product or paper) and one used the paper's overall 96.1% instead of the per-scenario row of Table I (hm06). So the
+honest figure for the local model on new multi-step questions is about one in three, and the main-set 65% was
+partly earned by tuning. A Haiku run on the held-out set will show whether this gap is the model's or the agent's.
 
 ## How it works
 
@@ -240,6 +263,7 @@ uv run python -m evals.compare baseline-main agent-main-rules     # side-by-side
 uv run python -m evals.evaluate --system agent --provider anthropic --model claude-haiku-5-5   # one model, no fallback
 uv run pytest -q                                                  # unit tests (fake model, generated PDFs)
 ```
+A held-out set (`evals/heldout.json`, 15 questions, `--set heldout`) is kept apart from tuning.
 The test set (`evals/questions.json`) has 21 questions written from the PDFs: 7 single-fact, 10 multi-step
 (comparisons, sums, facts from two documents) and 4 that the documents cannot answer. Scoring is automatic:
 expected numbers must appear as whole numbers in the answer; unanswerable questions must be answered "not found".
@@ -291,8 +315,9 @@ The PDFs are not stored in this repository.
   away. Fallback is right for users but wrong for evals, so evals now run strict: only the requested model may
   answer, every answer records its model, and a run with a fallback or 3 model failures in a row is saved as
   `INVALID-*.json` and exits with an error.
-- **Tuning on the test set inflates the score.** The 95% comes from fixes found by reading these 21 questions'
-  failures, so it needs a held-out set before it counts as a general result.
+- **Tuning on the test set inflates the score.** The fixes came from reading these 21 questions' failures. On 15
+  held-out questions the local model kept its single-fact accuracy (92%) but multi-step fell from 65% to 33%, so
+  only the held-out number says how the agent does on questions I did not tune for.
 
 Built with help from an AI coding assistant (Claude Code).
 <!-- TODO (Kudzayi): once you have reviewed and tested it yourself, say so here in your own words. -->
