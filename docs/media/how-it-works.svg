@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 290" width="960" height="290" role="img" aria-labelledby="t d">
+  <title id="t">How Agentic Researcher works</title>
+  <desc id="d">Question, then Planner, Researcher, Critic, Writer, Answer. The Critic sends lookups with no evidence back to the Researcher once, and asks a human before writing a partial answer.</desc>
+  <style>
+    :root { --ink:#1f2937; --sub:#57606a; --line:#d0d7de; --card:#ffffff; --on:#f97316; --tint:#fff4ec; }
+    @media (prefers-color-scheme: dark) {
+      :root { --ink:#e6edf3; --sub:#9198a1; --line:#3d444d; --card:#161b22; --tint:#2a1d14; }
+    }
+    text { font-family: Inter, "Segoe UI", system-ui, -apple-system, Helvetica, Arial, sans-serif; }
+    .title { font-size:15px; font-weight:700; fill:var(--ink); text-anchor:middle; }
+    .sub   { font-size:11.5px; fill:var(--sub); text-anchor:middle; }
+    .note  { font-size:11px; fill:var(--sub); text-anchor:middle; }
+    .node  { fill:var(--card); stroke:var(--line); stroke-width:1.5; }
+    .wire  { stroke:var(--line); stroke-width:1.5; fill:none; }
+    .dash  { stroke-dasharray:5 4; }
+    .head  { fill:var(--line); }
+    .dot   { fill:var(--on); }
+
+    .n1 { animation: k1 9s infinite; } .n2 { animation: k2 9s infinite; }
+    .n3 { animation: k3 9s infinite; } .n4 { animation: k4 9s infinite; }
+    .n5 { animation: k5 9s infinite; } .n6 { animation: k6 9s infinite; }
+    @keyframes k1 { 0%,8%   { stroke:var(--on); fill:var(--tint); } 11%,100% { stroke:var(--line); fill:var(--card); } }
+    @keyframes k2 { 0%,11%  { stroke:var(--line); fill:var(--card); } 13%,22% { stroke:var(--on); fill:var(--tint); } 25%,100% { stroke:var(--line); fill:var(--card); } }
+    @keyframes k3 { 0%,25%  { stroke:var(--line); fill:var(--card); } 27%,38% { stroke:var(--on); fill:var(--tint); } 41%,100% { stroke:var(--line); fill:var(--card); } }
+    @keyframes k4 { 0%,41%  { stroke:var(--line); fill:var(--card); } 43%,56% { stroke:var(--on); fill:var(--tint); } 59%,100% { stroke:var(--line); fill:var(--card); } }
+    @keyframes k5 { 0%,59%  { stroke:var(--line); fill:var(--card); } 61%,70% { stroke:var(--on); fill:var(--tint); } 73%,100% { stroke:var(--line); fill:var(--card); } }
+    @keyframes k6 { 0%,73%  { stroke:var(--line); fill:var(--card); } 75%,94% { stroke:var(--on); fill:var(--tint); } 98%,100% { stroke:var(--line); fill:var(--card); } }
+
+    .travel { animation: go 9s infinite; }
+    @keyframes go {
+      0%,8%   { transform:translateX(70px);  animation-timing-function:ease-in-out; }
+      12%,22% { transform:translateX(234px); animation-timing-function:ease-in-out; }
+      26%,38% { transform:translateX(398px); animation-timing-function:ease-in-out; }
+      42%,56% { transform:translateX(562px); animation-timing-function:ease-in-out; }
+      60%,70% { transform:translateX(726px); animation-timing-function:ease-in-out; }
+      74%,100%{ transform:translateX(890px); }
+    }
+    .retry { animation: retry 9s infinite; }
+    @keyframes retry {
+      0%,45%  { stroke:var(--line); stroke-dashoffset:0; }
+      47%     { stroke:var(--on); }
+      54%     { stroke:var(--on); stroke-dashoffset:-36; }
+      57%,100%{ stroke:var(--line); stroke-dashoffset:-36; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .n1,.n2,.n3,.n4,.n5,.n6,.travel,.retry { animation:none; }
+      .travel { display:none; }
+    }
+  </style>
+
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="head"/>
+    </marker>
+  </defs>
+
+  <!-- connectors -->
+  <g class="wire" marker-end="url(#a)">
+    <line x1="136" y1="135" x2="168" y2="135"/>
+    <line x1="300" y1="135" x2="332" y2="135"/>
+    <line x1="464" y1="135" x2="496" y2="135"/>
+    <line x1="628" y1="135" x2="660" y2="135"/>
+    <line x1="792" y1="135" x2="824" y2="135"/>
+  </g>
+
+  <!-- retry loop: Critic back to Researcher -->
+  <path class="wire dash retry" d="M552 98 C552 44, 408 44, 408 98" marker-end="url(#a)"/>
+  <text class="note" x="480" y="40">no evidence → reword, search once more</text>
+
+  <!-- human approval: Critic to Writer when only partly answered -->
+  <path class="wire dash" d="M580 172 L606 222" marker-end="url(#a)"/>
+  <path class="wire dash" d="M690 222 L716 172" marker-end="url(#a)"/>
+  <rect class="node" x="574" y="224" width="148" height="44" rx="10" style="stroke-dasharray:5 4"/>
+  <text class="title" x="648" y="243" style="font-size:13px">Human approval</text>
+  <text class="sub" x="648" y="259">only if partly answered</text>
+
+  <!-- travelling evidence dot (drawn under the cards) -->
+  <g class="travel"><circle class="dot" cx="0" cy="135" r="5"/></g>
+
+  <!-- cards -->
+  <rect class="node n1" x="6"   y="100" width="128" height="70" rx="12"/>
+  <rect class="node n2" x="170" y="100" width="128" height="70" rx="12"/>
+  <rect class="node n3" x="334" y="100" width="128" height="70" rx="12"/>
+  <rect class="node n4" x="498" y="100" width="128" height="70" rx="12"/>
+  <rect class="node n5" x="662" y="100" width="128" height="70" rx="12"/>
+  <rect class="node n6" x="826" y="100" width="128" height="70" rx="12"/>
+
+  <text class="title" x="70"  y="128">Question</text>
+  <text class="sub"   x="70"  y="146">+ conversation</text>
+  <text class="sub"   x="70"  y="160">memory</text>
+
+  <text class="title" x="234" y="128">Planner</text>
+  <text class="sub"   x="234" y="146">splits it into</text>
+  <text class="sub"   x="234" y="160">lookups</text>
+
+  <text class="title" x="398" y="128">Researcher</text>
+  <text class="sub"   x="398" y="146">hybrid search (MCP)</text>
+  <text class="sub"   x="398" y="160">claims + exact quotes</text>
+
+  <text class="title" x="562" y="128">Critic</text>
+  <text class="sub"   x="562" y="146">quote on the page?</text>
+  <text class="sub"   x="562" y="160">figures, injection</text>
+
+  <text class="title" x="726" y="128">Writer</text>
+  <text class="sub"   x="726" y="146">cited sentences</text>
+  <text class="sub"   x="726" y="160">only</text>
+
+  <text class="title" x="890" y="128">Answer</text>
+  <text class="sub"   x="890" y="146">evidence +</text>
+  <text class="sub"   x="890" y="160">audit log</text>
+</svg>

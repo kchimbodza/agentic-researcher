@@ -24,7 +24,8 @@ Full 70-second demo: [docs/media/demo.mp4](docs/media/demo.mp4).*
   app with human sign-off and an audit trail, and a small fine-tuned checking model.
 - **Measured, not claimed:** on 21 test questions the agent beat my single-step baseline (57% vs 52% accuracy,
   right page found 94% vs 78%), never made up an answer to an unanswerable question, and resisted 6/6 prompt-injection attacks.
-  It is also slower (15 s vs 3 s). All numbers below come from `evals/results/`.
+  It is also slower (15 s vs 3 s). With Claude as the model, the same agent reached 60–62% and found the right page
+  97–100% of the time. All numbers below come from `evals/results/`.
 
 ## Screenshots
 
@@ -81,7 +82,30 @@ on the GPU. On held-out document pages it scores 94.3% accuracy vs 78.9% for a "
 (details in `finetune/README.md`). As a hard filter in the agent it halved wrong citations but removed many
 correct, reworded claims, so it is off by default (Settings → Critic checks).
 
+**Same agent on Claude** (agent v0.4.1, rules checker, `effort: low`, same 21 questions × 2):
+
+| | qwen2.5:7b (local) | Claude Haiku 5.5 | Claude Sonnet 5.5 | Claude Opus 5.5 |
+|---|---|---|---|---|
+| Accuracy | 24/42 (57%) | 25/42 (60%) | **26/42 (62%)** | **26/42 (62%)** |
+| Single-fact questions | 8/14 (57%) | 6/14 (43%) | **9/14 (64%)** | 7/14 (50%) |
+| Multi-step questions | 8/20 (40%) | **11/20 (55%)** | 9/20 (45%) | **11/20 (55%)** |
+| Unanswerable → "not found" | 8/8 | 8/8 | 8/8 | 8/8 |
+| Made-up answers | 0 | 0 | 0 | 0 |
+| Right page found | 34/36 (94%) | 35/36 (97%) | **36/36 (100%)** | **36/36 (100%)** |
+| Cited but wrong (per run) | 5 | 5.5 | 6 | 5.5 |
+| Same result on both runs | 21/21 | 20/21 | 19/21 | 19/21 |
+| Median time per question | 15.2 s | **7.2 s** | 10.0 s | 12.7 s |
+| Cost for the whole run | $0 | $0.07 | $1.03 | $2.23 |
+
+A bigger model helped less than I expected: retrieval became near-perfect, but accuracy rose only 3–5 points and
+wrong citations stayed about the same. Opus scored the same as Sonnet at twice the cost, so the remaining errors
+come from the pipeline (what the researcher extracts and how the critic and scorer judge it), not model size.
+
 ## How it works
+
+<p align="center"><img src="docs/media/how-it-works.svg" width="100%" alt="Question, Planner, Researcher, Critic, Writer, Answer; the Critic retries lookups with no evidence once and asks a human before a partial answer"></p>
+
+<details><summary>Same flow as a Mermaid chart</summary>
 
 ```mermaid
 flowchart LR
@@ -94,6 +118,8 @@ flowchart LR
     H -- approve --> W[Writer<br/>cited sentences only,<br/>drops ungrounded figures]
     W --> A[Answer + evidence + audit log]
 ```
+
+</details>
 
 - **Planner** splits the question into lookups and resolves follow-ups ("that paper") from conversation memory.
 - **Researcher** calls `search_documents` on the MCP server (`app/mcp_server.py`): vector search (nomic-embed-text in Chroma)
@@ -163,7 +189,8 @@ The PDFs are not stored in this repository.
 - **Unit tests with a fake model found two security bugs** before any eval did: an injected instruction slipped
   through because the quote itself looked harmless, and the number check let 999 through as "60 ÷ 60 × 1000".
 - **Small local models are slow but private and free**: about 15 s and ~5,000 tokens per question on a laptop GPU.
-  The same code runs on Claude by adding an API key (not yet measured).
+  On Claude the same code was 2× faster (Haiku: 7 s, $0.07 for 42 runs) but only 3–5 points more accurate,
+  so the next gains have to come from the pipeline, not a bigger model.
 
 Built with help from an AI coding assistant (Claude Code).
 <!-- TODO (Kudzayi): once you have reviewed and tested it yourself, say so here in your own words. -->
