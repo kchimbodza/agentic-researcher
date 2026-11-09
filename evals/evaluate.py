@@ -30,6 +30,7 @@ def parse():
     p.add_argument("--claim-checker", choices=["auto", "rules"], help="override the critic setting")
     p.add_argument("--provider", choices=["anthropic", "ollama"], help="override the main provider")
     p.add_argument("--model", help="override the model for that provider")
+    p.add_argument("--cost-cap", type=float, help="override the per-run cost cap in USD")
     p.add_argument("--name", default="", help="results file name (default: system-set-timestamp)")
     p.add_argument("--min-accuracy", type=float, default=0.0, help="exit 1 if accuracy is below this (CI)")
     return p.parse_args()
@@ -53,6 +54,8 @@ def main():
         overrides["claim_checker"] = args.claim_checker
     if args.provider:
         overrides["provider"] = args.provider
+    if args.cost_cap:
+        overrides["cost_cap_usd"] = args.cost_cap
     if args.model:
         overrides["anthropic_model" if (args.provider or settings.load()["provider"]) == "anthropic" else "ollama_model"] = args.model
     if overrides:  # in-memory only: patch settings.load for this process

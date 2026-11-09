@@ -65,11 +65,25 @@ def _log(row: dict):
 
 
 # ---------------------------------------------------------------- providers
+_UNSUPPORTED = {"maxItems", "minLength", "maxLength", "minimum", "maximum", "multipleOf"}
+
+
+def claude_schema(schema):
+    """Copy of a JSON schema without the constraints Claude structured outputs reject (400 error).
+    The limits are enforced in code instead (e.g. lists are sliced in app/agent.py)."""
+    if isinstance(schema, dict):
+        return {k: claude_schema(v) for k, v in schema.items()
+                if k not in _UNSUPPORTED and not (k == "minItems" and v not in (0, 1))}
+    if isinstance(schema, list):
+        return [claude_schema(x) for x in schema]
+    return schema
+
+
 def _anthropic(model, system, user, schema, max_tokens):
     client = anthropic.Anthropic(max_retries=2, timeout=120)
     kwargs = dict(model=model, max_tokens=max_tokens, system=system,
                   messages=[{"role": "user", "content": user}],
-                  output_config={"effort": "low", "format": {"type": "json_schema", "schema": schema}})
+                  output_config={"effort": "low", "format": {"type": "json_schema", "schema": claude_schema(schema)}})
     if model in FALLBACK_OK:
         # On a safety decline, Anthropic re-runs the request on its recommended fallback model.
         r = client.beta.messages.create(betas=["server-side-fallback-2026-07-01"], fallbacks="default", **kwargs)

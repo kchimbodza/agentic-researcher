@@ -20,7 +20,7 @@ PROVIDERS = ["anthropic", "ollama"]
 DEFAULTS = {
     "reviewer_name": "",
     "provider": "anthropic",           # main model; the other is the fallback (Phase 5)
-    "anthropic_model": "claude-opus-5-5",
+    "anthropic_model": "claude-haiku-5-5",
     "ollama_model": "qwen2.5:7b",
     "cost_cap_usd": 0.05,              # per run
     "claim_checker": "rules",          # rules | auto (auto adds the fine-tuned model: fewer wrong citations, lower recall; see README)

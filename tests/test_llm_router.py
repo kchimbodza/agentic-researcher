@@ -44,3 +44,14 @@ def test_all_providers_failing_raises(monkeypatch, tmp_path):
 
 def test_route_skips_claude_without_a_key():
     assert all(p != "anthropic" for p, _ in llm.route())
+
+
+def test_claude_schema_drops_unsupported_constraints():
+    from app import agent
+    from app.llm import claude_schema
+    s = claude_schema(agent.PLAN_SCHEMA)
+    arr = s["properties"]["lookups"]
+    assert "maxItems" not in arr and arr["minItems"] == 1          # minItems 0/1 is allowed
+    assert "maxItems" in agent.PLAN_SCHEMA["properties"]["lookups"]  # original untouched (Ollama keeps it)
+    for sch in (agent.EXTRACT_SCHEMA, agent.WRITE_SCHEMA, agent.REFINE_SCHEMA):
+        assert "maxItems" not in str(claude_schema(sch))

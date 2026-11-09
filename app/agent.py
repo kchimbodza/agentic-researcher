@@ -154,7 +154,7 @@ def build_graph(tb: ToolBox, budget: llm.Budget, counters: dict):
                 continue
             passages = "\n\n".join(f"[P{n}] {h['doc_name']}, page {h['page']}:\n{h['text']}" for n, h in enumerate(hits, 1))
             out = llm.complete_json(RESEARCHER, f"Lookup: {q}\n\n{passages}", EXTRACT_SCHEMA, budget, "extract")
-            for c in out["claims"]:
+            for c in out["claims"][:3]:
                 m = re.search(r"\d+", c.get("passage", ""))
                 h = hits[int(m.group()) - 1] if m and 1 <= int(m.group()) <= len(hits) else hits[0]
                 q = docs.squash(c["quote"])
@@ -224,7 +224,7 @@ def build_graph(tb: ToolBox, budget: llm.Budget, counters: dict):
                            for n, c in enumerate(evidence, 1))
             out = llm.complete_json(WRITER, f"Question: {s['question']}\n\nEvidence:\n{ev}", WRITE_SCHEMA, budget, "write")
             kept, dropped, used = [], 0, set()
-            for sent in out["sentences"]:
+            for sent in out["sentences"][:6]:
                 refs = [n for n in sent["cites"] if 1 <= n <= len(evidence)]
                 text = re.sub(r"\s*\[\d+(?:,\s*\d+)*\]", "", sent["text"]).strip()
                 sources = [evidence[n - 1]["quote"] for n in refs] + [s["question"]]
