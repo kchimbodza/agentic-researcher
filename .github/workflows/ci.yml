@@ -41,7 +41,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: eval-results
-          path: evals/results/ci-smoke.json
+          path: evals/results/*ci-smoke.json
 
   docker:
     name: Docker image builds

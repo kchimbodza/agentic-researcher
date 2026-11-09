@@ -32,12 +32,34 @@ def parse():
     p.add_argument("--model", help="override the model for that provider")
     p.add_argument("--cost-cap", type=float, help="override the per-run cost cap in USD")
     p.add_argument("--name", default="", help="results file name (default: system-set-timestamp)")
+    p.add_argument("--allow-fallback", action="store_true",
+                   help="let the router fall back to another model (off by default: a fallback would mix models in one score)")
     p.add_argument("--min-accuracy", type=float, default=0.0, help="exit 1 if accuracy is below this (CI)")
     return p.parse_args()
 
 
 def pct(n, d):
     return f"{n}/{d} ({100 * n / d:.0f}%)" if d else "–"
+
+
+MODEL_FAILED = "No model could answer"
+MAX_MODEL_FAILURES = 3  # in a row: stop instead of scoring a dead API (e.g. credit ran out)
+
+
+def invalid_reason(rows: list[dict], expected_model: str | None) -> str:
+    """Why a run cannot be reported as a result for expected_model ('' = valid).
+
+    Every answer must come from the requested model alone: a router fallback (to a local model when
+    the API fails) or a model error would silently mix models into one score.
+    """
+    failed = sum(MODEL_FAILED in (r.get("error") or "") for r in rows)
+    other = [r["id"] for r in rows if r.get("model") and r["model"] not in (expected_model, "none")]
+    reasons = []
+    if failed:
+        reasons.append(f"{failed} answer(s) had no model available")
+    if other:
+        reasons.append(f"{len(other)} answer(s) used a model other than {expected_model} ({', '.join(other[:5])})")
+    return "; ".join(reasons)
 
 
 def main():
@@ -62,6 +84,19 @@ def main():
         base = settings.load
         settings.load = lambda: {**base(), **overrides}
 
+    expected_model = None
+    if args.system == "agent":
+        from app import llm  # noqa: E402
+        cfg0 = settings.load()
+        main_provider = llm.route()[0] if llm.route() else (None, None)
+        if main_provider[0] != cfg0["provider"]:
+            sys.exit(f"The main provider '{cfg0['provider']}' is not available (no API key?); refusing to "
+                     f"evaluate '{main_provider[0]}' under its name.")
+        expected_model = main_provider[1]
+        if not args.allow_fallback:  # strict: only the requested model may answer
+            full_route = llm.route
+            llm.route = lambda: full_route()[:1]
+
     cases = json.loads((ROOT / "evals" / f"{'questions' if args.set == 'main' else 'safety'}.json").read_text())
     if args.ids:
         keep = set(args.ids.split(","))
@@ -72,8 +107,10 @@ def main():
     if args.system == "agent" and agent.current_mode() != "agent":
         sys.exit("No model reachable (start Ollama or add an API key): the agent would run in preview mode.")
 
-    rows = []
+    rows, failures_in_row, stopped = [], 0, ""
     for rep in range(args.repeat):
+        if stopped:
+            break
         for c in cases:
             t0 = time.perf_counter()
             try:
@@ -100,6 +137,11 @@ def main():
                          "expected": c.get("expected"), "answer": answer, "cited": cited, **s, **meta, "error": err})
             mark = "✓" if s["correct"] else "✗"
             print(f"[{rep}] {c['id']} {mark} {meta.get('latency_ms')} ms  {answer[:110]!r}", flush=True)
+            failures_in_row = failures_in_row + 1 if MODEL_FAILED in err else 0
+            if failures_in_row >= MAX_MODEL_FAILURES:
+                stopped = f"stopped after {failures_in_row} model failures in a row: {err[:300]}"
+                print(stopped, flush=True)
+                break
 
     def acc(rs):
         return pct(sum(r["correct"] for r in rs), len(rs))
@@ -136,7 +178,12 @@ def main():
         summary["Attacks resisted"] = pct(sum(r["attack_resisted"] for r in attacked), len(attacked))
     if args.system == "agent":
         summary["Claim checker"] = cfg["claim_checker"]
+    invalid = "; ".join(x for x in (stopped, invalid_reason(rows, expected_model)) if x) if args.system == "agent" else ""
+    if invalid:
+        summary["INVALID"] = invalid
     name = args.name or f"{args.system}-{args.set}-{datetime.now():%Y%m%d-%H%M}"
+    if invalid:
+        name = "INVALID-" + name
     out = ROOT / "evals" / "results" / f"{name}.json"
     out.parent.mkdir(exist_ok=True)
     out.write_text(json.dumps({"summary": summary, "config": {**vars(args), "settings": cfg,
@@ -144,6 +191,8 @@ def main():
                                "rows": rows}, indent=2, default=str))
     print(json.dumps(summary, indent=2))
     print("saved", out)
+    if invalid:
+        sys.exit(f"Run is INVALID and must not be reported: {invalid}")
     correct = sum(r["correct"] for r in rows) / max(1, len(rows))
     if correct < args.min_accuracy:
         sys.exit(f"Accuracy {correct:.0%} is below the required {args.min_accuracy:.0%}")

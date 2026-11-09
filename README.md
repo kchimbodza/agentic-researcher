@@ -237,12 +237,15 @@ uv run python -m evals.evaluate --system baseline                 # single-step 
 uv run python -m evals.evaluate --system agent --repeat 2         # the agent, twice (stability)
 uv run python -m evals.evaluate --system agent --set safety       # prompt-injection and pressure tests
 uv run python -m evals.compare baseline-main agent-main-rules     # side-by-side table
+uv run python -m evals.evaluate --system agent --provider anthropic --model claude-haiku-5-5   # one model, no fallback
 uv run pytest -q                                                  # unit tests (fake model, generated PDFs)
 ```
 The test set (`evals/questions.json`) has 21 questions written from the PDFs: 7 single-fact, 10 multi-step
 (comparisons, sums, facts from two documents) and 4 that the documents cannot answer. Scoring is automatic:
 expected numbers must appear as whole numbers in the answer; unanswerable questions must be answered "not found".
-Raw outputs for every run are in `evals/results/`.
+Raw outputs for every run are in `evals/results/`. Evals are strict: the router may not fall back to another
+model during a run (`--allow-fallback` turns it back on), and a run that mixed models or lost its model is saved
+as `INVALID-*.json` and exits with an error.
 
 ## Deploy
 
@@ -285,8 +288,9 @@ The PDFs are not stored in this repository.
   is all model: planning, table reading and exact quoting. Before them the gap was hidden by the pipeline's own errors.
 - **Evals must fail loudly.** My Sonnet/Opus rerun ran out of API credit halfway, and the router's fallback quietly
   answered with the local model. The run "passed" with plausible scores; only answers identical to qwen's gave it
-  away. Fallback is right for users but wrong for evals; the next fix is to record the model behind every answer
-  and reject runs that fell back.
+  away. Fallback is right for users but wrong for evals, so evals now run strict: only the requested model may
+  answer, every answer records its model, and a run with a fallback or 3 model failures in a row is saved as
+  `INVALID-*.json` and exits with an error.
 - **Tuning on the test set inflates the score.** The 95% comes from fixes found by reading these 21 questions'
   failures, so it needs a held-out set before it counts as a general result.
 
