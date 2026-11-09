@@ -9,8 +9,8 @@ jobs:
     name: Unit tests (fake model, generated PDFs)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v6
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10.3.3
         with:
           version: "0.12.1"
       - run: uv sync --frozen
@@ -23,8 +23,8 @@ jobs:
     env:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v6
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10.3.3
         with:
           version: "0.12.1"
       - name: Skip when no API key secret is configured
@@ -38,7 +38,7 @@ jobs:
           uv run python -m evals.evaluate --system agent --provider anthropic --model claude-haiku-5-5
           --ids s01,s05,m05,m06,m10,u04 --min-accuracy 0.6 --name ci-smoke
       - if: always() && env.ANTHROPIC_API_KEY != ''
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: eval-results
           path: evals/results/ci-smoke.json
@@ -48,5 +48,5 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: docker build -t agentic-researcher:ci .
