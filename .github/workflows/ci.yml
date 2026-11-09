@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    name: Unit tests (fake model, generated PDFs)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.12.1"
+      - run: uv sync --frozen
+      - run: uv run pytest -q
+
+  smoke-eval:
+    name: Agent smoke eval (Claude Haiku, 6 questions)
+    needs: test
+    runs-on: ubuntu-latest
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.12.1"
+      - name: Skip when no API key secret is configured
+        if: env.ANTHROPIC_API_KEY == ''
+        run: echo "ANTHROPIC_API_KEY secret not set; skipping the smoke eval." && exit 0
+      - if: env.ANTHROPIC_API_KEY != ''
+        run: uv sync --frozen && ./evals/fetch_public_docs.sh
+      - name: Fail the build if accuracy drops below 60%
+        if: env.ANTHROPIC_API_KEY != ''
+        run: >
+          uv run python -m evals.evaluate --system agent --provider anthropic --model claude-haiku-5-5
+          --ids s01,s05,m05,m06,m10,u04 --min-accuracy 0.6 --name ci-smoke
+      - if: always() && env.ANTHROPIC_API_KEY != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-results
+          path: evals/results/ci-smoke.json
+
+  docker:
+    name: Docker image builds
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t agentic-researcher:ci .

@@ -1,0 +1,119 @@
+free GPU memory: 5.95 GB
+Loading weights:   0%|          | 0/100 [00:00<?, ?it/s]Loading weights: 100%|██████████| 100/100 [00:00<00:00, 19625.23it/s]
+[transformers] [1mDistilBertForSequenceClassification LOAD REPORT[0m from: distilbert-base-uncased
+Key                     | Status     | 
+------------------------+------------+-
+vocab_projector.bias    | UNEXPECTED | 
+vocab_transform.weight  | UNEXPECTED | 
+vocab_transform.bias    | UNEXPECTED | 
+vocab_layer_norm.weight | UNEXPECTED | 
+vocab_layer_norm.bias   | UNEXPECTED | 
+pre_classifier.weight   | MISSING    | 
+classifier.bias         | MISSING    | 
+classifier.weight       | MISSING    | 
+pre_classifier.bias     | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+epoch 1 step 100/5310 loss 0.6972 (6s)
+epoch 1 step 200/5310 loss 0.6642 (11s)
+epoch 1 step 300/5310 loss 0.6246 (17s)
+epoch 1 step 400/5310 loss 0.5702 (22s)
+epoch 1 step 500/5310 loss 0.5148 (28s)
+epoch 1 step 600/5310 loss 0.5175 (34s)
+epoch 1 step 700/5310 loss 0.4800 (39s)
+epoch 1 step 800/5310 loss 0.5013 (45s)
+epoch 1 step 900/5310 loss 0.4713 (51s)
+epoch 1 step 1000/5310 loss 0.4594 (57s)
+epoch 1 step 1100/5310 loss 0.4799 (63s)
+epoch 1 step 1200/5310 loss 0.4567 (69s)
+epoch 1 step 1300/5310 loss 0.4801 (75s)
+epoch 1 step 1400/5310 loss 0.4767 (81s)
+epoch 1 step 1500/5310 loss 0.4701 (87s)
+epoch 1 step 1600/5310 loss 0.4493 (93s)
+epoch 1 step 1700/5310 loss 0.4379 (99s)
+epoch 1 done: domain validation accuracy 0.8750
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+epoch 2 step 1800/5310 loss 0.1310 (107s)
+epoch 2 step 1900/5310 loss 0.4130 (113s)
+epoch 2 step 2000/5310 loss 0.3528 (119s)
+epoch 2 step 2100/5310 loss 0.3746 (125s)
+epoch 2 step 2200/5310 loss 0.4002 (131s)
+epoch 2 step 2300/5310 loss 0.3730 (137s)
+epoch 2 step 2400/5310 loss 0.3916 (142s)
+epoch 2 step 2500/5310 loss 0.3744 (148s)
+epoch 2 step 2600/5310 loss 0.3625 (153s)
+epoch 2 step 2700/5310 loss 0.3652 (159s)
+epoch 2 step 2800/5310 loss 0.3521 (164s)
+epoch 2 step 2900/5310 loss 0.3756 (170s)
+epoch 2 step 3000/5310 loss 0.3675 (175s)
+epoch 2 step 3100/5310 loss 0.3425 (181s)
+epoch 2 step 3200/5310 loss 0.3487 (186s)
+epoch 2 step 3300/5310 loss 0.3492 (192s)
+epoch 2 step 3400/5310 loss 0.3396 (197s)
+epoch 2 step 3500/5310 loss 0.3418 (203s)
+epoch 2 done: domain validation accuracy 0.9107
+epoch 3 step 3600/5310 loss 0.1641 (211s)
+epoch 3 step 3700/5310 loss 0.2702 (216s)
+epoch 3 step 3800/5310 loss 0.2881 (222s)
+epoch 3 step 3900/5310 loss 0.2766 (227s)
+epoch 3 step 4000/5310 loss 0.2925 (233s)
+epoch 3 step 4100/5310 loss 0.2831 (238s)
+epoch 3 step 4200/5310 loss 0.2743 (244s)
+epoch 3 step 4300/5310 loss 0.2789 (249s)
+epoch 3 step 4400/5310 loss 0.2481 (255s)
+epoch 3 step 4500/5310 loss 0.2910 (260s)
+epoch 3 step 4600/5310 loss 0.2514 (266s)
+epoch 3 step 4700/5310 loss 0.2359 (272s)
+epoch 3 step 4800/5310 loss 0.2536 (277s)
+epoch 3 step 4900/5310 loss 0.2412 (283s)
+epoch 3 step 5000/5310 loss 0.2761 (288s)
+epoch 3 step 5100/5310 loss 0.2477 (294s)
+epoch 3 step 5200/5310 loss 0.2496 (299s)
+epoch 3 step 5300/5310 loss 0.2537 (304s)
+epoch 3 done: domain validation accuracy 0.9235
+{
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+  "train_seconds": 306.7,
+  "trainable_params": 1919234,
+  "total_params": 68874244,
+  "best_epoch": 3,
+  "best_domain_val_acc": 0.923469387755102,
+  "history": [
+    {
+      "epoch": 1,
+      "domain_val_acc": 0.875,
+      "elapsed_s": 104.7
+    },
+    {
+      "epoch": 2,
+      "domain_val_acc": 0.9107142857142857,
+      "elapsed_s": 207.1
+    },
+    {
+      "epoch": 3,
+      "domain_val_acc": 0.923469387755102,
+      "elapsed_s": 306.4
+    }
+  ],
+  "note": null,
+  "base_model": "distilbert-base-uncased",
+  "max_length": 192,
+  "seed": 13,
+  "epochs": 3,
+  "batch_size": 16,
+  "lr": 0.0005,
+  "lora": {
+    "r": 16,
+    "alpha": 32,
+    "dropout": 0.1,
+    "targets": "q,k,v,out,lin1,lin2",
+    "modules_to_save": "pre_classifier, classifier"
+  },
+  "n_train_rows": 28307,
+  "n_train_mnli": 20000,
+  "n_train_domain_after_upsample": 8307,
+  "finished": "2026-11-08 18:53:57"
+}

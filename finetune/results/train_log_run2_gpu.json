@@ -1,0 +1,44 @@
+{
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+  "train_seconds": 306.7,
+  "trainable_params": 1919234,
+  "total_params": 68874244,
+  "best_epoch": 3,
+  "best_domain_val_acc": 0.923469387755102,
+  "history": [
+    {
+      "epoch": 1,
+      "domain_val_acc": 0.875,
+      "elapsed_s": 104.7
+    },
+    {
+      "epoch": 2,
+      "domain_val_acc": 0.9107142857142857,
+      "elapsed_s": 207.1
+    },
+    {
+      "epoch": 3,
+      "domain_val_acc": 0.923469387755102,
+      "elapsed_s": 306.4
+    }
+  ],
+  "note": null,
+  "base_model": "distilbert-base-uncased",
+  "max_length": 192,
+  "seed": 13,
+  "epochs": 3,
+  "batch_size": 16,
+  "lr": 0.0005,
+  "lora": {
+    "r": 16,
+    "alpha": 32,
+    "dropout": 0.1,
+    "targets": "q,k,v,out,lin1,lin2",
+    "modules_to_save": "pre_classifier, classifier"
+  },
+  "n_train_rows": 28307,
+  "n_train_mnli": 20000,
+  "n_train_domain_after_upsample": 8307,
+  "finished": "2026-11-08 18:53:57"
+}

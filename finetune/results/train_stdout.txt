@@ -1,0 +1,59 @@
+free GPU memory: 0.83 GB
+Loading weights:   0%|          | 0/100 [00:00<?, ?it/s]Loading weights: 100%|██████████| 100/100 [00:00<00:00, 13710.01it/s]
+[transformers] [1mDistilBertForSequenceClassification LOAD REPORT[0m from: distilbert-base-uncased
+Key                     | Status     | 
+------------------------+------------+-
+vocab_transform.bias    | UNEXPECTED | 
+vocab_projector.bias    | UNEXPECTED | 
+vocab_layer_norm.weight | UNEXPECTED | 
+vocab_layer_norm.bias   | UNEXPECTED | 
+vocab_transform.weight  | UNEXPECTED | 
+pre_classifier.weight   | MISSING    | 
+pre_classifier.bias     | MISSING    | 
+classifier.weight       | MISSING    | 
+classifier.bias         | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+epoch 1 step 100/501 loss 0.6575 (398s)
+epoch 1 step 200/501 loss 0.5882 (713s)
+epoch 1 step 300/501 loss 0.5141 (1043s)
+epoch 1 step 400/501 loss 0.4643 (1352s)
+epoch 1 step 500/501 loss 0.4547 (1610s)
+epoch 1 done: domain validation accuracy 0.8713
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+{
+  "device": "cpu",
+  "gpu": null,
+  "train_seconds": 1617.3,
+  "trainable_params": 1919234,
+  "total_params": 68874244,
+  "best_epoch": 1,
+  "best_domain_val_acc": 0.8712871287128713,
+  "history": [
+    {
+      "epoch": 1,
+      "domain_val_acc": 0.8712871287128713,
+      "elapsed_s": 1617.0
+    }
+  ],
+  "note": "GPU had only 0.83 GB free (Ollama loaded) -> CPU",
+  "base_model": "distilbert-base-uncased",
+  "max_length": 192,
+  "seed": 13,
+  "epochs": 1,
+  "batch_size": 16,
+  "lr": 0.0005,
+  "lora": {
+    "r": 16,
+    "alpha": 32,
+    "dropout": 0.1,
+    "targets": "q,k,v,out,lin1,lin2",
+    "modules_to_save": "pre_classifier, classifier"
+  },
+  "n_train_rows": 8002,
+  "n_train_mnli": 4000,
+  "n_train_domain_after_upsample": 4002,
+  "finished": "2026-11-08 18:40:46"
+}

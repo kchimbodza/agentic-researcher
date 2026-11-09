@@ -1,0 +1,10 @@
+{
+  "pairs": 20,
+  "same_prediction": 20,
+  "max_abs_logit_diff": 2.384185791015625e-06,
+  "onnx_inputs": [
+    "input_ids",
+    "attention_mask"
+  ],
+  "onnx_size_mb": 267.9
+}

@@ -1,0 +1,25 @@
+[project]
+name = "agentic-researcher"
+version = "0.1.0"
+description = "Agentic Researcher: answers you can verify. Multi-agent research with checked quotes, human review and an audit log."
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn>=0.30",
+    "pypdf>=5.0",
+    "python-multipart>=0.0.9",
+    "anthropic>=2.6.0",
+    "langgraph>=1.2.20",
+    "chromadb>=1.5.9",
+    "ollama>=0.6.3",
+    "mcp>=2.3.0",
+    "onnxruntime>=1.31.1",
+    "tokenizers>=0.23.3",
+    "httpx>=0.28.1",
+    "fonttools>=4.68.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+]

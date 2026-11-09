@@ -1,0 +1,70 @@
+{
+  "train": {
+    "n": 22001,
+    "labels": {
+      "1": 11067,
+      "0": 10934
+    },
+    "sources": {
+      "mnli": 20000,
+      "domain": 2001
+    },
+    "kinds": {
+      "pos_template": 713,
+      "neg_unit": 231,
+      "pos_verbatim": 341,
+      "neg_entity": 188,
+      "neg_number": 515,
+      "pos_abbrev": 13
+    }
+  },
+  "validation": {
+    "n": 202,
+    "labels": {
+      "0": 87,
+      "1": 115
+    },
+    "sources": {
+      "domain": 202
+    },
+    "kinds": {
+      "neg_number": 54,
+      "neg_entity": 20,
+      "pos_template": 76,
+      "pos_verbatim": 37,
+      "neg_unit": 13,
+      "pos_abbrev": 2
+    }
+  },
+  "nli_validation": {
+    "n": 3000,
+    "labels": {
+      "1": 1500,
+      "0": 1500
+    },
+    "sources": {
+      "mnli": 3000
+    },
+    "kinds": {}
+  },
+  "domain_test": {
+    "n": 298,
+    "labels": {
+      "1": 161,
+      "0": 137
+    },
+    "sources": {
+      "domain": 298
+    },
+    "kinds": {
+      "pos_verbatim": 54,
+      "pos_template": 105,
+      "neg_unit": 33,
+      "neg_number": 73,
+      "neg_entity": 31,
+      "pos_abbrev": 2
+    }
+  },
+  "domain_test_pages": 17,
+  "domain_train_pages": 58
+}

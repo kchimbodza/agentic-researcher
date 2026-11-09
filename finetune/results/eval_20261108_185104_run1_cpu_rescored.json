@@ -1,0 +1,281 @@
+{
+  "date": "2026-11-08 18:49:27",
+  "tag": "run1_cpu_rescored",
+  "model_dir": "models/lora_run1_cpu",
+  "device": "cpu",
+  "max_length": 192,
+  "nli_file": "nli_validation_run1.jsonl",
+  "nli_validation": {
+    "model": {
+      "n": 3000,
+      "accuracy": 0.7277,
+      "precision_supported": 0.7674,
+      "recall_supported": 0.6533,
+      "f1_supported": 0.7058,
+      "precision_not_supported": 0.6982,
+      "recall_not_supported": 0.802,
+      "f1_not_supported": 0.7465,
+      "macro_f1": 0.7262
+    }
+  },
+  "domain_test_run1": {
+    "model": {
+      "n": 298,
+      "accuracy": 0.8658,
+      "precision_supported": 0.8667,
+      "recall_supported": 0.8882,
+      "f1_supported": 0.8773,
+      "precision_not_supported": 0.8647,
+      "recall_not_supported": 0.8394,
+      "f1_not_supported": 0.8519,
+      "macro_f1": 0.8646
+    },
+    "numbers_match_baseline": {
+      "n": 298,
+      "accuracy": 0.7886,
+      "precision_supported": 0.7188,
+      "recall_supported": 1.0,
+      "f1_supported": 0.8364,
+      "precision_not_supported": 1.0,
+      "recall_not_supported": 0.5401,
+      "f1_not_supported": 0.7014,
+      "macro_f1": 0.7689
+    },
+    "model_by_kind": {
+      "neg_entity": {
+        "n": 31,
+        "accuracy": 0.6452
+      },
+      "neg_number": {
+        "n": 73,
+        "accuracy": 0.9041
+      },
+      "neg_unit": {
+        "n": 33,
+        "accuracy": 0.8788
+      },
+      "pos_abbrev": {
+        "n": 2,
+        "accuracy": 0.0
+      },
+      "pos_template": {
+        "n": 105,
+        "accuracy": 0.9333
+      },
+      "pos_verbatim": {
+        "n": 54,
+        "accuracy": 0.8333
+      }
+    },
+    "baseline_by_kind": {
+      "neg_entity": {
+        "n": 31,
+        "accuracy": 0.129
+      },
+      "neg_number": {
+        "n": 73,
+        "accuracy": 0.9589
+      },
+      "neg_unit": {
+        "n": 33,
+        "accuracy": 0.0
+      },
+      "pos_abbrev": {
+        "n": 2,
+        "accuracy": 1.0
+      },
+      "pos_template": {
+        "n": 105,
+        "accuracy": 1.0
+      },
+      "pos_verbatim": {
+        "n": 54,
+        "accuracy": 1.0
+      }
+    }
+  },
+  "domain_test_run2": {
+    "model": {
+      "n": 381,
+      "accuracy": 0.8005,
+      "precision_supported": 0.8261,
+      "recall_supported": 0.7755,
+      "f1_supported": 0.8,
+      "precision_not_supported": 0.7766,
+      "recall_not_supported": 0.827,
+      "f1_not_supported": 0.801,
+      "macro_f1": 0.8005
+    },
+    "numbers_match_baseline": {
+      "n": 381,
+      "accuracy": 0.7402,
+      "precision_supported": 0.6917,
+      "recall_supported": 0.8929,
+      "f1_supported": 0.7795,
+      "precision_not_supported": 0.8359,
+      "recall_not_supported": 0.5784,
+      "f1_not_supported": 0.6837,
+      "macro_f1": 0.7316
+    },
+    "model_by_kind": {
+      "neg_entity": {
+        "n": 47,
+        "accuracy": 0.617
+      },
+      "neg_number": {
+        "n": 73,
+        "accuracy": 0.9041
+      },
+      "neg_rw_entity": {
+        "n": 2,
+        "accuracy": 1.0
+      },
+      "neg_rw_metric": {
+        "n": 4,
+        "accuracy": 0.75
+      },
+      "neg_rw_number": {
+        "n": 10,
+        "accuracy": 0.8
+      },
+      "neg_rw_unit": {
+        "n": 16,
+        "accuracy": 0.9375
+      },
+      "neg_unit": {
+        "n": 33,
+        "accuracy": 0.9091
+      },
+      "pos_abbrev": {
+        "n": 2,
+        "accuracy": 0.0
+      },
+      "pos_reworded": {
+        "n": 32,
+        "accuracy": 0.125
+      },
+      "pos_template": {
+        "n": 113,
+        "accuracy": 0.9558
+      },
+      "pos_verbatim": {
+        "n": 49,
+        "accuracy": 0.8163
+      }
+    },
+    "baseline_by_kind": {
+      "neg_entity": {
+        "n": 47,
+        "accuracy": 0.383
+      },
+      "neg_number": {
+        "n": 73,
+        "accuracy": 0.9452
+      },
+      "neg_rw_entity": {
+        "n": 2,
+        "accuracy": 0.5
+      },
+      "neg_rw_metric": {
+        "n": 4,
+        "accuracy": 0.5
+      },
+      "neg_rw_number": {
+        "n": 10,
+        "accuracy": 1.0
+      },
+      "neg_rw_unit": {
+        "n": 16,
+        "accuracy": 0.4375
+      },
+      "neg_unit": {
+        "n": 33,
+        "accuracy": 0.0
+      },
+      "pos_abbrev": {
+        "n": 2,
+        "accuracy": 1.0
+      },
+      "pos_reworded": {
+        "n": 32,
+        "accuracy": 0.3438
+      },
+      "pos_template": {
+        "n": 113,
+        "accuracy": 1.0
+      },
+      "pos_verbatim": {
+        "n": 49,
+        "accuracy": 1.0
+      }
+    }
+  },
+  "domain_test_run2_reworded_only": {
+    "model": {
+      "n": 64,
+      "accuracy": 0.5,
+      "precision_supported": 0.5,
+      "recall_supported": 0.125,
+      "f1_supported": 0.2,
+      "precision_not_supported": 0.5,
+      "recall_not_supported": 0.875,
+      "f1_not_supported": 0.6364,
+      "macro_f1": 0.4182
+    },
+    "numbers_match_baseline": {
+      "n": 64,
+      "accuracy": 0.4844,
+      "precision_supported": 0.4783,
+      "recall_supported": 0.3438,
+      "f1_supported": 0.4,
+      "precision_not_supported": 0.4878,
+      "recall_not_supported": 0.625,
+      "f1_not_supported": 0.5479,
+      "macro_f1": 0.474
+    },
+    "model_by_kind": {
+      "neg_rw_entity": {
+        "n": 2,
+        "accuracy": 1.0
+      },
+      "neg_rw_metric": {
+        "n": 4,
+        "accuracy": 0.75
+      },
+      "neg_rw_number": {
+        "n": 10,
+        "accuracy": 0.8
+      },
+      "neg_rw_unit": {
+        "n": 16,
+        "accuracy": 0.9375
+      },
+      "pos_reworded": {
+        "n": 32,
+        "accuracy": 0.125
+      }
+    },
+    "baseline_by_kind": {
+      "neg_rw_entity": {
+        "n": 2,
+        "accuracy": 0.5
+      },
+      "neg_rw_metric": {
+        "n": 4,
+        "accuracy": 0.5
+      },
+      "neg_rw_number": {
+        "n": 10,
+        "accuracy": 1.0
+      },
+      "neg_rw_unit": {
+        "n": 16,
+        "accuracy": 0.4375
+      },
+      "pos_reworded": {
+        "n": 32,
+        "accuracy": 0.3438
+      }
+    }
+  }
+}

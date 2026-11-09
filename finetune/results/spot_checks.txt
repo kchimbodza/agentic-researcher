@@ -1,0 +1,9 @@
+expected | P(SUPPORTED) | claim
+SUPP     | 0.079        | The S8-PoE has a 60 W PoE budget.
+NOT_S    | 0.057        | The S16-PoE has a 60 W PoE budget.
+SUPP     | 0.786        | The S8-PoE offers four PoE+ ports with a PoE budget of 60 Watts.
+NOT_S    | 0.052        | The S8-PoE offers four PoE+ ports with a PoE budget of 60 Kilowatts.
+SUPP     | 0.332        | ESP32 is made on a 40 nm process.
+NOT_S    | 0.168        | ESP32 is made on a 28 nm process.
+SUPP     | 0.792        | According to the document, ESP32 is a single 2.4 GHz Wi-Fi-and-Bluetooth combo chip designed with the TSMC low-power 40 nm technology.
+NOT_S    | 0.056        | ESP32 is a single 5 GHz Wi-Fi-and-Bluetooth combo chip designed with the TSMC low-power 40 nm technology.

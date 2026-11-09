@@ -1,0 +1,34 @@
+{
+  "device": "cpu",
+  "gpu": null,
+  "train_seconds": 1617.3,
+  "trainable_params": 1919234,
+  "total_params": 68874244,
+  "best_epoch": 1,
+  "best_domain_val_acc": 0.8712871287128713,
+  "history": [
+    {
+      "epoch": 1,
+      "domain_val_acc": 0.8712871287128713,
+      "elapsed_s": 1617.0
+    }
+  ],
+  "note": "GPU had only 0.83 GB free (Ollama loaded) -> CPU",
+  "base_model": "distilbert-base-uncased",
+  "max_length": 192,
+  "seed": 13,
+  "epochs": 1,
+  "batch_size": 16,
+  "lr": 0.0005,
+  "lora": {
+    "r": 16,
+    "alpha": 32,
+    "dropout": 0.1,
+    "targets": "q,k,v,out,lin1,lin2",
+    "modules_to_save": "pre_classifier, classifier"
+  },
+  "n_train_rows": 8002,
+  "n_train_mnli": 4000,
+  "n_train_domain_after_upsample": 4002,
+  "finished": "2026-11-08 18:40:46"
+}

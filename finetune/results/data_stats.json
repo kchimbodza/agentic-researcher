@@ -1,0 +1,84 @@
+{
+  "train": {
+    "n": 22769,
+    "labels": {
+      "1": 11399,
+      "0": 11370
+    },
+    "sources": {
+      "mnli": 20000,
+      "domain": 2769
+    },
+    "kinds": {
+      "pos_template": 742,
+      "neg_number": 514,
+      "neg_entity": 304,
+      "neg_unit": 237,
+      "pos_reworded": 300,
+      "neg_rw_number": 96,
+      "neg_rw_metric": 91,
+      "pos_verbatim": 341,
+      "pos_abbrev": 16,
+      "neg_rw_unit": 115,
+      "neg_rw_entity": 13
+    }
+  },
+  "validation": {
+    "n": 392,
+    "labels": {
+      "0": 191,
+      "1": 201
+    },
+    "sources": {
+      "domain": 392
+    },
+    "kinds": {
+      "neg_entity": 39,
+      "neg_number": 54,
+      "pos_template": 87,
+      "neg_unit": 13,
+      "neg_rw_entity": 1,
+      "pos_reworded": 85,
+      "neg_rw_metric": 28,
+      "pos_verbatim": 29,
+      "neg_rw_unit": 31,
+      "neg_rw_number": 25
+    }
+  },
+  "nli_validation": {
+    "n": 3000,
+    "labels": {
+      "1": 1500,
+      "0": 1500
+    },
+    "sources": {
+      "mnli": 3000
+    },
+    "kinds": {}
+  },
+  "domain_test": {
+    "n": 381,
+    "labels": {
+      "0": 185,
+      "1": 196
+    },
+    "sources": {
+      "domain": 381
+    },
+    "kinds": {
+      "neg_rw_unit": 16,
+      "pos_verbatim": 49,
+      "neg_unit": 33,
+      "neg_number": 73,
+      "neg_entity": 47,
+      "pos_template": 113,
+      "neg_rw_number": 10,
+      "pos_reworded": 32,
+      "pos_abbrev": 2,
+      "neg_rw_metric": 4,
+      "neg_rw_entity": 2
+    }
+  },
+  "domain_test_pages": 17,
+  "domain_train_pages": 59
+}

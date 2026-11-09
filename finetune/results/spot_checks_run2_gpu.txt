@@ -1,0 +1,6 @@
+id | P(SUPPORTED) | claim || quote
+a | 0.988 | The S8-PoE has a 60 W PoE budget. || The S8-PoE offers four PoE+ ports with a PoE budget of 60 Watts.
+b | 0.001 | The S16-PoE has a 60 W PoE budget. || The S8-PoE offers four PoE+ ports with a PoE budget of 60 Watts.
+c | 0.990 | The ESP32 draws 10 µA in Deep-sleep with the RTC timer and memory on. || Deep-sleep The ULP coprocessor is powered up. 150 µA ULP sensor-monitored pattern 100 µA @1% duty RTC timer + RTC memory 10 µA
+d | 0.998 | The Route10 supports a PoE budget of 40W per port. || POE Budget 40W Per-Port PoE (2) 802.3at POE+
+e | 0.022 | The radar-only model has 35.9 ms latency. || reduces latency from 35.9 ms to 15.8 ms

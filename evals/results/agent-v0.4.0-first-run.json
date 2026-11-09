@@ -1,0 +1,1244 @@
+{
+  "summary": {
+    "System": "agent",
+    "Test set": "main (21 questions \u00d7 2)",
+    "Accuracy (all)": "20/42 (48%)",
+    "Single-fact": "6/14 (43%)",
+    "Multi-step": "6/20 (30%)",
+    "Unanswerable \u2192 'not found'": "8/8 (100%)",
+    "Made-up answers": "0",
+    "Right page found": "28/36 (78%)",
+    "Cited but wrong": "10",
+    "Median time": "13.7 s",
+    "Tokens": "132,077",
+    "Cost": "$0.0000",
+    "Model": "qwen2.5:7b",
+    "Errors": "0",
+    "Same result every run": "21/21 (100%)",
+    "Claim checker": "rules"
+  },
+  "config": {
+    "system": "agent",
+    "set": "main",
+    "repeat": 2,
+    "limit": 0,
+    "ids": "",
+    "claim_checker": "rules",
+    "provider": null,
+    "model": null,
+    "name": "agent-main-rules",
+    "min_accuracy": 0.0,
+    "settings": {
+      "reviewer_name": "Kudzayi Chimbodza",
+      "provider": "ollama",
+      "anthropic_model": "claude-opus-5-5",
+      "ollama_model": "qwen2.5:7b",
+      "cost_cap_usd": 0.05,
+      "claim_checker": "rules",
+      "tool_transport": "mcp"
+    },
+    "date": "2026-11-08T18:20:13"
+  },
+  "rows": [
+    {
+      "id": "s01",
+      "type": "single",
+      "repeat": 0,
+      "question": "How much current does the ESP32 draw in Deep-sleep with the RTC timer and RTC memory on?",
+      "expected": "10 \u00b5A",
+      "answer": "The ESP32 draws 10 \u00b5A in deep-sleep with the RTC timer and RTC memory on. [1][2]",
+      "cited": [
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          30
+        ],
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          5
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 20927,
+      "tokens": 1929,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 2,
+      "verified": 2,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "s02",
+      "type": "single",
+      "repeat": 0,
+      "question": "What is the PoE budget of the Alta Labs S8-PoE switch?",
+      "expected": "60 W",
+      "answer": "The PoE budget of the Alta Labs S8-PoE switch is 295 Watts. [3]\n\n**Not found in your documents:** What is the PoE budget of the Alta Labs S8-PoE switch? (already found in evidence [3])",
+      "cited": [
+        [
+          "datasheets/Alta_Labs_Switches_Datasheet.pdf",
+          7
+        ]
+      ],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": false,
+      "cited_right_page": false,
+      "verified_but_wrong": true,
+      "latency_ms": 11227,
+      "tokens": 2642,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 3,
+      "verified": 3,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "s03",
+      "type": "single",
+      "repeat": 0,
+      "question": "What is the PoE budget of the Route10 router?",
+      "expected": "40 W",
+      "answer": "The PoE budget of the Route10 router is 40W. [1] It supports 802.3at PoE+ on two ports. [1][2]\n\n**Not found in your documents:** What is the specific power requirement for each port?",
+      "cited": [
+        [
+          "datasheets/Route10_Datasheet.pdf",
+          4
+        ],
+        [
+          "datasheets/Route10_Datasheet.pdf",
+          2
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 7801,
+      "tokens": 1807,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 2,
+      "verified": 2,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "s04",
+      "type": "single",
+      "repeat": 0,
+      "question": "Which LoRa transceiver module did Adebesin et al. use in their wearable?",
+      "expected": "RYLR896 UART LoRa transceiver (868/915 MHz)",
+      "answer": "The LoRa transceiver module used in the wearable fall detection system is RYLR896 and operates on 868/915MHz frequency band. [1]",
+      "cited": [
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          6
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 10614,
+      "tokens": 1840,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 2,
+      "verified": 1,
+      "removed": [
+        "names not in the quote: RYLR896"
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "s05",
+      "type": "single",
+      "repeat": 0,
+      "question": "At what height was the mmWave radar mounted in the bathroom fall detection study?",
+      "expected": "1.87 m on the wall",
+      "answer": "**Not found in your documents:** height of the mmWave radar mount",
+      "cited": [],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": false,
+      "cited_right_page": false,
+      "verified_but_wrong": false,
+      "latency_ms": 16438,
+      "tokens": 3225,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 3,
+      "verified": 2,
+      "removed": [
+        "numbers not in the quote: 200"
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "s06",
+      "type": "single",
+      "repeat": 0,
+      "question": "How many sensor readings are in the Adebesin et al. fall detection dataset, and how many are falls?",
+      "expected": "18,906 readings, of which 2169 are falls",
+      "answer": "The total number of sensor readings in the dataset is 13,459. [2]\n\n**Not found in your documents:** How many of these readings represent falls?\n\n_1 sentence(s) removed because their figures were not in the cited evidence._",
+      "cited": [
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          8
+        ]
+      ],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": true,
+      "latency_ms": 18597,
+      "tokens": 3312,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 5,
+      "verified": 5,
+      "removed": [],
+      "dropped": 1,
+      "error": ""
+    },
+    {
+      "id": "s07",
+      "type": "single",
+      "repeat": 0,
+      "question": "What is the idle power consumption of the S24-PoE switch?",
+      "expected": "15 W",
+      "answer": "**Not found in your documents:** idle power consumption",
+      "cited": [],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": false,
+      "verified_but_wrong": false,
+      "latency_ms": 4442,
+      "tokens": 1658,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 1,
+      "verified": 1,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m01",
+      "type": "multi",
+      "repeat": 0,
+      "question": "What is the combined PoE budget of one Route10 and one S8-PoE?",
+      "expected": "100 W (Route10 40 W + S8-PoE 60 W)",
+      "answer": "The combined PoE budget is 40 W (Route10) + 60 W (S8-PoE) = 100 W. [1][2]",
+      "cited": [
+        [
+          "datasheets/Route10_Datasheet.pdf",
+          4
+        ],
+        [
+          "datasheets/Alta_Labs_Switches_Datasheet.pdf",
+          2
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 7983,
+      "tokens": 2905,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 2,
+      "verified": 2,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m02",
+      "type": "multi",
+      "repeat": 0,
+      "question": "Can the Route10 power both of its PoE+ ports at the full 30 W per port at the same time?",
+      "expected": "No: 2 ports x 30 W = 60 W, but the Route10 PoE budget is 40 W",
+      "answer": "**Not found in your documents:** Can the Route10 power both of its PoE+ ports at the full 30 W per port at the same time?",
+      "cited": [],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": false,
+      "verified_but_wrong": false,
+      "latency_ms": 13318,
+      "tokens": 3062,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 4,
+      "verified": 3,
+      "removed": [
+        "quote not found on the cited page"
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m03",
+      "type": "multi",
+      "repeat": 0,
+      "question": "Both fall detection papers use an ESP32. How does each one send its sensor data?",
+      "expected": "Adebesin et al.: the ESP32 sends over LoRa to a gateway; bathroom study: ESP32-C3 nodes send 2.56 s windows over Wi-Fi to a Raspberry Pi 4B",
+      "answer": "**Not found in your documents:** how each one sends its sensor data",
+      "cited": [],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": false,
+      "cited_right_page": false,
+      "verified_but_wrong": false,
+      "latency_ms": 20926,
+      "tokens": 4029,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 7,
+      "verified": 7,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m04",
+      "type": "multi",
+      "repeat": 0,
+      "question": "What sampling rate does each fall detection paper use for its sensor data?",
+      "expected": "Adebesin et al.: 20 Hz (50 ms); bathroom study: streams mapped to a common 100 Hz",
+      "answer": "The adebesin2026 wearable fall detection paper uses a sampling rate of 20 Hz for its sensor data. [2]\n\n**Not found in your documents:** What sampling rate does the bathroom fall mmwave arxiv2603.17069 paper use?",
+      "cited": [
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          8
+        ]
+      ],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": true,
+      "latency_ms": 19371,
+      "tokens": 4335,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 3,
+      "verified": 2,
+      "removed": [
+        "quote not found on the cited page"
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m05",
+      "type": "multi",
+      "repeat": 0,
+      "question": "On the Raspberry Pi 4B, how does the end-to-end latency of the radar-only model compare with the radar and vibration fusion model in the bathroom study?",
+      "expected": "Radar only 28.4 ms vs fusion 15.8 ms",
+      "answer": "The end-to-end latency of the radar-only model is 15.8 ms, which is the same as the latency of the radar and vibration fusion model on the Raspberry Pi 4B in the bathroom study. [1][3]\n\n**Not found in your documents:** accuracy and recall comparison",
+      "cited": [
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          5
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          5
+        ]
+      ],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": true,
+      "latency_ms": 41968,
+      "tokens": 5667,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 5,
+      "verified": 3,
+      "removed": [
+        "quote not found on the cited page",
+        "quote not found on the cited page; numbers not in the quote: 2.56"
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m06",
+      "type": "multi",
+      "repeat": 0,
+      "question": "In the bathroom study, how much energy per 2.56 s window do the radar sensing node and the vibration sensing node use?",
+      "expected": "Radar node (ESP32-C3 + C4001) 4740 mJ; vibration node (ESP32-C3 + ADXL345) 820 mJ",
+      "answer": "**Not found** in your documents. None of the searched pages contain a verifiable answer to this question.",
+      "cited": [],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": false,
+      "cited_right_page": false,
+      "verified_but_wrong": false,
+      "latency_ms": 27073,
+      "tokens": 5720,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 4,
+      "verified": 0,
+      "removed": [
+        "quote not found on the cited page",
+        "quote not found on the cited page",
+        "quote not found on the cited page",
+        "quote not found on the cited page"
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m07",
+      "type": "multi",
+      "repeat": 0,
+      "question": "Adebesin et al. cite an mmWave radar fall detection accuracy in their literature review. How does it compare with the accuracy of the full model in the bathroom study?",
+      "expected": "92.3% (cited mmWave radar work, ref [10]) vs 96.1% (bathroom full model)",
+      "answer": "**Not found in your documents:** Adebesin et al. cite an mmWave radar fall detection accuracy",
+      "cited": [],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": false,
+      "verified_but_wrong": false,
+      "latency_ms": 17732,
+      "tokens": 3614,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 6,
+      "verified": 4,
+      "removed": [
+        "quote not found on the cited page",
+        "quote not found on the cited page"
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m08",
+      "type": "multi",
+      "repeat": 0,
+      "question": "Does the ESP32 have a built-in LoRa radio, and which separate LoRa module did Adebesin et al. use?",
+      "expected": "No: the ESP32 has 2.4 GHz Wi-Fi + Bluetooth, not LoRa; they used an RYLR896 module",
+      "answer": "The ESP32 does not have a built-in LoRa radio. [1] Adebesin et al. used the RYLR896 UART LoRa transceiver module. [2]",
+      "cited": [
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          8
+        ],
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          6
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 13002,
+      "tokens": 3118,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 2,
+      "verified": 2,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m09",
+      "type": "multi",
+      "repeat": 0,
+      "question": "What is the highest operating temperature of the Route10 with two 2 W SFP+ modules, and of the S8-PoE?",
+      "expected": "Route10 with two 2 W SFP+ modules: 40 \u00b0C; S8-PoE: 50 \u00b0C",
+      "answer": "The highest operating temperature of the Route10 with two 2 W SFP+ modules is 40\u00b0 C (104\u00b0 F). [1] The highest operating temperature of the S8-PoE is 50\u00b0C. [2][3][4]",
+      "cited": [
+        [
+          "datasheets/Route10_Datasheet.pdf",
+          5
+        ],
+        [
+          "datasheets/Alta_Labs_Switches_Datasheet.pdf",
+          5
+        ],
+        [
+          "datasheets/Alta_Labs_Switches_Datasheet.pdf",
+          6
+        ],
+        [
+          "datasheets/Alta_Labs_Switches_Datasheet.pdf",
+          7
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 14775,
+      "tokens": 3366,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 4,
+      "verified": 4,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m10",
+      "type": "multi",
+      "repeat": 0,
+      "question": "How does the ESP32's Light-sleep current compare with its Deep-sleep current (RTC timer and memory on)?",
+      "expected": "Light-sleep 0.8 mA vs Deep-sleep 10 \u00b5A (about 80 times less)",
+      "answer": "The ESP32's light-sleep mode consumes approximately 0.8 mA. [1] In deep-sleep mode, only the RTC memory and RTC peripherals are powered up on the ESP32. [2]\n\n**Not found in your documents:** How does the ESP32's Light-sleep current compare with its Deep-sleep current?",
+      "cited": [
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          30
+        ],
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          30
+        ]
+      ],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": true,
+      "latency_ms": 11490,
+      "tokens": 3185,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 3,
+      "verified": 3,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "u01",
+      "type": "unanswerable",
+      "repeat": 0,
+      "question": "What LoRa packet loss rate did Adebesin et al. measure?",
+      "expected": "Not measured: the paper says packet loss, latency and power were not quantitatively measured (p.6)",
+      "answer": "**Not found in your documents:** LoRa packet loss rate",
+      "cited": [],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": false,
+      "verified_but_wrong": false,
+      "latency_ms": 15454,
+      "tokens": 2916,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 4,
+      "verified": 2,
+      "removed": [
+        "quote not found on the cited page",
+        "quote not found on the cited page"
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "u02",
+      "type": "unanswerable",
+      "repeat": 0,
+      "question": "What is the retail price of the Route10 in Canadian dollars?",
+      "expected": "Not in the documents (the datasheet only says it is 'disruptively priced')",
+      "answer": "**Not found in your documents:** retail price of the Route10 in Canadian dollars",
+      "cited": [],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": null,
+      "cited_right_page": null,
+      "verified_but_wrong": false,
+      "latency_ms": 9889,
+      "tokens": 2942,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 4,
+      "verified": 4,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "u03",
+      "type": "unanswerable",
+      "repeat": 0,
+      "question": "How long does the battery last in the Adebesin et al. wearable?",
+      "expected": "Not in the documents (battery life is not reported)",
+      "answer": "**Not found** in your documents. None of the searched pages contain a verifiable answer to this question.",
+      "cited": [],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": null,
+      "cited_right_page": null,
+      "verified_but_wrong": false,
+      "latency_ms": 14279,
+      "tokens": 2406,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 2,
+      "verified": 0,
+      "removed": [
+        "quote not found on the cited page",
+        "quote not found on the cited page"
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "u04",
+      "type": "unanswerable",
+      "repeat": 0,
+      "question": "What is the MTBF (mean time between failures) of the S24-PoE switch?",
+      "expected": "Not in the documents",
+      "answer": "**Not found in your documents:** MTBF (mean time between failures) of the S24-PoE switch",
+      "cited": [],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": null,
+      "cited_right_page": null,
+      "verified_but_wrong": false,
+      "latency_ms": 10294,
+      "tokens": 3666,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 2,
+      "verified": 1,
+      "removed": [
+        "quote not found on the cited page"
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "s01",
+      "type": "single",
+      "repeat": 1,
+      "question": "How much current does the ESP32 draw in Deep-sleep with the RTC timer and RTC memory on?",
+      "expected": "10 \u00b5A",
+      "answer": "The ESP32 draws 10 \u00b5A in deep-sleep with the RTC timer and RTC memory on. [1][2]",
+      "cited": [
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          30
+        ],
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          5
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 7270,
+      "tokens": 1929,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 2,
+      "verified": 2,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "s02",
+      "type": "single",
+      "repeat": 1,
+      "question": "What is the PoE budget of the Alta Labs S8-PoE switch?",
+      "expected": "60 W",
+      "answer": "The PoE budget of the Alta Labs S8-PoE switch is 295 Watts. [3]\n\n**Not found in your documents:** What is the PoE budget of the Alta Labs S8-PoE switch? (already found in evidence [3])",
+      "cited": [
+        [
+          "datasheets/Alta_Labs_Switches_Datasheet.pdf",
+          7
+        ]
+      ],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": false,
+      "cited_right_page": false,
+      "verified_but_wrong": true,
+      "latency_ms": 10733,
+      "tokens": 2642,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 3,
+      "verified": 3,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "s03",
+      "type": "single",
+      "repeat": 1,
+      "question": "What is the PoE budget of the Route10 router?",
+      "expected": "40 W",
+      "answer": "The PoE budget of the Route10 router is 40W. [1] It supports 802.3at PoE+ on two ports. [1][2]\n\n**Not found in your documents:** What is the specific power requirement for each port?",
+      "cited": [
+        [
+          "datasheets/Route10_Datasheet.pdf",
+          4
+        ],
+        [
+          "datasheets/Route10_Datasheet.pdf",
+          2
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 7351,
+      "tokens": 1807,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 2,
+      "verified": 2,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "s04",
+      "type": "single",
+      "repeat": 1,
+      "question": "Which LoRa transceiver module did Adebesin et al. use in their wearable?",
+      "expected": "RYLR896 UART LoRa transceiver (868/915 MHz)",
+      "answer": "The LoRa transceiver module used in the wearable fall detection system is RYLR896. [1]",
+      "cited": [
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          6
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 9215,
+      "tokens": 1799,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 2,
+      "verified": 1,
+      "removed": [
+        "names not in the quote: RYLR896"
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "s05",
+      "type": "single",
+      "repeat": 1,
+      "question": "At what height was the mmWave radar mounted in the bathroom fall detection study?",
+      "expected": "1.87 m on the wall",
+      "answer": "**Not found in your documents:** height of the mmWave radar",
+      "cited": [],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": false,
+      "cited_right_page": false,
+      "verified_but_wrong": false,
+      "latency_ms": 11362,
+      "tokens": 1915,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 3,
+      "verified": 1,
+      "removed": [
+        "quote not found on the cited page; numbers not in the quote: 4500",
+        "numbers not in the quote: 120, 200"
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "s06",
+      "type": "single",
+      "repeat": 1,
+      "question": "How many sensor readings are in the Adebesin et al. fall detection dataset, and how many are falls?",
+      "expected": "18,906 readings, of which 2169 are falls",
+      "answer": "The total number of sensor readings in the dataset is 13,459. [2]\n\n**Not found in your documents:** How many of these readings represent falls?\n\n_1 sentence(s) removed because their figures were not in the cited evidence._",
+      "cited": [
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          8
+        ]
+      ],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": true,
+      "latency_ms": 17862,
+      "tokens": 3312,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 5,
+      "verified": 5,
+      "removed": [],
+      "dropped": 1,
+      "error": ""
+    },
+    {
+      "id": "s07",
+      "type": "single",
+      "repeat": 1,
+      "question": "What is the idle power consumption of the S24-PoE switch?",
+      "expected": "15 W",
+      "answer": "**Not found in your documents:** idle power consumption",
+      "cited": [],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": false,
+      "verified_but_wrong": false,
+      "latency_ms": 3948,
+      "tokens": 1658,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 1,
+      "verified": 1,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m01",
+      "type": "multi",
+      "repeat": 1,
+      "question": "What is the combined PoE budget of one Route10 and one S8-PoE?",
+      "expected": "100 W (Route10 40 W + S8-PoE 60 W)",
+      "answer": "The combined PoE budget is 40 W (Route10) + 60 W (S8-PoE) = 100 W. [1][2]",
+      "cited": [
+        [
+          "datasheets/Route10_Datasheet.pdf",
+          4
+        ],
+        [
+          "datasheets/Alta_Labs_Switches_Datasheet.pdf",
+          2
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 8020,
+      "tokens": 2905,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 2,
+      "verified": 2,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m02",
+      "type": "multi",
+      "repeat": 1,
+      "question": "Can the Route10 power both of its PoE+ ports at the full 30 W per port at the same time?",
+      "expected": "No: 2 ports x 30 W = 60 W, but the Route10 PoE budget is 40 W",
+      "answer": "**Not found in your documents:** Can the Route10 power both of its PoE+ ports at the full 30 W per port at the same time?",
+      "cited": [],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": false,
+      "verified_but_wrong": false,
+      "latency_ms": 12340,
+      "tokens": 3062,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 4,
+      "verified": 3,
+      "removed": [
+        "quote not found on the cited page"
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m03",
+      "type": "multi",
+      "repeat": 1,
+      "question": "Both fall detection papers use an ESP32. How does each one send its sensor data?",
+      "expected": "Adebesin et al.: the ESP32 sends over LoRa to a gateway; bathroom study: ESP32-C3 nodes send 2.56 s windows over Wi-Fi to a Raspberry Pi 4B",
+      "answer": "**Not found in your documents:** how each one sends its sensor data",
+      "cited": [],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": false,
+      "cited_right_page": false,
+      "verified_but_wrong": false,
+      "latency_ms": 20341,
+      "tokens": 4029,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 7,
+      "verified": 7,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m04",
+      "type": "multi",
+      "repeat": 1,
+      "question": "What sampling rate does each fall detection paper use for its sensor data?",
+      "expected": "Adebesin et al.: 20 Hz (50 ms); bathroom study: streams mapped to a common 100 Hz",
+      "answer": "The adebesin2026 wearable fall detection paper uses a sampling rate of 20 Hz for its sensor data. [2]\n\n**Not found in your documents:** What sampling rate does the bathroom fall mmwave arxiv2603.17069 paper use?",
+      "cited": [
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          8
+        ]
+      ],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": true,
+      "latency_ms": 18107,
+      "tokens": 4335,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 3,
+      "verified": 2,
+      "removed": [
+        "quote not found on the cited page"
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m05",
+      "type": "multi",
+      "repeat": 1,
+      "question": "On the Raspberry Pi 4B, how does the end-to-end latency of the radar-only model compare with the radar and vibration fusion model in the bathroom study?",
+      "expected": "Radar only 28.4 ms vs fusion 15.8 ms",
+      "answer": "The radar-only model on the Raspberry Pi 4B has a latency of 15.8 ms. [1] In contrast, the radar and vibration fusion model has a latency of 35.9 ms. [2]\n\n**Not found in your documents:** end-to-end latency comparison",
+      "cited": [
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          5
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          6
+        ]
+      ],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": true,
+      "latency_ms": 29565,
+      "tokens": 3917,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 2,
+      "verified": 2,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m06",
+      "type": "multi",
+      "repeat": 1,
+      "question": "In the bathroom study, how much energy per 2.56 s window do the radar sensing node and the vibration sensing node use?",
+      "expected": "Radar node (ESP32-C3 + C4001) 4740 mJ; vibration node (ESP32-C3 + ADXL345) 820 mJ",
+      "answer": "**Not found** in your documents. None of the searched pages contain a verifiable answer to this question.",
+      "cited": [],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": false,
+      "cited_right_page": false,
+      "verified_but_wrong": false,
+      "latency_ms": 25329,
+      "tokens": 5721,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 4,
+      "verified": 0,
+      "removed": [
+        "quote not found on the cited page",
+        "quote not found on the cited page",
+        "quote not found on the cited page",
+        "quote not found on the cited page"
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m07",
+      "type": "multi",
+      "repeat": 1,
+      "question": "Adebesin et al. cite an mmWave radar fall detection accuracy in their literature review. How does it compare with the accuracy of the full model in the bathroom study?",
+      "expected": "92.3% (cited mmWave radar work, ref [10]) vs 96.1% (bathroom full model)",
+      "answer": "**Not found in your documents:** Adebesin et al. cite an mmWave radar fall detection accuracy",
+      "cited": [],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": false,
+      "verified_but_wrong": false,
+      "latency_ms": 18278,
+      "tokens": 3614,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 6,
+      "verified": 4,
+      "removed": [
+        "quote not found on the cited page",
+        "quote not found on the cited page"
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m08",
+      "type": "multi",
+      "repeat": 1,
+      "question": "Does the ESP32 have a built-in LoRa radio, and which separate LoRa module did Adebesin et al. use?",
+      "expected": "No: the ESP32 has 2.4 GHz Wi-Fi + Bluetooth, not LoRa; they used an RYLR896 module",
+      "answer": "The ESP32 does not have a built-in LoRa radio. [1] Adebesin et al. used the RYLR896 UART LoRa transceiver module. [2]",
+      "cited": [
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          8
+        ],
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          6
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 14073,
+      "tokens": 3118,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 2,
+      "verified": 2,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m09",
+      "type": "multi",
+      "repeat": 1,
+      "question": "What is the highest operating temperature of the Route10 with two 2 W SFP+ modules, and of the S8-PoE?",
+      "expected": "Route10 with two 2 W SFP+ modules: 40 \u00b0C; S8-PoE: 50 \u00b0C",
+      "answer": "The highest operating temperature of the Route10 with two 2 W SFP+ modules is 40\u00b0 C (104\u00b0 F). [1] The highest operating temperature of the S8-PoE is 50\u00b0C. [2][3][4]",
+      "cited": [
+        [
+          "datasheets/Route10_Datasheet.pdf",
+          5
+        ],
+        [
+          "datasheets/Alta_Labs_Switches_Datasheet.pdf",
+          5
+        ],
+        [
+          "datasheets/Alta_Labs_Switches_Datasheet.pdf",
+          6
+        ],
+        [
+          "datasheets/Alta_Labs_Switches_Datasheet.pdf",
+          7
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 16406,
+      "tokens": 3366,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 4,
+      "verified": 4,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m10",
+      "type": "multi",
+      "repeat": 1,
+      "question": "How does the ESP32's Light-sleep current compare with its Deep-sleep current (RTC timer and memory on)?",
+      "expected": "Light-sleep 0.8 mA vs Deep-sleep 10 \u00b5A (about 80 times less)",
+      "answer": "The ESP32's light-sleep mode consumes approximately 0.8 mA. [1] In deep-sleep mode, only the RTC memory and RTC peripherals are powered up on the ESP32. [2]\n\n**Not found in your documents:** How does the ESP32's Light-sleep current compare with its Deep-sleep current?",
+      "cited": [
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          30
+        ],
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          30
+        ]
+      ],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": true,
+      "latency_ms": 21884,
+      "tokens": 3185,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 3,
+      "verified": 3,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "u01",
+      "type": "unanswerable",
+      "repeat": 1,
+      "question": "What LoRa packet loss rate did Adebesin et al. measure?",
+      "expected": "Not measured: the paper says packet loss, latency and power were not quantitatively measured (p.6)",
+      "answer": "**Not found in your documents:** LoRa packet loss rate",
+      "cited": [],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": false,
+      "verified_but_wrong": false,
+      "latency_ms": 14413,
+      "tokens": 2916,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 4,
+      "verified": 2,
+      "removed": [
+        "quote not found on the cited page",
+        "quote not found on the cited page"
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "u02",
+      "type": "unanswerable",
+      "repeat": 1,
+      "question": "What is the retail price of the Route10 in Canadian dollars?",
+      "expected": "Not in the documents (the datasheet only says it is 'disruptively priced')",
+      "answer": "**Not found in your documents:** retail price of the Route10 in Canadian dollars",
+      "cited": [],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": null,
+      "cited_right_page": null,
+      "verified_but_wrong": false,
+      "latency_ms": 9755,
+      "tokens": 2942,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 4,
+      "verified": 4,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "u03",
+      "type": "unanswerable",
+      "repeat": 1,
+      "question": "How long does the battery last in the Adebesin et al. wearable?",
+      "expected": "Not in the documents (battery life is not reported)",
+      "answer": "**Not found in your documents:** battery duration",
+      "cited": [],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": null,
+      "cited_right_page": null,
+      "verified_but_wrong": false,
+      "latency_ms": 13364,
+      "tokens": 2895,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 3,
+      "verified": 1,
+      "removed": [
+        "quote not found on the cited page",
+        "quote not found on the cited page"
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "u04",
+      "type": "unanswerable",
+      "repeat": 1,
+      "question": "What is the MTBF (mean time between failures) of the S24-PoE switch?",
+      "expected": "Not in the documents",
+      "answer": "**Not found in your documents:** MTBF (mean time between failures) of the S24-PoE switch",
+      "cited": [],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": null,
+      "cited_right_page": null,
+      "verified_but_wrong": false,
+      "latency_ms": 8963,
+      "tokens": 3666,
+      "cost_usd": 0.0,
+      "model": "qwen2.5:7b",
+      "claims": 2,
+      "verified": 1,
+      "removed": [
+        "quote not found on the cited page"
+      ],
+      "dropped": 0,
+      "error": ""
+    }
+  ]
+}

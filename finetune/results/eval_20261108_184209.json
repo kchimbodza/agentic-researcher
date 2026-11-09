@@ -1,0 +1,94 @@
+{
+  "date": "2026-11-08 18:42:09",
+  "device": "cpu",
+  "max_length": 192,
+  "nli_validation": {
+    "model": {
+      "n": 3000,
+      "accuracy": 0.7277,
+      "precision_supported": 0.7674,
+      "recall_supported": 0.6533,
+      "f1_supported": 0.7058,
+      "precision_not_supported": 0.6982,
+      "recall_not_supported": 0.802,
+      "f1_not_supported": 0.7465,
+      "macro_f1": 0.7262
+    }
+  },
+  "domain_test": {
+    "model": {
+      "n": 298,
+      "accuracy": 0.8658,
+      "precision_supported": 0.8667,
+      "recall_supported": 0.8882,
+      "f1_supported": 0.8773,
+      "precision_not_supported": 0.8647,
+      "recall_not_supported": 0.8394,
+      "f1_not_supported": 0.8519,
+      "macro_f1": 0.8646
+    },
+    "numbers_match_baseline": {
+      "n": 298,
+      "accuracy": 0.7886,
+      "precision_supported": 0.7188,
+      "recall_supported": 1.0,
+      "f1_supported": 0.8364,
+      "precision_not_supported": 1.0,
+      "recall_not_supported": 0.5401,
+      "f1_not_supported": 0.7014,
+      "macro_f1": 0.7689
+    },
+    "model_by_kind": {
+      "neg_entity": {
+        "n": 31,
+        "accuracy": 0.6452
+      },
+      "neg_number": {
+        "n": 73,
+        "accuracy": 0.9041
+      },
+      "neg_unit": {
+        "n": 33,
+        "accuracy": 0.8788
+      },
+      "pos_abbrev": {
+        "n": 2,
+        "accuracy": 0.0
+      },
+      "pos_template": {
+        "n": 105,
+        "accuracy": 0.9333
+      },
+      "pos_verbatim": {
+        "n": 54,
+        "accuracy": 0.8333
+      }
+    },
+    "baseline_by_kind": {
+      "neg_entity": {
+        "n": 31,
+        "accuracy": 0.129
+      },
+      "neg_number": {
+        "n": 73,
+        "accuracy": 0.9589
+      },
+      "neg_unit": {
+        "n": 33,
+        "accuracy": 0.0
+      },
+      "pos_abbrev": {
+        "n": 2,
+        "accuracy": 1.0
+      },
+      "pos_template": {
+        "n": 105,
+        "accuracy": 1.0
+      },
+      "pos_verbatim": {
+        "n": 54,
+        "accuracy": 1.0
+      }
+    }
+  }
+}

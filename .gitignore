@@ -1,0 +1,22 @@
+# Planning files (kept local)
+TASKS.md
+CLAUDE.md
+.claude/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.env
+.pytest_cache/
+
+# Local data and outputs
+chroma_db/
+data/
+logs/
+models/*
+!models/.gitkeep
+evals/fixtures/
+
+# Design drafts with placeholder data (kept local)
+docs/mockups/
