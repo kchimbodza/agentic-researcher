@@ -30,7 +30,7 @@ from langgraph.graph import END, START, StateGraph
 from . import claimcheck, docs, guardrails, llm, settings
 from .mcp_client import ToolBox
 
-AGENT_VERSION = "0.4.2"
+AGENT_VERSION = "0.4.3"
 MAX_LOOKUPS = 4
 MAX_ROUNDS = 2          # first search + one retry for lookups that found nothing
 CHECKER_THRESHOLD = 0.25  # fine-tuned checker: below this support probability, the claim is removed

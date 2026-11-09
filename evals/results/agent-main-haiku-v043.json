@@ -1,0 +1,1531 @@
+{
+  "summary": {
+    "System": "agent",
+    "Test set": "main (21 questions \u00d7 2)",
+    "Accuracy (all)": "40/42 (95%)",
+    "Single-fact": "12/14 (86%)",
+    "Multi-step": "20/20 (100%)",
+    "Unanswerable \u2192 'not found'": "8/8 (100%)",
+    "Made-up answers": "0",
+    "Right page found": "36/36 (100%)",
+    "Cited but wrong": "2",
+    "Median time": "6.4 s",
+    "Tokens": "669,644",
+    "Cost": "$0.0807",
+    "Model": "claude-haiku-5-5",
+    "Errors": "0",
+    "Same result every run": "21/21 (100%)",
+    "Claim checker": "rules"
+  },
+  "config": {
+    "system": "agent",
+    "set": "main",
+    "repeat": 2,
+    "limit": 0,
+    "ids": "",
+    "claim_checker": null,
+    "provider": "anthropic",
+    "model": "claude-haiku-5-5",
+    "cost_cap": 1.0,
+    "name": "agent-main-haiku-v043",
+    "min_accuracy": 0.0,
+    "settings": {
+      "reviewer_name": "Kudzayi Chimbodza",
+      "provider": "anthropic",
+      "anthropic_model": "claude-haiku-5-5",
+      "ollama_model": "qwen2.5:7b",
+      "cost_cap_usd": 1.0,
+      "claim_checker": "rules",
+      "tool_transport": "mcp"
+    },
+    "date": "2026-11-08T23:07:24"
+  },
+  "rows": [
+    {
+      "id": "s01",
+      "type": "single",
+      "repeat": 0,
+      "question": "How much current does the ESP32 draw in Deep-sleep with the RTC timer and RTC memory on?",
+      "expected": "10 \u00b5A",
+      "answer": "In the ESP32 datasheet, Deep-sleep mode with the RTC timer and RTC memory enabled draws 10 \u00b5A. [1] The ESP32 datasheet also states that power consumption in Deep-sleep mode is 10 \u00b5A. [2] In this mode only the RTC memory and RTC peripherals are powered up, which is consistent with the low current draw. [3]",
+      "cited": [
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          30
+        ],
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          5
+        ],
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          30
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 15846,
+      "tokens": 12858,
+      "cost_usd": 0.001585,
+      "model": "claude-haiku-5-5",
+      "claims": 3,
+      "verified": 3,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "s02",
+      "type": "single",
+      "repeat": 0,
+      "question": "What is the PoE budget of the Alta Labs S8-PoE switch?",
+      "expected": "60 W",
+      "answer": "The Alta Labs S8-PoE switch has a total PoE power budget of 60 watts. [1] The Alta Labs S8-PoE datasheet also states that the switch offers four PoE+ ports with a PoE budget of 60 Watts. [2]",
+      "cited": [
+        [
+          "datasheets/Alta_Labs_Switches_Datasheet.pdf",
+          5
+        ],
+        [
+          "datasheets/Alta_Labs_Switches_Datasheet.pdf",
+          2
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 3307,
+      "tokens": 6499,
+      "cost_usd": 0.000781,
+      "model": "claude-haiku-5-5",
+      "claims": 2,
+      "verified": 2,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "s03",
+      "type": "single",
+      "repeat": 0,
+      "question": "What is the PoE budget of the Route10 router?",
+      "expected": "40 W",
+      "answer": "The Route10 router has a PoE power budget of 40W, according to the Route10 Datasheet p.4. [1]",
+      "cited": [
+        [
+          "datasheets/Route10_Datasheet.pdf",
+          4
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 2552,
+      "tokens": 5771,
+      "cost_usd": 0.000649,
+      "model": "claude-haiku-5-5",
+      "claims": 1,
+      "verified": 1,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "s04",
+      "type": "single",
+      "repeat": 0,
+      "question": "Which LoRa transceiver module did Adebesin et al. use in their wearable?",
+      "expected": "RYLR896 UART LoRa transceiver (868/915 MHz)",
+      "answer": "Adebesin et al. (2026) used the RYLR896 UART LoRa transceiver module (868/915MHz) in their wearable fall detection device, which transmits acceleration and velocity readings over LoRa. [1][2]",
+      "cited": [
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          6
+        ],
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          6
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 4796,
+      "tokens": 13618,
+      "cost_usd": 0.001595,
+      "model": "claude-haiku-5-5",
+      "claims": 3,
+      "verified": 2,
+      "removed": [
+        "product/part names not on the cited page: ESP32-WROVER :: The device's sensor suite runs on a Freenove ESP32-WROVER CAM board, and the ESP32 handles LoRa communication with the gateway."
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "s05",
+      "type": "single",
+      "repeat": 0,
+      "question": "At what height was the mmWave radar mounted in the bathroom fall detection study?",
+      "expected": "1.87 m on the wall",
+      "answer": "In arXiv 2603.17069, the mmWave radar (C4001 radar) in the bathroom fall detection study was mounted on the upper wall at a height of 1.87 m. [1][2] The same paper places the vibration node on the shower platform 0.18 m above the floor, separate from the radar's 1.87 m mounting height. [3]",
+      "cited": [
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          3
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          4
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          3
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 7028,
+      "tokens": 24699,
+      "cost_usd": 0.002752,
+      "model": "claude-haiku-5-5",
+      "claims": 3,
+      "verified": 3,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "s06",
+      "type": "single",
+      "repeat": 0,
+      "question": "How many sensor readings are in the Adebesin et al. fall detection dataset, and how many are falls?",
+      "expected": "18,906 readings, of which 2169 are falls",
+      "answer": "The Adebesin et al. 2026 piezoelectric sensor fall detection dataset contains 10,798 total samples, of which 693 are fall samples. [1][2] The 10,798 total samples span 34 files and 53 fall events, per the dataset overview. [1][2] The separate Mixed Fall Detection (IMU) configuration, used for the reported accuracy results, has 13,459 total samples with 1993 fall samples, so it should not be confused with the piezoelectric figures. [3][4]",
+      "cited": [
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          8
+        ],
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          8
+        ],
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          8
+        ],
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          8
+        ]
+      ],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": true,
+      "latency_ms": 6871,
+      "tokens": 14478,
+      "cost_usd": 0.001894,
+      "model": "claude-haiku-5-5",
+      "claims": 4,
+      "verified": 4,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "s07",
+      "type": "single",
+      "repeat": 0,
+      "question": "What is the idle power consumption of the S24-PoE switch?",
+      "expected": "15 W",
+      "answer": "The idle power consumption of the Alta Labs S24-PoE switch is 15 watts. [1]",
+      "cited": [
+        [
+          "datasheets/Alta_Labs_Switches_Datasheet.pdf",
+          7
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 2756,
+      "tokens": 6246,
+      "cost_usd": 0.000697,
+      "model": "claude-haiku-5-5",
+      "claims": 1,
+      "verified": 1,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m01",
+      "type": "multi",
+      "repeat": 0,
+      "question": "What is the combined PoE budget of one Route10 and one S8-PoE?",
+      "expected": "100 W (Route10 40 W + S8-PoE 60 W)",
+      "answer": "The Route10 datasheet lists a PoE budget of 40W for the Route10 router. [1] The Alta Labs S8-PoE datasheet lists a PoE budget/max of 60 Watts. [2] The combined PoE budget is 40 W (Route10) + 60 W (S8-PoE) = 100 W. [1][2]",
+      "cited": [
+        [
+          "datasheets/Route10_Datasheet.pdf",
+          4
+        ],
+        [
+          "datasheets/Alta_Labs_Switches_Datasheet.pdf",
+          5
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 5245,
+      "tokens": 11037,
+      "cost_usd": 0.001326,
+      "model": "claude-haiku-5-5",
+      "claims": 4,
+      "verified": 3,
+      "removed": [
+        "numbers not in the quote: 40 :: The Route10 router has two 802.3at PoE+ ports (54VDC, 0.6A Max) with a total PoE budget of 40W."
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m02",
+      "type": "multi",
+      "repeat": 0,
+      "question": "Can the Route10 power both of its PoE+ ports at the full 30 W per port at the same time?",
+      "expected": "No: 2 ports x 30 W = 60 W, but the Route10 PoE budget is 40 W",
+      "answer": "The Route10 datasheet lists a total PoE budget of 40W for the router, shared across its PoE ports. [1] Each of the two 802.3at PoE+ ports is rated 54VDC at 0.6A max, which is 54 V \u00d7 0.6 A = 32.4 W per port at maximum, not 30 W. [2][4] Two ports at the full 30 W each would require 30 W (port 2) + 30 W (port 3) = 60 W, which exceeds the stated 40W total PoE budget. [1][3] Based on this evidence, the Route10 cannot power both PoE+ ports at the full 30 W per port simultaneously, since the 40W total budget is less than the 60 W required. [1][3]\n\n**Not found in your documents:** The evidence does not state how the 40W budget is divided between the two ports under load.",
+      "cited": [
+        [
+          "datasheets/Route10_Datasheet.pdf",
+          4
+        ],
+        [
+          "datasheets/Route10_Datasheet.pdf",
+          4
+        ],
+        [
+          "datasheets/Route10_Datasheet.pdf",
+          2
+        ],
+        [
+          "datasheets/Route10_Datasheet.pdf",
+          4
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 8446,
+      "tokens": 15625,
+      "cost_usd": 0.002014,
+      "model": "claude-haiku-5-5",
+      "claims": 6,
+      "verified": 6,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m03",
+      "type": "multi",
+      "repeat": 0,
+      "question": "Both fall detection papers use an ESP32. How does each one send its sensor data?",
+      "expected": "Adebesin et al.: the ESP32 sends over LoRa to a gateway; bathroom study: ESP32-C3 nodes send 2.56 s windows over Wi-Fi to a Raspberry Pi 4B",
+      "answer": "In the wearable fall detection paper (adebesin2026), the ESP32 sends sensor data to the gateway over a wireless LoRa interface. [1][2] In the bathroom fall mmWave paper (arXiv:2603.17069), the ESP32-C3 sensing nodes send buffered 2.56 s windows over Wi-Fi to a Raspberry Pi 4B edge gateway for inference. [3][4]",
+      "cited": [
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          4
+        ],
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          5
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          4
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          4
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 5770,
+      "tokens": 17183,
+      "cost_usd": 0.002106,
+      "model": "claude-haiku-5-5",
+      "claims": 6,
+      "verified": 5,
+      "removed": [
+        "product/part names not on the cited page: MPU6050-BASED :: The device uses an RYLR896 UART LoRa transceiver module (868/915MHz) connected to the MPU6050-based Freenove ESP32-WROVER CAM board to send readings to the proc"
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m04",
+      "type": "multi",
+      "repeat": 0,
+      "question": "What sampling rate does each fall detection paper use for its sensor data?",
+      "expected": "Adebesin et al.: 20 Hz (50 ms); bathroom study: streams mapped to a common 100 Hz",
+      "answer": "In adebesin2026, the Mixed Fall Detection (IMU) configuration uses a 20 Hz (50 ms) sampling rate. [1] Lower-frequency baseline streams in adebesin2026 were linearly resampled to a uniform 20 Hz before windowing. [2] In the bathroom fall detection study (arxiv2603.17069), the mmWave radar node produced 3D point clouds at 12.5 Hz, while the vibration node sampled at 200 Hz and was resampled to 100 Hz, with the framework mapping radar and vibration to a common 100 Hz rate. [3][4]\n\n**Not found in your documents:** The sampling rate for the fall detection paper beyond adebesin2026 and arxiv2603.17069 is not in the evidence.",
+      "cited": [
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          8
+        ],
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          9
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          5
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          5
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 5881,
+      "tokens": 15757,
+      "cost_usd": 0.00193,
+      "model": "claude-haiku-5-5",
+      "claims": 5,
+      "verified": 4,
+      "removed": [
+        "numbers not in the quote: 20 :: The adebesin2026 wearable fall detection study samples fall-detection experiments at a fixed 20 Hz (50 ms per sample)."
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m05",
+      "type": "multi",
+      "repeat": 0,
+      "question": "On the Raspberry Pi 4B, how does the end-to-end latency of the radar-only model compare with the radar and vibration fusion model in the bathroom study?",
+      "expected": "Radar only 28.4 ms vs fusion 15.8 ms",
+      "answer": "On the Raspberry Pi 4B gateway, the radar-only model (Motion-Mamba) has an end-to-end latency of 28.4 ms, while the radar and vibration fusion model has an end-to-end detection latency of 15.8 ms per 2.56 s window. [1][2] The fusion model is faster by 28.4 ms (radar-only) - 15.8 ms (fusion) = 12.6 ms, or about 1.8 times faster (28.4 / 15.8 \u2248 1.80). [1][2] Both Table II latency values were measured on the Raspberry Pi 4B gateway with sensing, wireless transmission and computation included. [4]",
+      "cited": [
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          5
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          5
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          6
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 9251,
+      "tokens": 26119,
+      "cost_usd": 0.003213,
+      "model": "claude-haiku-5-5",
+      "claims": 4,
+      "verified": 4,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m06",
+      "type": "multi",
+      "repeat": 0,
+      "question": "In the bathroom study, how much energy per 2.56 s window do the radar sensing node and the vibration sensing node use?",
+      "expected": "Radar node (ESP32-C3 + C4001) 4740 mJ; vibration node (ESP32-C3 + ADXL345) 820 mJ",
+      "answer": "The radar sensing node (ESP32-C3 + C4001 radar front end) uses 4740 mJ per 2.56 s window, per Table II. [5] The vibration sensing node (ESP32-C3 + ADXL345, vibration preprocessing) uses 820 mJ per 2.56 s window, per Table II. [4] Combined, the two sensing nodes use 4740 mJ (radar) + 820 mJ (vibration) = 5560 mJ per 2.56 s window. [4][5] The full radar and vibration fusion configuration on the Raspberry Pi 4B gateway uses 10750 mJ per window, which is a separate figure from the sensing nodes alone. [1][2]",
+      "cited": [
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          5
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          5
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          5
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          5
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 7100,
+      "tokens": 18625,
+      "cost_usd": 0.002334,
+      "model": "claude-haiku-5-5",
+      "claims": 5,
+      "verified": 5,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m07",
+      "type": "multi",
+      "repeat": 0,
+      "question": "Adebesin et al. cite an mmWave radar fall detection accuracy in their literature review. How does it compare with the accuracy of the full model in the bathroom study?",
+      "expected": "92.3% (cited mmWave radar work, ref [10]) vs 96.1% (bathroom full model)",
+      "answer": "The literature review by Adebesin et al. cites an mmWave radar fall detection system from Rezaei et al. that reaches 92.3% accuracy without wearables. [1] The full model in the bathroom mmWave fall detection study reaches 96.1% window-level accuracy. [2][4] Comparing the two, the full model's 96.1% accuracy is 3.8 percentage points higher than the 92.3% cited by Adebesin et al. (96.1% - 92.3% = 3.8 percentage points). [1][2]",
+      "cited": [
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          2
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          5
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          2
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 14694,
+      "tokens": 40077,
+      "cost_usd": 0.004778,
+      "model": "claude-haiku-5-5",
+      "claims": 7,
+      "verified": 5,
+      "removed": [
+        "numbers not in the quote: 2023 :: The mmWave radar reference [10] is Rezaei et al., Unobtrusive Human Fall Detection System Using mmWave Radar and Data Driven Methods, IEEE Sens. J. 2023.",
+        "numbers not in the quote: 94.1, 96.1 :: Compared with the strongest baseline, the proposed model improves accuracy by 2.0 percentage points (from 94.1% to 96.1%)."
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m08",
+      "type": "multi",
+      "repeat": 0,
+      "question": "Does the ESP32 have a built-in LoRa radio, and which separate LoRa module did Adebesin et al. use?",
+      "expected": "No: the ESP32 has 2.4 GHz Wi-Fi + Bluetooth, not LoRa; they used an RYLR896 module",
+      "answer": "The evidence does not show that the ESP32 has a built-in LoRa radio; the ESP32 datasheet describes Wi-Fi b/g/n and Bluetooth/Bluetooth LE dual mode connectivity, with no LoRa radio mentioned. [1][2] Adebesin et al. used the RYLR896 UART LoRa transceiver module (868/915MHz) to transmit acceleration and velocity readings from the wearable device. [3] In their wearable, the ESP32 handles LoRa communication with the gateway, but the paper's LoRa transceiver is the separate RYLR896 module, paired with an MPU6050 IMU on a Freenove ESP32-WROVER CAM board. [4][5][3]",
+      "cited": [
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          33
+        ],
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          11
+        ],
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          6
+        ],
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          6
+        ],
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          5
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 8721,
+      "tokens": 19601,
+      "cost_usd": 0.002493,
+      "model": "claude-haiku-5-5",
+      "claims": 6,
+      "verified": 5,
+      "removed": [
+        "numbers not in the quote: 802.11 :: The ESP32 integrates Wi-Fi and Bluetooth radios, with Wi-Fi 802.11b/g/n and Bluetooth v4.2 BR/EDR and Bluetooth LE specifications listed as features; no LoRa ra"
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m09",
+      "type": "multi",
+      "repeat": 0,
+      "question": "What is the highest operating temperature of the Route10 with two 2 W SFP+ modules, and of the S8-PoE?",
+      "expected": "Route10 with two 2 W SFP+ modules: 40 \u00b0C; S8-PoE: 50 \u00b0C",
+      "answer": "The Route10 has a maximum operating temperature of 40\u00b0 C (104\u00b0 F) when equipped with two 2 W SFP+ modules, per the Route10 datasheet. [1] The Alta Labs S8-PoE has an operating temperature range of -5 to 50\u00b0 C (23 to 122\u00b0 F), per the Alta Labs Switches datasheet, so its highest operating temperature is 50\u00b0 C (122\u00b0 F). [2] The S8-PoE's upper limit of 50\u00b0 C is 10\u00b0 C higher than the Route10's 40\u00b0 C limit with two 2 W SFP+ modules. [1][2]",
+      "cited": [
+        [
+          "datasheets/Route10_Datasheet.pdf",
+          5
+        ],
+        [
+          "datasheets/Alta_Labs_Switches_Datasheet.pdf",
+          5
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 6416,
+      "tokens": 10315,
+      "cost_usd": 0.001243,
+      "model": "claude-haiku-5-5",
+      "claims": 2,
+      "verified": 2,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m10",
+      "type": "multi",
+      "repeat": 0,
+      "question": "How does the ESP32's Light-sleep current compare with its Deep-sleep current (RTC timer and memory on)?",
+      "expected": "Light-sleep 0.8 mA vs Deep-sleep 10 \u00b5A (about 80 times less)",
+      "answer": "The ESP32's Light-sleep mode consumes a typical 0.8 mA, which is 800 \u00b5A. [1] Deep-sleep mode with the RTC timer and RTC memory enabled consumes a typical 10 \u00b5A. [2][3] Comparing the two: Light-sleep (800 \u00b5A) divided by Deep-sleep (10 \u00b5A) gives 80, so Light-sleep current is about 80 times higher than Deep-sleep current. [1][2][3]",
+      "cited": [
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          30
+        ],
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          30
+        ],
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          5
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 4660,
+      "tokens": 12468,
+      "cost_usd": 0.001483,
+      "model": "claude-haiku-5-5",
+      "claims": 3,
+      "verified": 3,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "u01",
+      "type": "unanswerable",
+      "repeat": 0,
+      "question": "What LoRa packet loss rate did Adebesin et al. measure?",
+      "expected": "Not measured: the paper says packet loss, latency and power were not quantitatively measured (p.6)",
+      "answer": "The evidence indicates that Adebesin et al. (2026) did not quantitatively measure LoRa packet loss; the paper states that packet loss, along with air time, throughput, end-to-end alert latency, and device power consumption, was not quantitatively measured in that setup and was left for future work. [1] No packet loss rate figure is reported in the provided evidence, so the requested value cannot be given. [1]\n\n**Not found in your documents:** LoRa packet loss rate measured by Adebesin et al.",
+      "cited": [
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          6
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 3335,
+      "tokens": 8072,
+      "cost_usd": 0.000954,
+      "model": "claude-haiku-5-5",
+      "claims": 1,
+      "verified": 1,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "u02",
+      "type": "unanswerable",
+      "repeat": 0,
+      "question": "What is the retail price of the Route10 in Canadian dollars?",
+      "expected": "Not in the documents (the datasheet only says it is 'disruptively priced')",
+      "answer": "The evidence does not state a retail price for the Route10 in Canadian dollars. [1] The only pricing statement in the evidence is that the Route10 is \"disruptively priced\" at a retail price point, with no dollar amount or currency given. [1]\n\n**Not found in your documents:** Retail price of the Route10 in Canadian dollars (CAD)",
+      "cited": [
+        [
+          "datasheets/Route10_Datasheet.pdf",
+          2
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": null,
+      "cited_right_page": null,
+      "verified_but_wrong": false,
+      "latency_ms": 7168,
+      "tokens": 20005,
+      "cost_usd": 0.002172,
+      "model": "claude-haiku-5-5",
+      "claims": 1,
+      "verified": 1,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "u03",
+      "type": "unanswerable",
+      "repeat": 0,
+      "question": "How long does the battery last in the Adebesin et al. wearable?",
+      "expected": "Not in the documents (battery life is not reported)",
+      "answer": "The Adebesin et al. (2026) wearable fall detection paper does not report battery life or runtime, because device power consumption was not quantitatively measured in that study and is deferred to future work. [1][2] The paper also does not report battery capacity in mAh, so no battery runtime or endurance figure can be given from the evidence. [1][3]\n\n**Not found in your documents:** How long the battery lasts in the Adebesin et al. wearable",
+      "cited": [
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          6
+        ],
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          6
+        ],
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          6
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": null,
+      "cited_right_page": null,
+      "verified_but_wrong": false,
+      "latency_ms": 6646,
+      "tokens": 21157,
+      "cost_usd": 0.002396,
+      "model": "claude-haiku-5-5",
+      "claims": 3,
+      "verified": 3,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "u04",
+      "type": "unanswerable",
+      "repeat": 0,
+      "question": "What is the MTBF (mean time between failures) of the S24-PoE switch?",
+      "expected": "Not in the documents",
+      "answer": "**Not found** in your documents. None of the searched pages contain a verifiable answer to this question.",
+      "cited": [],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": null,
+      "cited_right_page": null,
+      "verified_but_wrong": false,
+      "latency_ms": 4700,
+      "tokens": 12886,
+      "cost_usd": 0.001355,
+      "model": "claude-haiku-5-5",
+      "claims": 0,
+      "verified": 0,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "s01",
+      "type": "single",
+      "repeat": 1,
+      "question": "How much current does the ESP32 draw in Deep-sleep with the RTC timer and RTC memory on?",
+      "expected": "10 \u00b5A",
+      "answer": "The ESP32 datasheet lists a typical current of 10 \u00b5A for Deep-sleep mode with the RTC timer and RTC memory powered on. [1][3] The ESP32 datasheet's general statement also gives power consumption in Deep-sleep mode as 10 \u00b5A. [2]",
+      "cited": [
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          30
+        ],
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          5
+        ],
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          30
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 6019,
+      "tokens": 12157,
+      "cost_usd": 0.001479,
+      "model": "claude-haiku-5-5",
+      "claims": 3,
+      "verified": 3,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "s02",
+      "type": "single",
+      "repeat": 1,
+      "question": "What is the PoE budget of the Alta Labs S8-PoE switch?",
+      "expected": "60 W",
+      "answer": "The Alta Labs S8-PoE switch has a PoE budget of 60 watts. [1] The Alta Labs Switches datasheet also lists the S8-PoE's PoE Budget/Max specification as 60 Watts, with a PoE supply of 30 Watts per port. [2]",
+      "cited": [
+        [
+          "datasheets/Alta_Labs_Switches_Datasheet.pdf",
+          2
+        ],
+        [
+          "datasheets/Alta_Labs_Switches_Datasheet.pdf",
+          5
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 5473,
+      "tokens": 6542,
+      "cost_usd": 0.000796,
+      "model": "claude-haiku-5-5",
+      "claims": 2,
+      "verified": 2,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "s03",
+      "type": "single",
+      "repeat": 1,
+      "question": "What is the PoE budget of the Route10 router?",
+      "expected": "40 W",
+      "answer": "The Route10 router has a total PoE budget of 40W, according to the Route10 datasheet. [1] The Route10 datasheet also lists per-port PoE of 802.3at PoE+ (54VDC, 0.6A Max) on two PoE ports. [2]",
+      "cited": [
+        [
+          "datasheets/Route10_Datasheet.pdf",
+          4
+        ],
+        [
+          "datasheets/Route10_Datasheet.pdf",
+          4
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 2721,
+      "tokens": 6038,
+      "cost_usd": 0.00074,
+      "model": "claude-haiku-5-5",
+      "claims": 2,
+      "verified": 2,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "s04",
+      "type": "single",
+      "repeat": 1,
+      "question": "Which LoRa transceiver module did Adebesin et al. use in their wearable?",
+      "expected": "RYLR896 UART LoRa transceiver (868/915 MHz)",
+      "answer": "Adebesin et al. (2026) used the RYLR896 UART LoRa transceiver module (868/915MHz) in their wearable fall detection device to transmit acceleration and velocity readings. [1][2]",
+      "cited": [
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          6
+        ],
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          6
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 6838,
+      "tokens": 20399,
+      "cost_usd": 0.002327,
+      "model": "claude-haiku-5-5",
+      "claims": 3,
+      "verified": 2,
+      "removed": [
+        "product/part names not on the cited page: RFM95, SX1262, SX1276 :: The paper names no SX1276, SX1262, or RFM95 chip; the transceiver module specified is the RYLR896, and no bill of materials is given in these passages."
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "s05",
+      "type": "single",
+      "repeat": 1,
+      "question": "At what height was the mmWave radar mounted in the bathroom fall detection study?",
+      "expected": "1.87 m on the wall",
+      "answer": "In the bathroom fall detection study (arXiv:2603.17069), the mmWave radar was mounted on the upper wall at a height of 1.87 m. [1][2] The radar node (C4001 radar with ESP32-C3) was placed on the wall at 1.87 m to provide unobstructed coverage of the bathroom area. [3]",
+      "cited": [
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          3
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          3
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          4
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 6619,
+      "tokens": 24811,
+      "cost_usd": 0.002782,
+      "model": "claude-haiku-5-5",
+      "claims": 4,
+      "verified": 4,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "s06",
+      "type": "single",
+      "repeat": 1,
+      "question": "How many sensor readings are in the Adebesin et al. fall detection dataset, and how many are falls?",
+      "expected": "18,906 readings, of which 2169 are falls",
+      "answer": "The Adebesin et al. IMU fall-detection dataset used for the reported results contains 13,459 total samples, of which 1993 are falls. [2][3][4] It also includes 11,466 normal samples, which is consistent with 13,459 total samples minus 1993 falls (11,466 + 1993 = 13,459). [2] Table 3 lists a separate Piezoelectric Sensors configuration with 10,798 total samples and 693 fall samples, which is not the dataset used for the Section 4 results. [1]",
+      "cited": [
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          8
+        ],
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          8
+        ],
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          8
+        ],
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          8
+        ]
+      ],
+      "correct": false,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": true,
+      "latency_ms": 6528,
+      "tokens": 14666,
+      "cost_usd": 0.00198,
+      "model": "claude-haiku-5-5",
+      "claims": 5,
+      "verified": 4,
+      "removed": [
+        "numbers not in the quote: 34 :: The Adebesin et al. 2026 fall detection dataset's piezoelectric sensor configuration contains 10,798 total samples, with 693 fall samples across 34 files."
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "s07",
+      "type": "single",
+      "repeat": 1,
+      "question": "What is the idle power consumption of the S24-PoE switch?",
+      "expected": "15 W",
+      "answer": "The Alta Labs S24-PoE switch has an idle power consumption of 15 watts. [1]",
+      "cited": [
+        [
+          "datasheets/Alta_Labs_Switches_Datasheet.pdf",
+          7
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 3174,
+      "tokens": 6246,
+      "cost_usd": 0.000697,
+      "model": "claude-haiku-5-5",
+      "claims": 1,
+      "verified": 1,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m01",
+      "type": "multi",
+      "repeat": 1,
+      "question": "What is the combined PoE budget of one Route10 and one S8-PoE?",
+      "expected": "100 W (Route10 40 W + S8-PoE 60 W)",
+      "answer": "The Route10 router datasheet lists a PoE budget of 40 W, and the S8-PoE switch has a PoE budget of 60 W. [1][2][3] The combined PoE budget is 40 W (Route10) + 60 W (S8-PoE) = 100 W. [1][2][3]",
+      "cited": [
+        [
+          "datasheets/Route10_Datasheet.pdf",
+          4
+        ],
+        [
+          "datasheets/Alta_Labs_Switches_Datasheet.pdf",
+          2
+        ],
+        [
+          "datasheets/Alta_Labs_Switches_Datasheet.pdf",
+          1
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 6471,
+      "tokens": 11036,
+      "cost_usd": 0.001316,
+      "model": "claude-haiku-5-5",
+      "claims": 4,
+      "verified": 3,
+      "removed": [
+        "numbers not in the quote: 54, 802.3 :: Route10 supports 802.3at PoE+ on two ports, with a per-port output of 54VDC, 0.6A max."
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m02",
+      "type": "multi",
+      "repeat": 1,
+      "question": "Can the Route10 power both of its PoE+ ports at the full 30 W per port at the same time?",
+      "expected": "No: 2 ports x 30 W = 60 W, but the Route10 PoE budget is 40 W",
+      "answer": "The Route10 datasheet lists a total PoE budget of 40W. [1] Each of the two 802.3at PoE+ ports is rated at 54VDC, 0.6A max, which is about 32W per port (54 V \u00d7 0.6 A = 32.4 W). [2] Even at 30W per port (2 \u00d7 30 W = 60 W), the total would still exceed the 40W budget. [1]\n\n**Not found in your documents:** The evidence does not state a 30W per-port figure for the Route10.\n\n_1 sentence(s) removed because their figures were not in the cited evidence._",
+      "cited": [
+        [
+          "datasheets/Route10_Datasheet.pdf",
+          4
+        ],
+        [
+          "datasheets/Route10_Datasheet.pdf",
+          4
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 10433,
+      "tokens": 16122,
+      "cost_usd": 0.002303,
+      "model": "claude-haiku-5-5",
+      "claims": 5,
+      "verified": 4,
+      "removed": [
+        "numbers not in the quote: 802.3 :: Route10 provides two PoE+ ports (ports 2 and 3) that support 802.3at."
+      ],
+      "dropped": 1,
+      "error": ""
+    },
+    {
+      "id": "m03",
+      "type": "multi",
+      "repeat": 1,
+      "question": "Both fall detection papers use an ESP32. How does each one send its sensor data?",
+      "expected": "Adebesin et al.: the ESP32 sends over LoRa to a gateway; bathroom study: ESP32-C3 nodes send 2.56 s windows over Wi-Fi to a Raspberry Pi 4B",
+      "answer": "The first paper (adebesin2026, wearable fall detection with LoRa) uses an ESP32 that handles LoRa communication with the gateway, and the device sends acceleration and angular velocity readings over LoRa using an RYLR896 UART LoRa transceiver module (868/915MHz) to a processing application. [1][3] In that paper the gateway receives the wearable's data over LoRa and forwards it to the cloud application over conventional wired Internet protocols. [2] The second paper (arXiv:2603.17069, bathroom fall detection with mmWave) uses ESP32-C3 sensing nodes that transmit buffered 2.56 s windows over Wi-Fi to a Raspberry Pi 4B edge gateway for inference. [4][5] The ESP32 datasheet notes Bluetooth v4.2 BR/EDR and Bluetooth LE support, but the evidence does not show either fall detection paper using Bluetooth for its data transmission. [6]",
+      "cited": [
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          5
+        ],
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          4
+        ],
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          6
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          4
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          4
+        ],
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          35
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 9324,
+      "tokens": 21772,
+      "cost_usd": 0.002808,
+      "model": "claude-haiku-5-5",
+      "claims": 8,
+      "verified": 6,
+      "removed": [
+        "numbers not in the quote: 150 :: The ESP32 implements a TCP/IP and full 802.11 b/g/n Wi-Fi MAC protocol, supporting Basic Service Set STA and SoftAP operations, with data rates up to 150 Mbps.",
+        "numbers not in the quote: -94 :: The ESP32 Bluetooth radio supports Class-1, class-2 and class-3 transmit output powers and has a minimum receiver sensitivity of -94 dBm."
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m04",
+      "type": "multi",
+      "repeat": 1,
+      "question": "What sampling rate does each fall detection paper use for its sensor data?",
+      "expected": "Adebesin et al.: 20 Hz (50 ms); bathroom study: streams mapped to a common 100 Hz",
+      "answer": "The adebesin2026 wearable fall detection LoRa study uses a fixed sampling rate of 20 Hz (50 ms per sample) for its sensor data. [1][2] The arXiv 2603.17069 bathroom fall detection study has two sensor streams with different rates: the radar node produced 3D point clouds at 12.5 Hz, while the vibration node sampled at 200 Hz and was resampled to 100 Hz. [3][4] For preprocessing, the arXiv 2603.17069 study maps raw vibration and radar streams to a common rate of 100 Hz. [5]",
+      "cited": [
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          9
+        ],
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          8
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          5
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          5
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          2
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 6350,
+      "tokens": 15981,
+      "cost_usd": 0.001992,
+      "model": "claude-haiku-5-5",
+      "claims": 6,
+      "verified": 5,
+      "removed": [
+        "numbers not in the quote: 20 :: Fall recordings in the adebesin2026 study were sampled at a fixed 50 ms period (20 Hz), while baseline activities used dynamic sampling from 500 ms to 50 ms."
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m05",
+      "type": "multi",
+      "repeat": 1,
+      "question": "On the Raspberry Pi 4B, how does the end-to-end latency of the radar-only model compare with the radar and vibration fusion model in the bathroom study?",
+      "expected": "Radar only 28.4 ms vs fusion 15.8 ms",
+      "answer": "On the Raspberry Pi 4B, the radar-only Motion-Mamba model has an end-to-end latency of 28.4 ms per 2.56 s window, while the radar and vibration fusion model has 15.8 ms per 2.56 s window. [1][2] The difference is 28.4 ms (radar-only) - 15.8 ms (fusion) = 12.6 ms, so the radar-only model is 12.6 ms slower end-to-end than the fusion model. [1][2]",
+      "cited": [
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          5
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          5
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 9551,
+      "tokens": 25283,
+      "cost_usd": 0.003024,
+      "model": "claude-haiku-5-5",
+      "claims": 6,
+      "verified": 5,
+      "removed": [
+        "quote not found on the cited page :: The paper reports that the proposed fusion model reduces latency from 35.9 ms for the strongest baseline to 15.8 ms on the Raspberry Pi 4B gateway."
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m06",
+      "type": "multi",
+      "repeat": 1,
+      "question": "In the bathroom study, how much energy per 2.56 s window do the radar sensing node and the vibration sensing node use?",
+      "expected": "Radar node (ESP32-C3 + C4001) 4740 mJ; vibration node (ESP32-C3 + ADXL345) 820 mJ",
+      "answer": "The radar sensing node (ESP32-C3 + C4001 radar front end) has an energy of 4740 mJ per 2.56 s window in Table II of the bathroom fall mmwave study (arXiv:2603.17069). [5] Combined, the two sensing nodes use 4740 mJ (radar) + 820 mJ (vibration) = 5560 mJ per 2.56 s window. [5][4]\n\n_1 sentence(s) removed because their figures were not in the cited evidence._",
+      "cited": [
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          5
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          5
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 10410,
+      "tokens": 19453,
+      "cost_usd": 0.002745,
+      "model": "claude-haiku-5-5",
+      "claims": 5,
+      "verified": 5,
+      "removed": [],
+      "dropped": 1,
+      "error": ""
+    },
+    {
+      "id": "m07",
+      "type": "multi",
+      "repeat": 1,
+      "question": "Adebesin et al. cite an mmWave radar fall detection accuracy in their literature review. How does it compare with the accuracy of the full model in the bathroom study?",
+      "expected": "92.3% (cited mmWave radar work, ref [10]) vs 96.1% (bathroom full model)",
+      "answer": "The mmWave radar fall detection system cited by Adebesin et al. reaches 92.3% accuracy without wearables, paired with SVM and CNN models. [1][5] The full model in the bathroom study (arXiv 2603.17069) reaches 96.1% window-level accuracy on the held-out test split. [3][4][6] The bathroom study's full model is 3.8 percentage points higher: 96.1% - 92.3% = 3.8 percentage points. [1][3][5]",
+      "cited": [
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          2
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          2
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          5
+        ],
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          3
+        ],
+        [
+          "papers/bathroom_fall_mmwave_arxiv2603.17069.pdf",
+          2
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 9504,
+      "tokens": 33493,
+      "cost_usd": 0.004025,
+      "model": "claude-haiku-5-5",
+      "claims": 7,
+      "verified": 6,
+      "removed": [
+        "numbers not in the quote: 2023 :: Reference [10] is Rezaei et al., Unobtrusive Human Fall Detection System Using mmWave Radar and Data Driven Methods, IEEE Sens. J. 2023."
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m08",
+      "type": "multi",
+      "repeat": 1,
+      "question": "Does the ESP32 have a built-in LoRa radio, and which separate LoRa module did Adebesin et al. use?",
+      "expected": "No: the ESP32 has 2.4 GHz Wi-Fi + Bluetooth, not LoRa; they used an RYLR896 module",
+      "answer": "The ESP32 datasheet does not list a LoRa radio: its radios are Bluetooth (compliant with Bluetooth v4.2 BR/EDR and Bluetooth LE) and Wi-Fi, and its connection nomenclature lists only Wi-Fi b/g/n plus Bluetooth/Bluetooth LE dual mode. [1][2] Adebesin et al. used the RYLR896 UART LoRa transceiver module (868/915MHz) as the separate LoRa module in their wearable fall detection device. [3][4] The Adebesin paper says the ESP32 handles LoRa communication with the gateway, but it gives no datasheet specifications for a built-in ESP32 LoRa radio, so the paper does not establish one. [5]\n\n**Not found in your documents:** Whether the ESP32 has any built-in LoRa radio is not established by the evidence beyond the absence of LoRa in its datasheet listings.",
+      "cited": [
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          3
+        ],
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          11
+        ],
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          6
+        ],
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          6
+        ],
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          5
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 11287,
+      "tokens": 26227,
+      "cost_usd": 0.003333,
+      "model": "claude-haiku-5-5",
+      "claims": 6,
+      "verified": 5,
+      "removed": [
+        "numbers not in the quote: 802.11 :: The ESP32 Wi-Fi radio supports 802.11b/g/n with up to 150 Mbps data rate."
+      ],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m09",
+      "type": "multi",
+      "repeat": 1,
+      "question": "What is the highest operating temperature of the Route10 with two 2 W SFP+ modules, and of the S8-PoE?",
+      "expected": "Route10 with two 2 W SFP+ modules: 40 \u00b0C; S8-PoE: 50 \u00b0C",
+      "answer": "The Route10 with two 2 W SFP+ modules installed has a highest operating temperature of 40\u00b0 C (104\u00b0 F). [1] The S8-PoE from Alta Labs has an operating temperature range of -5 to 50\u00b0 C (23 to 122\u00b0 F), so its highest operating temperature is 50\u00b0 C (122\u00b0 F). [2]",
+      "cited": [
+        [
+          "datasheets/Route10_Datasheet.pdf",
+          5
+        ],
+        [
+          "datasheets/Alta_Labs_Switches_Datasheet.pdf",
+          5
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 5126,
+      "tokens": 10373,
+      "cost_usd": 0.001205,
+      "model": "claude-haiku-5-5",
+      "claims": 2,
+      "verified": 2,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "m10",
+      "type": "multi",
+      "repeat": 1,
+      "question": "How does the ESP32's Light-sleep current compare with its Deep-sleep current (RTC timer and memory on)?",
+      "expected": "Light-sleep 0.8 mA vs Deep-sleep 10 \u00b5A (about 80 times less)",
+      "answer": "The ESP32 Light-sleep current is 0.8 mA, which is 800 \u00b5A, per the ESP32 datasheet. [1] The ESP32 Deep-sleep current with RTC timer and RTC memory enabled is 10 \u00b5A, per the ESP32 datasheet. [2][3] Light-sleep current is 800 \u00b5A (0.8 mA) compared with 10 \u00b5A for Deep-sleep, so Light-sleep draws 80 times more current (800 \u00b5A \u00f7 10 \u00b5A = 80). [1][2]",
+      "cited": [
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          30
+        ],
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          30
+        ],
+        [
+          "datasheets/esp32_datasheet_en.pdf",
+          5
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 5106,
+      "tokens": 12349,
+      "cost_usd": 0.001476,
+      "model": "claude-haiku-5-5",
+      "claims": 3,
+      "verified": 3,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "u01",
+      "type": "unanswerable",
+      "repeat": 1,
+      "question": "What LoRa packet loss rate did Adebesin et al. measure?",
+      "expected": "Not measured: the paper says packet loss, latency and power were not quantitatively measured (p.6)",
+      "answer": "The evidence does not report a LoRa packet loss rate measured by Adebesin et al.; the paper states that packet loss was not quantitatively measured in its setup and is deferred to future work. [1] Robustness evaluation under realistic wireless conditions, including packet loss, is described as planned future work rather than a reported measured result. [2]\n\n**Not found in your documents:** LoRa packet loss rate measured by Adebesin et al. 2026",
+      "cited": [
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          6
+        ],
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          12
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": true,
+      "cited_right_page": true,
+      "verified_but_wrong": false,
+      "latency_ms": 3518,
+      "tokens": 8270,
+      "cost_usd": 0.001007,
+      "model": "claude-haiku-5-5",
+      "claims": 2,
+      "verified": 2,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "u02",
+      "type": "unanswerable",
+      "repeat": 1,
+      "question": "What is the retail price of the Route10 in Canadian dollars?",
+      "expected": "Not in the documents (the datasheet only says it is 'disruptively priced')",
+      "answer": "The evidence does not state the retail price of the Route10 in Canadian dollars. [1] The only price-related passage describes the Route10 as disruptively priced at a retail price point, but it gives no dollar figure in any currency. [1]\n\n**Not found in your documents:** Retail price of the Route10 in Canadian dollars",
+      "cited": [
+        [
+          "datasheets/Route10_Datasheet.pdf",
+          2
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": null,
+      "cited_right_page": null,
+      "verified_but_wrong": false,
+      "latency_ms": 5702,
+      "tokens": 12868,
+      "cost_usd": 0.001425,
+      "model": "claude-haiku-5-5",
+      "claims": 1,
+      "verified": 1,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "u03",
+      "type": "unanswerable",
+      "repeat": 1,
+      "question": "How long does the battery last in the Adebesin et al. wearable?",
+      "expected": "Not in the documents (battery life is not reported)",
+      "answer": "The Adebesin et al. (2026) wearable fall detection paper does not report how long the battery lasts. [1] The paper states that device power consumption was not quantitatively measured in its setup and will be evaluated in future work, so no battery runtime is reported. [1][2]\n\n**Not found in your documents:** Battery runtime (how long the battery lasts) for the Adebesin et al. 2026 wearable",
+      "cited": [
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          6
+        ],
+        [
+          "papers/adebesin2026_wearable_fall_detection_lora.pdf",
+          6
+        ]
+      ],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": null,
+      "cited_right_page": null,
+      "verified_but_wrong": false,
+      "latency_ms": 5431,
+      "tokens": 20830,
+      "cost_usd": 0.002291,
+      "model": "claude-haiku-5-5",
+      "claims": 2,
+      "verified": 2,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    },
+    {
+      "id": "u04",
+      "type": "unanswerable",
+      "repeat": 1,
+      "question": "What is the MTBF (mean time between failures) of the S24-PoE switch?",
+      "expected": "Not in the documents",
+      "answer": "**Not found** in your documents. None of the searched pages contain a verifiable answer to this question.",
+      "cited": [],
+      "correct": true,
+      "hallucinated": false,
+      "retrieval_hit": null,
+      "cited_right_page": null,
+      "verified_but_wrong": false,
+      "latency_ms": 5207,
+      "tokens": 11632,
+      "cost_usd": 0.001208,
+      "model": "claude-haiku-5-5",
+      "claims": 0,
+      "verified": 0,
+      "removed": [],
+      "dropped": 0,
+      "error": ""
+    }
+  ]
+}

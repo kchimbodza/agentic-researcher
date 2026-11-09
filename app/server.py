@@ -17,7 +17,7 @@ from pydantic import BaseModel
 
 from . import agent, claimcheck, docs, settings, store
 
-APP_VERSION = "0.4.2"
+APP_VERSION = "0.4.3"
 
 RESULTS = docs.ROOT / "evals" / "results"
 STATIC = Path(__file__).parent / "static"

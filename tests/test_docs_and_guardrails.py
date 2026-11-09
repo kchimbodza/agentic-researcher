@@ -62,3 +62,11 @@ def test_unlabelled_spec_page_accepts_document_product_but_not_a_rival():
     assert "S8-POE" in extra and "S24-POE" in extra
     labelled = "S8-PoE Interface ports (8) RJ45"
     assert "S16-POE" not in guardrails.unlabelled_page_codes(labelled, doc)
+
+
+def test_search_returns_whole_pages_within_budget():
+    from app import tools
+    hits = tools.search_documents("PoE budget Route10", k=5)
+    assert hits and sum(len(h["text"]) for h in hits) <= tools.PASSAGE_BUDGET + tools.FULL_PAGE_CHARS
+    top = hits[0]
+    assert top["text"] == docs.page_text(top["doc"], top["page"])

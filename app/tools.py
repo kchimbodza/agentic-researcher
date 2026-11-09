@@ -30,6 +30,10 @@ def _around(page: str, chunk: str, extra: int = 500) -> str:
     return page[max(0, i - extra): i + len(chunk) + extra]
 
 
+FULL_PAGE_CHARS = 8000   # longest library page is ~7,100 characters
+PASSAGE_BUDGET = 16000   # characters of passage text per search (about 4,000 tokens)
+
+
 def search_documents(query: str, k: int = 5) -> list[dict]:
     """Reciprocal-rank fusion of vector hits and keyword hits; one passage per (doc, page)."""
     ranked: dict[tuple, dict] = {}
@@ -54,6 +58,15 @@ def search_documents(query: str, k: int = 5) -> list[dict]:
         r["score"] += 1 / (60 + rank)
         r["via"].add("keyword")
     out = sorted(ranked.values(), key=lambda r: -r["score"])[:k]
+    # Whole pages, not windows: on long pages a window around the best chunk missed tables and
+    # sentences elsewhere on the same page (eval m06, m07). Pages are short (median ~1,700 chars);
+    # past a total budget the remaining hits keep their window, so prompts fit an 8k local model.
+    used = 0
+    for r in out:
+        page = docs.page_text(r["doc"], r["page"])
+        if len(page) <= FULL_PAGE_CHARS and used + len(page) <= PASSAGE_BUDGET:
+            r["text"] = page
+        used += len(r["text"])
     for r in out:
         r["score"] = round(r["score"], 4)
         r["via"] = sorted(r["via"])
