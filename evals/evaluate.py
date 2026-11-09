@@ -91,7 +91,7 @@ def main():
                     retrieved = [(x["doc"], x["page"]) for x in claims]
                     meta = {"latency_ms": m.get("latency_ms"), "tokens": m.get("tokens"), "cost_usd": m.get("cost_usd"),
                             "model": m.get("model"), "claims": len(claims), "verified": sum(x["verified"] for x in claims),
-                            "removed": [x["reason"] for x in claims if not x["verified"]], "dropped": brief.get("dropped", 0)}
+                            "removed": [f'{x["reason"]} :: {x.get("text", "")[:160]}' for x in claims if not x["verified"]], "dropped": brief.get("dropped", 0)}
                 err = ""
             except Exception as e:  # a crash counts as a wrong answer, and is recorded
                 answer, cited, retrieved, meta, err = "", [], [], {"latency_ms": int((time.perf_counter() - t0) * 1000)}, f"{type(e).__name__}: {e}"

@@ -30,7 +30,7 @@ from langgraph.graph import END, START, StateGraph
 from . import claimcheck, docs, guardrails, llm, settings
 from .mcp_client import ToolBox
 
-AGENT_VERSION = "0.4.1"
+AGENT_VERSION = "0.4.2"
 MAX_LOOKUPS = 4
 MAX_ROUNDS = 2          # first search + one retry for lookups that found nothing
 CHECKER_THRESHOLD = 0.25  # fine-tuned checker: below this support probability, the claim is removed
@@ -172,6 +172,7 @@ def build_graph(tb: ToolBox, budget: llm.Budget, counters: dict):
         emit({"type": "step", "agent": "critic", "status": "start", "detail": "Checking every quote against its page"})
         use_model = settings.load()["claim_checker"] == "auto" and claimcheck.available()
         judged, lookups, seen = list(s["claims"]), [dict(l) for l in s["lookups"]], set()
+        ids = docs.id_numbers()
         for c in s["new_claims"]:
             key = (c["doc"], c["page"], docs.squash(c["quote"]))
             if key in seen or not c["quote"]:
@@ -186,8 +187,10 @@ def build_graph(tb: ToolBox, budget: llm.Budget, counters: dict):
             if chk.get("injection_nearby"):
                 reasons.append("the page text around this quote gives instructions to the AI (possible prompt injection)")
             page_text = docs.page_text(c["doc"], c["page"]) if chk["verified"] else ""
+            if page_text:
+                page_text += " " + " ".join(sorted(guardrails.unlabelled_page_codes(page_text, docs.doc_text(c["doc"]))))
             reasons += guardrails.check_claim(c["claim"], c["quote"], s["question"],
-                                              names_context=f"{page_text} {c['doc_name']}")
+                                              names_context=f"{page_text} {c['doc_name']}", ignore=ids)
             if not reasons and use_model:
                 p = claimcheck.support_probability(c["claim"], c["quote"])
                 if p < CHECKER_THRESHOLD:
@@ -228,7 +231,7 @@ def build_graph(tb: ToolBox, budget: llm.Budget, counters: dict):
                 refs = [n for n in sent["cites"] if 1 <= n <= len(evidence)]
                 text = re.sub(r"\s*\[\d+(?:,\s*\d+)*\]", "", sent["text"]).strip()
                 sources = [evidence[n - 1]["quote"] for n in refs] + [s["question"]]
-                if not refs or not text or guardrails.ungrounded_numbers(text, sources) or guardrails.looks_like_injection(text):
+                if not refs or not text or guardrails.ungrounded_numbers(text, sources, docs.id_numbers()) or guardrails.looks_like_injection(text):
                     dropped += 1  # guardrail: uncited sentence or a number the evidence does not contain
                     continue
                 used.update(refs)

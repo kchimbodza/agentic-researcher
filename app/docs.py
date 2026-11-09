@@ -52,6 +52,21 @@ def list_documents() -> list[dict]:
     return docs
 
 
+def id_numbers() -> set[float]:
+    """Numbers inside document file names (years, arXiv ids): they name a source, they are not figures."""
+    from .guardrails import numbers
+    out = set()
+    for folder in KINDS:
+        for pdf in (DATA / folder).glob("*.pdf"):
+            out |= numbers(pdf.stem.replace("_", " "))
+    return out
+
+
+def doc_text(doc_id: str) -> str:
+    """All pages of one document (cached through pages_of)."""
+    return " ".join(pages_of(path_of(doc_id)))
+
+
 def path_of(doc_id: str) -> Path:
     """Map 'papers/x.pdf' to a file, refusing anything outside the two library folders."""
     folder, _, name = doc_id.partition("/")

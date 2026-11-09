@@ -38,3 +38,27 @@ def test_claim_checks_catch_wrong_product_and_wrong_number():
     assert guardrails.check_claim("The S8-PoE has a 60 W PoE budget.", quote) == []
     assert any("names" in r for r in guardrails.check_claim("The S16-PoE has a 60 W PoE budget.", quote))
     assert any("numbers" in r for r in guardrails.check_claim("The S8-PoE has a 65 W PoE budget.", quote))
+
+def test_document_id_numbers_are_not_invented_figures():
+    ids = {2026.0, 2603.17069}
+    claim = "The adebesin2026 paper and arXiv 2603.17069 both mount the radar at 1.87 m on a Raspberry Pi 4B gateway."
+    assert guardrails.check_claim(claim, "the radar was mounted at 1.87 m", ignore=ids) == []
+    # without the ignore set the ids would be flagged
+    assert guardrails.check_claim(claim, "the radar was mounted at 1.87 m")
+    # a real invented figure is still caught
+    assert guardrails.check_claim("The radar sits at 2.5 m (adebesin2026).", "the radar was mounted at 1.87 m", ignore=ids)
+
+
+def test_table_labels_and_citation_years_are_not_figures():
+    assert guardrails.check_claim("Table 3 lists 1993 fall samples.", "1993 fall samples") == []
+    assert guardrails.check_claim("Rezaei et al., 2023 report 92.3% accuracy.", "accuracy of 92.3%") == []
+    assert guardrails.check_claim("Table 3 lists 2000 fall samples.", "1993 fall samples")
+
+
+def test_unlabelled_spec_page_accepts_document_product_but_not_a_rival():
+    doc = "S8-PoE S16-PoE S24-PoE overview ... Operating Temperature -5 to 50 C RJ45"
+    spec_page = "Interface ports (8) RJ45 Operating Temperature -5 to 50 C"
+    extra = guardrails.unlabelled_page_codes(spec_page, doc)
+    assert "S8-POE" in extra and "S24-POE" in extra
+    labelled = "S8-PoE Interface ports (8) RJ45"
+    assert "S16-POE" not in guardrails.unlabelled_page_codes(labelled, doc)
