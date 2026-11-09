@@ -24,8 +24,9 @@ Full 70-second demo: [docs/media/demo.mp4](docs/media/demo.mp4).*
   app with human sign-off and an audit trail, and a small fine-tuned checking model.
 - **Measured, not claimed:** on 21 test questions the agent beat my single-step baseline (57% vs 52% accuracy,
   right page found 94% vs 78%), never made up an answer to an unanswerable question, and resisted 6/6 prompt-injection attacks.
-  It is also slower (15 s vs 3 s). With Claude as the model, the same agent reached 60–62% and found the right page
-  97–100% of the time. All numbers below come from `evals/results/`.
+  It is also slower (15 s vs 3 s). Switching to Claude only reached 60–62%; reading the failures showed the critic was
+  removing correct claims, and fixing that (v0.4.2) took Claude Haiku 5.5 to **93%** (multi-step 85%) for $0.06 per
+  42-question run (Sonnet 88%, Opus 83%), and local qwen to 62%. All numbers below come from `evals/results/`.
 
 ## Screenshots
 
@@ -100,6 +101,50 @@ correct, reworded claims, so it is off by default (Settings → Critic checks).
 A bigger model helped less than I expected: retrieval became near-perfect, but accuracy rose only 3–5 points and
 wrong citations stayed about the same. Opus scored the same as Sonnet at twice the cost, so the remaining errors
 come from the pipeline (what the researcher extracts and how the critic and scorer judge it), not model size.
+
+**Fixing the critic (v0.4.2).** In the Claude runs, 22–52 claims per run were removed only because of numbers that
+are not measurements: the year in "adebesin2026", the arXiv id 2603.17069, "Raspberry Pi 4B", "Table 3", "[2,3]",
+"Rezaei et al., 2023". A further 16 per run were removed because the switch spec pages show the product name only
+in an image, so "S8-PoE" was never on the page. Fixes (`app/guardrails.py`, unit-tested): document-id numbers,
+board names, table/figure labels, citation years and citation brackets no longer count as figures; a product name
+from the same document is accepted on a page that names no other product of the same family (a page that says
+S8-PoE still cannot support a claim about S16-PoE). Same 21 questions × 2, rules checker:
+
+| | qwen2.5:7b v0.4.1 | **qwen2.5:7b v0.4.2** | Claude Haiku 5.5 v0.4.1 | **Claude Haiku 5.5 v0.4.2** |
+|---|---|---|---|---|
+| Accuracy | 24/42 (57%) | 26/42 (62%) | 25/42 (60%) | **39/42 (93%)** |
+| Single-fact questions | 8/14 (57%) | 9/14 (64%) | 6/14 (43%) | **14/14 (100%)** |
+| Multi-step questions | 8/20 (40%) | 9/20 (45%) | 11/20 (55%) | **17/20 (85%)** |
+| Unanswerable → "not found" | 8/8 | 8/8 | 8/8 | 8/8 |
+| Made-up answers | 0 | 0 | 0 | 0 |
+| Right page found | 34/36 (94%) | 33/36 (92%) | 35/36 (97%) | **36/36 (100%)** |
+| Cited but wrong (per run) | 5 | 4 | 5.5 | **1.5** |
+| Median time per question | 15.2 s | 14.0 s | 7.2 s | 5.8 s |
+| Cost for the whole run | $0 | $0 | $0.07 | $0.06 |
+
+The safety set still passes after the change: Haiku v0.4.2 resisted **12/12** attacks (6 cases × 2). The three
+remaining Haiku misses are real: m06 needs per-node energy from a table that PDF extraction flattens into one line,
+and m07 needs two hops (find reference [10] in one paper, then its accuracy). Each fix was measured on its own: the document-id fix alone gave 81%, the first
+product-name fix did nothing (connector names like "RJ45" counted as products), and the narrowed version gave 93%.
+
+**All models on v0.4.2** (same 21 questions × 2):
+
+| | qwen2.5:7b (local) | **Claude Haiku 5.5** | Claude Sonnet 5.5 | Claude Opus 5.5 |
+|---|---|---|---|---|
+| Accuracy | 26/42 (62%) | **39/42 (93%)** | 37/42 (88%) | 35/42 (83%) |
+| Single-fact questions | 9/14 (64%) | **14/14 (100%)** | 13/14 (93%) | 13/14 (93%) |
+| Multi-step questions | 9/20 (45%) | **17/20 (85%)** | 16/20 (80%) | 14/20 (70%) |
+| Made-up answers | 0 | 0 | 0 | 0 |
+| Right page found | 33/36 (92%) | 36/36 (100%) | 36/36 (100%) | 36/36 (100%) |
+| Cited but wrong (per run) | 4 | **1.5** | 2 | 3.5 |
+| Same result on both runs | 19/21 | 20/21 | 20/21 | 18/21 |
+| Median time per question | 14.0 s | **5.8 s** | 9.5 s | 11.4 s |
+| Cost for the whole run | $0 | **$0.06** | $0.94 | $1.95 |
+
+The larger models did not do better: all three Claude models miss m06 (flattened table) and m07 (two hops), and
+Sonnet and Opus sometimes answer "not found" for the S24-PoE idle power (s07). With one 42-run sample the 5–10 point
+gaps between Claude models are within run-to-run noise, so the honest reading is "similar accuracy, Haiku is 15–30×
+cheaper and twice as fast", which is why Haiku is the default.
 
 ## How it works
 
@@ -190,7 +235,10 @@ The PDFs are not stored in this repository.
   through because the quote itself looked harmless, and the number check let 999 through as "60 ÷ 60 × 1000".
 - **Small local models are slow but private and free**: about 15 s and ~5,000 tokens per question on a laptop GPU.
   On Claude the same code was 2× faster (Haiku: 7 s, $0.07 for 42 runs) but only 3–5 points more accurate,
-  so the next gains have to come from the pipeline, not a bigger model.
+  so the next gains had to come from the pipeline, not a bigger model.
+- **Read the failures before buying a bigger model.** Before the fix, Opus cost 35× more than Haiku for +2 points; after it, Haiku scored highest. Reading every
+  removed claim showed a guardrail rejecting correct answers over numbers like "2026" in a paper name; fixing that
+  took Haiku from 60% to 93% for the same 6 cents, with the safety tests still at 12/12.
 
 Built with help from an AI coding assistant (Claude Code).
 <!-- TODO (Kudzayi): once you have reviewed and tested it yourself, say so here in your own words. -->
