@@ -60,6 +60,18 @@ Full 70-second demo: [docs/media/demo.mp4](docs/media/demo.mp4).*
 
 <p align="center"><img src="docs/media/architecture.svg" width="100%" alt="Browser UI, FastAPI server, LangGraph agent team (Planner, Researcher, Critic, Writer), MCP tool server with hybrid search, Chroma document index, model router (Claude, Ollama, Azure OpenAI) and SQLite audit log"></p>
 
+**Why this architecture**
+
+| Choice | Why |
+|---|---|
+| Four agents (plan → search → check → write) | Multi-step questions need several lookups; the single-step baseline got only 30% of them. |
+| A rule-based critic, separate from the model | A model cannot be trusted to check its own quotes; plain code can check that a quote is really on the page. |
+| LangGraph | Built-in pause before the writer (human approval) and saved state for each run. |
+| Search behind an MCP server | The same search tool works in this app and in any MCP client (e.g. Claude Code), and can be tested on its own. |
+| Hybrid search (vectors + keywords) | Vectors find meaning; keywords find exact part numbers and units that vectors miss. |
+| Model router, local first | Runs free and private on a laptop; Claude when accuracy matters; fallback for users, strict mode for evals. |
+| SQLite audit log | Every answer can be traced: who asked, what the agents did, who signed off. |
+
 **One question, step by step:**
 
 <p align="center"><img src="docs/media/how-it-works.svg" width="100%" alt="Question, Planner, Researcher, Critic, Writer, Answer; the Critic retries lookups with no evidence once and asks a human before a partial answer"></p>
