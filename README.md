@@ -56,11 +56,50 @@ Full 70-second demo: [docs/media/demo.mp4](docs/media/demo.mp4).*
 | **Tech** | Python, FastAPI, LangGraph, MCP, Anthropic API, Ollama (qwen2.5:7b, nomic-embed-text), Chroma, ONNX Runtime, SQLite, vanilla JS |
 | **Runs** | Fully on a laptop with a local model, or with Claude via an API key |
 
+## Architecture
+
+<p align="center"><img src="docs/media/architecture.svg" width="100%" alt="Browser UI, FastAPI server, LangGraph agent team (Planner, Researcher, Critic, Writer), MCP tool server with hybrid search, Chroma document index, model router (Claude, Ollama, Azure OpenAI) and SQLite audit log"></p>
+
+**One question, step by step:**
+
+<p align="center"><img src="docs/media/how-it-works.svg" width="100%" alt="Question, Planner, Researcher, Critic, Writer, Answer; the Critic retries lookups with no evidence once and asks a human before a partial answer"></p>
+
+<details><summary>Same flow as a Mermaid chart</summary>
+
+```mermaid
+flowchart LR
+    Q[Question + conversation memory] --> P[Planner<br/>splits into lookups]
+    P --> R[Researcher<br/>hybrid search via MCP,<br/>extracts claims + exact quotes]
+    R --> C[Critic<br/>quote on page? injection nearby?<br/>numbers & product names match?<br/>fine-tuned claim checker]
+    C -- lookups with no evidence<br/>(one retry, reworded) --> R
+    C -- partly answered --> H{{Human approval}}
+    C -- fully answered / nothing found --> W
+    H -- approve --> W[Writer<br/>cited sentences only,<br/>drops ungrounded figures]
+    W --> A[Answer + evidence + audit log]
+```
+
+</details>
+
+- **Planner** splits the question into lookups and resolves follow-ups ("that paper") from conversation memory.
+- **Researcher** calls `search_documents` on the MCP server (`app/mcp_server.py`): vector search (nomic-embed-text in Chroma)
+  and keyword search merged by reciprocal-rank fusion, returning whole pages (up to 16,000 characters per search),
+  then asks the model for claims with word-for-word quotes.
+- **Critic** (`app/guardrails.py`) removes a claim if the quote is not on the cited page, if the page text around it
+  addresses the AI (prompt injection), if the claim has numbers or product names the quote does not contain, or if the
+  fine-tuned claim checker (`app/claimcheck.py`, see `finetune/`) says the quote does not support it.
+  Lookups with no surviving evidence are reworded and searched once more.
+- **Human-in-the-loop:** if only part of the question is answered, the LangGraph run pauses (interrupt before the writer)
+  and the app asks whether to show a partial answer. The decision is logged.
+- **Writer** may only use verified evidence; any sentence without a citation, or with a figure that is not in its cited
+  quotes (simple arithmetic and unit conversion on cited figures is allowed), is dropped.
+- **Model routing** (`app/llm.py`): Claude (structured outputs; server-side refusal fallbacks on Opus/Sonnet) or a local
+  Ollama model as main, the other as fallback, Azure OpenAI optional; per-run cost cap; every call logged with tokens, cost and latency.
+
 ## Results
 
-Measured on the 21-question test set (7 single-fact, 10 multi-step, 4 unanswerable), all on the local
-`qwen2.5:7b` model through Ollama on a laptop RTX 4050 (6 GB). Agent runs repeat every question twice.
-Raw outputs: `evals/results/`; per-question table: `evals/results/REPORT.md`.
+Measured on the 21-question test set (7 single-fact, 10 multi-step, 4 unanswerable). The first table uses the local
+`qwen2.5:7b` model through Ollama on a laptop RTX 4050 (6 GB); the later tables add Claude. Agent runs repeat every
+question twice. Raw outputs: `evals/results/`; ✓/✗ for every question in every run: [`evals/results/REPORT.md`](evals/results/REPORT.md).
 
 | | Single-step RAG (baseline) | Agent v0.4.0 (first) | **Agent v0.4.1** | Agent v0.4.1 + fine-tuned checker |
 |---|---|---|---|---|
@@ -207,40 +246,18 @@ product or paper) and one used the paper's overall 96.1% instead of the per-scen
 honest figure for the local model on new multi-step questions is about one in three, and the main-set 65% was
 partly earned by tuning. A Haiku run on the held-out set will show whether this gap is the model's or the agent's.
 
-## How it works
+### Passes and failures, with real answers
 
-<p align="center"><img src="docs/media/how-it-works.svg" width="100%" alt="Question, Planner, Researcher, Critic, Writer, Answer; the Critic retries lookups with no evidence once and asks a human before a partial answer"></p>
+Copied from `evals/results/` (answers shortened). Every run's ✓/✗ for each question: [`REPORT.md`](evals/results/REPORT.md).
 
-<details><summary>Same flow as a Mermaid chart</summary>
-
-```mermaid
-flowchart LR
-    Q[Question + conversation memory] --> P[Planner<br/>splits into lookups]
-    P --> R[Researcher<br/>hybrid search via MCP,<br/>extracts claims + exact quotes]
-    R --> C[Critic<br/>quote on page? injection nearby?<br/>numbers & product names match?<br/>fine-tuned claim checker]
-    C -- lookups with no evidence<br/>(one retry, reworded) --> R
-    C -- partly answered --> H{{Human approval}}
-    C -- fully answered / nothing found --> W
-    H -- approve --> W[Writer<br/>cited sentences only,<br/>drops ungrounded figures]
-    W --> A[Answer + evidence + audit log]
-```
-
-</details>
-
-- **Planner** splits the question into lookups and resolves follow-ups ("that paper") from conversation memory.
-- **Researcher** calls `search_documents` on the MCP server (`app/mcp_server.py`): vector search (nomic-embed-text in Chroma)
-  and keyword search merged by reciprocal-rank fusion, returning whole pages (up to 16,000 characters per search),
-  then asks the model for claims with word-for-word quotes.
-- **Critic** (`app/guardrails.py`) removes a claim if the quote is not on the cited page, if the page text around it
-  addresses the AI (prompt injection), if the claim has numbers or product names the quote does not contain, or if the
-  fine-tuned claim checker (`app/claimcheck.py`, see `finetune/`) says the quote does not support it.
-  Lookups with no surviving evidence are reworded and searched once more.
-- **Human-in-the-loop:** if only part of the question is answered, the LangGraph run pauses (interrupt before the writer)
-  and the app asks whether to show a partial answer. The decision is logged.
-- **Writer** may only use verified evidence; any sentence without a citation, or with a figure that is not in its cited
-  quotes (simple arithmetic and unit conversion on cited figures is allowed), is dropped.
-- **Model routing** (`app/llm.py`): Claude (structured outputs; server-side refusal fallbacks on Opus/Sonnet) or a local
-  Ollama model as main, the other as fallback, Azure OpenAI optional; per-run cost cap; every call logged with tokens, cost and latency.
+| | Question | What the agent answered | Why |
+|---|---|---|---|
+| ✅ m01 · Haiku | Combined PoE budget of one Route10 and one S8-PoE? | "40 W (Route10) + 60 W (S8-PoE) = 100 W" [Route10 p.4, Switches p.5] | Two lookups, two checked quotes, arithmetic allowed on cited figures. The critic also removed one claim whose numbers were not in its quote. |
+| ✅ m06 · Haiku v0.4.3 | Energy per 2.56 s window for the radar and vibration nodes? | "4740 mJ … 820 mJ" [Wang p.5] | Failed in every agent run before v0.4.3; passing whole pages let the model see Table II. |
+| ✅ u01 · Haiku | What LoRa packet loss rate did Adebesin et al. measure? | "Not found … packet loss was not quantitatively measured" [Adebesin p.6] | Unanswerable question: an honest "not found" with the page that says so, not a guess. |
+| ❌ s06 · Haiku | How many readings in the Adebesin dataset, and how many falls? | "13,459 samples, 1993 falls" (IMU subset) [p.8] | Real quote, right page, but a subset. The test expects the full set (18,906 / 2,169). Counted as "cited but wrong". |
+| ❌ hm02 · qwen, held-out | Can the S8-PoE give 30 W to all four PoE+ ports at once? | "Not found in your documents" | The critic correctly rejected a claim about the S16-PoE (120 W). The planner never searched for the S8-PoE budget (60 W), so nothing was left. |
+| ❌ hm06 · qwen, held-out | Heavy Object Drop vs Squatting window accuracy? | "96.1% for heavy object drop" | Took the paper's overall accuracy instead of the per-scenario row (91.30% vs 96.27%). The right page was never retrieved. |
 
 ## Run it
 

@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 350" width="960" height="350" role="img" aria-labelledby="t d">
+  <title id="t">Agentic Researcher system architecture</title>
+  <desc id="d">Browser UI talks to a FastAPI server, which runs a LangGraph agent team (Planner, Researcher, Critic, Writer). The Researcher calls an MCP tool server that does hybrid search over a Chroma vector index and page text of the PDFs. All agents call models through a router (Claude, local Ollama, or Azure OpenAI). Runs, threads and the audit log are stored in SQLite.</desc>
+  <style>
+    :root { --ink:#1f2937; --sub:#57606a; --line:#d0d7de; --card:#ffffff; --on:#f97316; --tint:#fff4ec; --group:#f6f8fa; }
+    @media (prefers-color-scheme: dark) {
+      :root { --ink:#e6edf3; --sub:#9198a1; --line:#3d444d; --card:#161b22; --tint:#2a1d14; --group:#0d1117; }
+    }
+    text { font-family: Inter, "Segoe UI", system-ui, -apple-system, Helvetica, Arial, sans-serif; }
+    .title { font-size:14.5px; font-weight:700; fill:var(--ink); text-anchor:middle; }
+    .sub   { font-size:11px; fill:var(--sub); text-anchor:middle; }
+    .pill-t{ font-size:12px; font-weight:600; fill:var(--ink); text-anchor:middle; }
+    .lbl   { font-size:10.5px; fill:var(--sub); text-anchor:middle; }
+    .node  { fill:var(--card); stroke:var(--line); stroke-width:1.5; }
+    .group { fill:var(--group); stroke:var(--line); stroke-width:1.5; stroke-dasharray:5 4; }
+    .wire  { stroke:var(--line); stroke-width:1.5; fill:none; }
+    .flow  { stroke:var(--on); stroke-width:2; fill:none; stroke-dasharray:3 11; animation: dash 1.1s linear infinite; }
+    @keyframes dash { to { stroke-dashoffset:-14; } }
+    .p1 { animation: k1 8s infinite; } .p2 { animation: k2 8s infinite; }
+    .p3 { animation: k3 8s infinite; } .p4 { animation: k4 8s infinite; }
+    @keyframes k1 { 0%,22%  { stroke:var(--on); fill:var(--tint); } 25%,100% { stroke:var(--line); fill:var(--card); } }
+    @keyframes k2 { 0%,25%  { stroke:var(--line); fill:var(--card); } 27%,47% { stroke:var(--on); fill:var(--tint); } 50%,100% { stroke:var(--line); fill:var(--card); } }
+    @keyframes k3 { 0%,50%  { stroke:var(--line); fill:var(--card); } 52%,72% { stroke:var(--on); fill:var(--tint); } 75%,100% { stroke:var(--line); fill:var(--card); } }
+    @keyframes k4 { 0%,75%  { stroke:var(--line); fill:var(--card); } 77%,97% { stroke:var(--on); fill:var(--tint); } 100% { stroke:var(--line); fill:var(--card); } }
+    @media (prefers-reduced-motion: reduce) { .flow, .p1, .p2, .p3, .p4 { animation:none; } }
+  </style>
+
+  <!-- wires (grey base + animated orange flow) -->
+  <g>
+    <path class="wire" d="M180 85 H230"/>   <path class="flow" d="M180 85 H230"/>
+    <path class="wire" d="M410 85 H460"/>   <path class="flow" d="M410 85 H460"/>
+    <path class="wire" d="M700 113 H750"/>  <path class="flow" d="M700 113 H750"/>
+    <path class="wire" d="M845 160 V240"/>  <path class="flow" d="M845 160 V240"/>
+    <path class="wire" d="M580 215 V240"/>  <path class="flow" d="M580 215 V240"/>
+    <path class="wire" d="M320 130 V240"/>  <path class="flow" d="M320 130 V240"/>
+  </g>
+  <text class="lbl" x="205" y="76">HTTP</text>
+  <text class="lbl" x="435" y="76">runs</text>
+  <text class="lbl" x="725" y="104">MCP</text>
+  <text class="lbl" x="868" y="204" text-anchor="start">search</text>
+  <text class="lbl" x="603" y="232" text-anchor="start">LLM calls</text>
+  <text class="lbl" x="343" y="190" text-anchor="start">events, audit</text>
+
+  <!-- Browser UI -->
+  <rect class="node" x="20" y="40" width="160" height="90" rx="12"/>
+  <text class="title" x="100" y="72">Browser UI</text>
+  <text class="sub" x="100" y="92">ask · evidence · sign-off</text>
+  <text class="sub" x="100" y="108">evaluation · settings</text>
+
+  <!-- FastAPI -->
+  <rect class="node" x="230" y="40" width="180" height="90" rx="12"/>
+  <text class="title" x="320" y="72">FastAPI server</text>
+  <text class="sub" x="320" y="92">streams each agent step</text>
+  <text class="sub" x="320" y="108">approvals · PDF reports</text>
+
+  <!-- LangGraph group -->
+  <rect class="group" x="460" y="25" width="240" height="190" rx="14"/>
+  <text class="title" x="580" y="46">LangGraph agent team</text>
+  <rect class="node p1" x="490" y="58"  width="180" height="30" rx="8"/><text class="pill-t" x="580" y="78">1 · Planner</text>
+  <rect class="node p2" x="490" y="98"  width="180" height="30" rx="8"/><text class="pill-t" x="580" y="118">2 · Researcher</text>
+  <rect class="node p3" x="490" y="138" width="180" height="30" rx="8"/><text class="pill-t" x="580" y="158">3 · Critic (guardrails)</text>
+  <rect class="node p4" x="490" y="178" width="180" height="30" rx="8"/><text class="pill-t" x="580" y="198">4 · Writer</text>
+
+  <!-- MCP server -->
+  <rect class="node" x="750" y="40" width="190" height="120" rx="12"/>
+  <text class="title" x="845" y="70">MCP tool server</text>
+  <text class="sub" x="845" y="90">search_documents</text>
+  <text class="sub" x="845" y="108">vector + keyword search,</text>
+  <text class="sub" x="845" y="124">merged by rank fusion,</text>
+  <text class="sub" x="845" y="140">returns whole pages</text>
+
+  <!-- SQLite -->
+  <rect class="node" x="230" y="240" width="180" height="90" rx="12"/>
+  <text class="title" x="320" y="272">SQLite</text>
+  <text class="sub" x="320" y="292">threads · runs</text>
+  <text class="sub" x="320" y="308">append-only audit log</text>
+
+  <!-- Router -->
+  <rect class="node" x="460" y="240" width="240" height="90" rx="12"/>
+  <text class="title" x="580" y="272">Model router</text>
+  <text class="sub" x="580" y="292">Claude ↔ local Ollama (qwen2.5:7b)</text>
+  <text class="sub" x="580" y="308">Azure OpenAI optional · cost cap</text>
+
+  <!-- Index -->
+  <rect class="node" x="750" y="240" width="190" height="90" rx="12"/>
+  <text class="title" x="845" y="272">Document index</text>
+  <text class="sub" x="845" y="292">Chroma + nomic-embed-text</text>
+  <text class="sub" x="845" y="308">PDF pages (datasheets, papers)</text>
+</svg>
