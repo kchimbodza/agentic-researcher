@@ -116,11 +116,11 @@
 
         <section class="card set">
           <h2><svg class="i"><use href="#i-cpu"/></svg>Models</h2>
-          <p class="hint">Which model the agents use. The other one is the fallback when the main one fails or the per-run cost cap is reached. With no model reachable the app runs in preview mode.</p>
+          <p class="hint">Choose Gemma 4 Cloud through Ollama or another installed Ollama model. Cloud inference requires Ollama sign-in and internet access; it is billed by token. If the selected Ollama model is unavailable, the run reports an error rather than silently switching to Claude. With no model reachable the app runs in preview mode.</p>
           <label class="field">Main provider
-            <select id="sProvider"><option value="anthropic">Claude (Anthropic API)</option><option value="ollama">Local model (Ollama)</option></select></label>
+            <select id="sProvider"><option value="anthropic">Claude (Anthropic API)</option><option value="ollama">Ollama (Gemma 4 Cloud / local model)</option></select></label>
           <label class="field">Claude model<select id="sClaude"></select></label>
-          <label class="field">Local model<select id="sOllama"></select></label>
+          <label class="field">Ollama model<select id="sOllama"></select></label>
           <label class="field">Cost cap per run (USD)<input id="sCap" type="number" min="0.01" max="5" step="0.01"></label>
           <label class="field">Critic checks
             <select id="sChecker"><option value="rules">Rules only (recommended: best accuracy)</option><option value="auto">Rules + fine-tuned checker (stricter: fewer wrong citations, more "not found")</option></select></label>

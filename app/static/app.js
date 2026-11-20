@@ -398,7 +398,7 @@ $("#helpBtn").onclick = () => drawerMode("Help", `
   <h3>Low-confidence answers</h3>
   <p>If the matches are weak, the agents pause and ask before showing an answer. Your choice is logged.</p>
   <h3>Models</h3>
-  <p>The agent uses the model chosen in Settings (Claude or a local Ollama model) and falls back to the other if the first fails or the per-run cost cap is reached.
+  <p>The agent uses the provider selected in Settings. Ollama mode uses only the selected Ollama model (Gemma 4 Cloud requires internet and Ollama sign-in); it does not silently fall back to Claude or Azure.
      If no model is reachable it runs in <b>preview mode</b>: keyword search and quote checks only, listing verified quotes instead of a written answer.</p>
   <h3>Guardrails</h3>
   <p>The critic removes a claim if its quote is not on the page, if the quote contains instructions aimed at the AI (prompt injection),

@@ -30,6 +30,8 @@ PRICES = {
     "claude-sonnet-5-5": (2.00, 10.00),
     "claude-haiku-5-5": (0.10, 0.50),
 }
+# Ollama Cloud pricing in USD per million tokens (Gemma 4 Cloud; verify against current plan).
+OLLAMA_CLOUD_PRICES = {"gemma4:cloud": (0.14, 0.40)}
 FALLBACK_OK = {"claude-opus-5-5", "claude-sonnet-5-5"}  # models that accept fallbacks="default"
 
 
@@ -100,11 +102,16 @@ def _anthropic(model, system, user, schema, max_tokens):
 
 
 def _ollama(model, system, user, schema, max_tokens):
+    # Uses the signed-in local Ollama server. Cloud models are routed by Ollama; no
+    # Ollama API key is embedded in the application or sent to the browser.
     r = ollama.chat(model=model, format=schema, keep_alive="10m",
-                    options={"temperature": 0, "num_ctx": 8192, "num_predict": max_tokens},
+                    options={"temperature": 0, "num_ctx": 32768, "num_predict": max_tokens},
                     messages=[{"role": "system", "content": system}, {"role": "user", "content": user}])
-    return (json.loads(r["message"]["content"]), model,
-            r.get("prompt_eval_count", 0) or 0, r.get("eval_count", 0) or 0, 0.0)
+    tin = r.get("prompt_eval_count", 0) or 0
+    tout = r.get("eval_count", 0) or 0
+    pin, pout = OLLAMA_CLOUD_PRICES.get(model, (0.0, 0.0))
+    cost = (tin * pin + tout * pout) / 1e6
+    return json.loads(r["message"]["content"]), model, tin, tout, cost
 
 
 def _azure(model, system, user, schema, max_tokens):
@@ -134,8 +141,8 @@ def route() -> list[tuple[str, str]]:
     """Provider order for this request: the main provider from Settings, then the fallbacks."""
     s = settings.load()
     order = {"anthropic": [("anthropic", s["anthropic_model"]), ("ollama", s["ollama_model"])],
-             "ollama": [("ollama", s["ollama_model"]), ("anthropic", s["anthropic_model"])]}[s["provider"]]
-    if os.environ.get("AZURE_OPENAI_ENDPOINT"):
+             "ollama": [("ollama", s["ollama_model"])]}[s["provider"]]
+    if s["provider"] == "anthropic" and os.environ.get("AZURE_OPENAI_ENDPOINT"):
         order.append(("azure", os.environ.get("AZURE_OPENAI_DEPLOYMENT", "gpt")))
     if not settings.key_status()["set"]:
         order = [o for o in order if o[0] != "anthropic"]
@@ -144,11 +151,12 @@ def route() -> list[tuple[str, str]]:
 
 def available() -> bool:
     """Is any model reachable? (Decides agent mode vs preview mode.)"""
-    if settings.key_status()["set"] or os.environ.get("AZURE_OPENAI_ENDPOINT"):
+    s = settings.load()
+    if s["provider"] == "anthropic" and (settings.key_status()["set"] or os.environ.get("AZURE_OPENAI_ENDPOINT")):
         return True
     try:
         names = {m["model"] for m in ollama.list()["models"]}
-        return settings.load()["ollama_model"] in names
+        return s["ollama_model"] in names
     except Exception:
         return False
 
@@ -157,7 +165,7 @@ def complete_json(system: str, user: str, schema: dict, budget: Budget, purpose:
                   max_tokens: int = 2000, order: list | None = None) -> dict:
     errors = []
     for provider, model in order or route():
-        if provider != "ollama" and budget.cost_usd >= budget.cap_usd:
+        if budget.cost_usd >= budget.cap_usd:
             errors.append(f"{provider}: over the ${budget.cap_usd:.2f} per-run cap")
             continue
         t0 = time.perf_counter()

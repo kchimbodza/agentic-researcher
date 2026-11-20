@@ -6,12 +6,15 @@ and is never sent back to the browser: the UI only sees whether a key is set and
 
 import json
 import os
-import pwd
+import getpass
 import re
 import urllib.request
 from pathlib import Path
 
-CONF = Path.home() / ".config" / "agentic-researcher"
+if os.name == "nt":
+    CONF = Path(os.environ.get("APPDATA", Path.home() / "AppData" / "Roaming")) / "agentic-researcher"
+else:
+    CONF = Path(os.environ.get("XDG_CONFIG_HOME", Path.home() / ".config")) / "agentic-researcher"
 FILE = CONF / "settings.json"
 ENV = CONF / "env"
 
@@ -19,9 +22,9 @@ CLAUDE_MODELS = ["claude-opus-5-5", "claude-sonnet-5-5", "claude-haiku-5-5"]
 PROVIDERS = ["anthropic", "ollama"]
 DEFAULTS = {
     "reviewer_name": "",
-    "provider": "anthropic",           # main model; the other is the fallback (Phase 5)
+    "provider": "ollama",               # Gemma 4 Cloud through the signed-in local Ollama server
     "anthropic_model": "claude-haiku-5-5",
-    "ollama_model": "qwen2.5:7b",
+    "ollama_model": "gemma4:e4b",
     "cost_cap_usd": 0.05,              # per run
     "claim_checker": "rules",          # rules | auto (auto adds the fine-tuned model: fewer wrong citations, lower recall; see README)
     "tool_transport": "mcp",           # mcp | direct
@@ -68,8 +71,8 @@ def user_name() -> str:
     name = load()["reviewer_name"] or os.environ.get("REVIEWER_NAME", "")
     if name:
         return name
-    p = pwd.getpwuid(os.getuid())
-    return (p.pw_gecos.split(",")[0] or p.pw_name).strip()
+    # getpass works on Windows, macOS, and Linux (unlike the Unix-only pwd module).
+    return getpass.getuser().strip()
 
 
 def key_status() -> dict:
@@ -84,7 +87,12 @@ def _write_env(name: str, value: str | None) -> None:
     if value is not None:
         lines.append(f"{name}={value}")
     ENV.write_text("\n".join(lines) + "\n")
-    ENV.chmod(0o600)
+    # POSIX permissions are useful on Linux/macOS; Windows does not support
+    # chmod semantics in the same way, so do not fail settings updates there.
+    try:
+        ENV.chmod(0o600)
+    except OSError:
+        pass
 
 
 def set_key(key: str) -> dict:
@@ -104,7 +112,7 @@ def clear_key() -> dict:
 
 def ollama_models() -> list[str]:
     try:
-        with urllib.request.urlopen("http://127.0.0.1:11434/api/tags", timeout=1.5) as r:
+        with urllib.request.urlopen(os.environ.get("OLLAMA_HOST", "http://127.0.0.1:11434").rstrip("/") + "/api/tags", timeout=3) as r:
             return sorted(m["name"] for m in json.load(r).get("models", []) if "embed" not in m["name"])
     except (OSError, ValueError):
         return []

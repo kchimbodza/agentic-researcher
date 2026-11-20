@@ -53,7 +53,7 @@ Full 70-second demo: [docs/media/demo.mp4](docs/media/demo.mp4).*
 |---|---|
 | **What it does** | Multi-step research over your own PDFs with verified quotes, citations, human approval and an audit log |
 | **Skills shown** | LangGraph multi-agent workflow, MCP tool server, agent evals (accuracy, safety, latency, cost), guardrails against prompt injection and made-up numbers, human-in-the-loop, model routing (Claude ↔ local Ollama ↔ Azure OpenAI), LoRA fine-tuning (PyTorch), Docker, GitHub Actions |
-| **Tech** | Python, FastAPI, LangGraph, MCP, Anthropic API, Ollama (qwen2.5:7b, nomic-embed-text), Chroma, ONNX Runtime, SQLite, vanilla JS |
+| **Tech** | Python, FastAPI, LangGraph, MCP, Anthropic API, Ollama (Gemma 4 local models, nomic-embed-text), Chroma, ONNX Runtime, SQLite, vanilla JS |
 | **Runs** | Fully on a laptop with a local model, or with Claude via an API key |
 
 ## Architecture
@@ -69,7 +69,7 @@ Full 70-second demo: [docs/media/demo.mp4](docs/media/demo.mp4).*
 | LangGraph | Built-in pause before the writer (human approval) and saved state for each run. |
 | Search behind an MCP server | The same search tool works in this app and in any MCP client (e.g. Claude Code), and can be tested on its own. |
 | Hybrid search (vectors + keywords) | Vectors find meaning; keywords find exact part numbers and units that vectors miss. |
-| Model router, local first | Runs free and private on a laptop; Claude when accuracy matters; fallback for users, strict mode for evals. |
+| Model router, local first | Runs through Ollama on your machine; supports Ollama Cloud or local models; Claude is optional when selected. |
 | SQLite audit log | Every answer can be traced: who asked, what the agents did, who signed off. |
 
 **One question, step by step:**
@@ -274,11 +274,15 @@ Copied from `evals/results/` (answers shortened). Every run's ✓/✗ for each q
 ## Run it
 
 ```bash
-ollama pull qwen2.5:7b && ollama pull nomic-embed-text   # local model + embeddings
+ollama run gemma4:e4b
+ollama pull nomic-embed-text   # local embedding model; Gemma 4 Cloud is accessed through Ollama
 ./install.sh            # adds "Agentic Researcher" to the app menu (Linux; needs uv and Google Chrome)
 ```
 Or `uv run uvicorn app.server:app --port 8770` and open http://127.0.0.1:8770. Put PDFs in `data/datasheets/` and
-`data/papers/` (or drag them onto the Documents page). Add an Anthropic API key in Settings to use Claude.
+`data/papers/` (or drag them onto the Documents page). Open Settings → Models and choose **Local model (Ollama)** with **gemma4:e4b** (this is now the default).
+The app sends model requests to your local Ollama server at `http://127.0.0.1:11434`. `gemma4:e4b` runs locally; after the model and embedding model are downloaded, inference does not require Ollama Cloud sign-in or an internet connection. Set `OLLAMA_HOST` if your Ollama server is on another host.
+To use a fully local model instead, select an installed local model in Settings. Add an Anthropic API key only if you
+explicitly switch the main provider to Claude.
 
 Use the tools from any MCP client, e.g. Claude Code: `claude mcp add agentic-researcher -- uv run --project . python -m app.mcp_server`
 
